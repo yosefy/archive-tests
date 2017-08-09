@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ArchiveBB Sanity Tests" parallel="false">
+    <test name="ArchiveBB Tests" preserve-order="true">
+
+        <parameter name="link" value="http://archive.kbb1.com/" />
+        <!--<parameter name="kb" value="customercare" />-->
+        <!--<parameter name="server" value="server3" />-->
+
+        <classes>
+            <class name="ArchiveBB.Test.TestDatePicker">
+                <methods>
+                    <include name="datePickerToday">
+                    </include>
+                    <include name="datePickerYesterday">
+                    </include>
+                    <include name="datePickerLast7Days">
+                    </include>
+                    <include name="datePickerLast30Days">
+                    </include>
+                    <include name="datePickerLastMonth">
+                    </include>
+                    <include name="datePickerThisMonth">
+                    </include>
+                    <include name="datePickerCustomRange">
+                    </include>
+                    <include name="datePickerLastMonthRemoveLabel">
+                    </include>
+
+                    <!--<include name="Sources">-->
+                    <!--</include>-->
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
