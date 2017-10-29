@@ -31,7 +31,7 @@ public class ArchiveDate extends BaseClass {
     public final static String MENU_DAILY_PHOTOS = "Photos";
 
 
-    private final static String DAILY_LESSON_PANEL = ".ui.blue.large.pointing.secondary.index-filters.menu>a";
+    private final static String DAILY_LESSON_PANEL = ".ui.blue.large.pointing.secondary.index-filters.menu>div>a";
     private final static String PANEL_DATE = "Date";
     private final static String PANEL_SOURCES = "Sources";
     private final static String PANEL_TOPICS = "Topics";
@@ -43,7 +43,7 @@ public class ArchiveDate extends BaseClass {
 
 
     public final static String DATE_DROPDOWN_LIST_SELECTED = ".ui.fluid.item.dropdown>div:nth-child(1)";
-    public final static String DATE_DROPDOWN_LIST = ".menu.transition.visible>div";
+    public final static String DATE_DROPDOWN_LIST = ".ui.fluid.item.dropdown>div>div";
     public final static String LIST_TODAY = "Today";
     public final static String LIST_YESTERDAY = "Yesterday";
     public final static String LIST_LAST_7_DAYS = "Last 7 Days";
@@ -55,6 +55,8 @@ public class ArchiveDate extends BaseClass {
     public final static String DATE_SECOND = ".eight:nth-child(2)>div>input";
 
     public final static String LABEL = ".filter-tags>div";
+    public final static String LABEL_OPEN = ".ui.blue.basic.button";
+
     private final static String REMOVE_LABEL = ".close.icon";
 
     private final static String APPLY_BTN = ".ui.button:nth-child(2)";
@@ -62,8 +64,9 @@ public class ArchiveDate extends BaseClass {
 
 
 
+
     public String saveAndReturnDateRangeLabel(String listToDropDownRange, String range) {
-        WebElement openDropDown = driver.findElement(By.cssSelector(".dropdown.icon"));
+        WebElement openDropDown = driver.findElement(By.cssSelector(".sixteen.wide.column>div"));
         click(openDropDown);
         clickListAndTarget(listToDropDownRange, range);
         WebElement applyBtn = driver.findElement(By.cssSelector(APPLY_BTN));
@@ -98,10 +101,11 @@ public class ArchiveDate extends BaseClass {
         return dateName.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-
-    public void navToDailyLessonsDate() {
-//        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
-        clickListAndTarget(ArchiveDate.DAILY_LESSON_PANEL, ArchiveDate.PANEL_DATE);
+    // if label existing
+    public void openDateRangeByClickOnFilter(){
+       boolean ifLabelExist = driver.findElements(By.cssSelector(".ui.blue.basic.button")).size()!=0;
+       if (ifLabelExist)
+            click(driver.findElement(By.cssSelector(LABEL_OPEN)));
     }
 
     public void removeLabel () {
@@ -122,13 +126,16 @@ public class ArchiveDate extends BaseClass {
 
 
     public void navToDailyLessonsSources() {
-        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
-        clickListAndTarget(ArchiveDate.DAILY_LESSON_PANEL, ArchiveDate.PANEL_SOURCES);
+//        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
+        clickListAndTarget(DAILY_LESSON_PANEL, PANEL_SOURCES);
     }
-
+    public void navToDailyLessonsDate() {
+//        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
+        clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
+    }
     public void navToDailyLessonsTopics() {
-        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
-        clickListAndTarget(ArchiveDate.DAILY_LESSON_PANEL, ArchiveDate.PANEL_TOPICS);
+//        clickListAndTarget(MAIN_VERTICAL_MENU, MENU_DAILY_LESSONS);
+        clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
     }
 
 }

@@ -29,13 +29,9 @@ public class InitClass {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod
-    public void cleanUp(){
-        driver.manage().deleteAllCookies();
-    }
-
     @AfterClass
     public static void tearDown(){
+        driver.manage().deleteAllCookies();
         driver.quit();
     }
 }

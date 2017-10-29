@@ -5,10 +5,13 @@ import PageObjects.ArchiveTopics;
 import helper.Class.InitClass;
 import PageObjects.ArchiveDate;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import videoHelper.VideoRecorder;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -17,152 +20,309 @@ public class TestDatePicker extends InitClass {
     private ArchiveDate archiveDate;
     private ArchiveSources archiveSources;
     private ArchiveTopics archiveTopics;
+    private VideoRecorder videoRecord;
 
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         archiveDate = new ArchiveDate(driver);
         archiveSources = new ArchiveSources(driver);
         archiveTopics = new ArchiveTopics(driver);
+        videoRecord = new VideoRecorder(driver);
     }
 
-    @Test()@Parameters({"link"})
-    public void datePickerToday(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
 
+//    @BeforeClass
+//    @AfterClass
+
+
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerToday(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        // do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
         ValidationsWithSingleLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
-    @Test()@Parameters({"link"})
-    public void datePickerYesterday(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_YESTERDAY);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerYesterday(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        // do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_YESTERDAY);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
         ValidationsWithSingleLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
-    @Test()@Parameters({"link"})
-    public void datePickerLast7Days(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_7_DAYS);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+
+
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerLast7Days(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        // do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_7_DAYS);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
         ValidationsWithRangeLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerLast30Days(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
 
+        // do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_30_DAYS);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
 
-    @Test()@Parameters({"link"})
-    public void datePickerLast30Days(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_30_DAYS);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+        // assert all success criteria
         ValidationsWithRangeLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
 
-    @Test()@Parameters({"link"})
-    public void datePickerLastMonth(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_MONTH);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerLastMonth(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        //do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_MONTH);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
         ValidationsWithRangeLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
 
-    @Test()@Parameters({"link"})
-    public void datePickerThisMonth(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_THIS_MONTH);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerThisMonth(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        //do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_THIS_MONTH);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
         ValidationsWithRangeLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
-    @Test()@Parameters({"link"})
-    public void datePickerCustomRange(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_CUSTOM_RANGE);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerCustomRange(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        //do test
+        String label;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_CUSTOM_RANGE);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
         ValidationsWithSingleLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
-    @Test()@Parameters({"link"})
-    public void datePickerLastMonthRemoveLabel(String link) {
-        driver.get(link);
-        archiveDate.navToDailyLessonsDate();
-        String label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
-        String today = label;
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL,label));
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void datePickerLastMonthRemoveLabel(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        // do test
+        String today;
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsDate();
+            today = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // save the label before remove
+        String label = today;
+
+        // assert all success criteria
         ValidationsWithSingleLable(label);
+        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
 
         label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_MONTH);
         ValidationsWithRangeLable(label);
 
         archiveDate.removeLabel();
         ValidationsWithSingleLable(today);
+
+        // if we're here it means the test passed. remove video files
+        deleteVideoLog(videoPath);
     }
 
-    @Test()@Parameters({"link"})
-    public void Sources(String link) {
-        String label;
-        link = "http://archive.kbb1.com/?dates=16-07-2017_16-07-2017";
+
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void sourcesAndVerifyInnerSources(String link, String videoPath) throws Exception {
+        // start video recording
+        videoRecord.startRecording(videoPath);
+
+        // do test
+        String label = "Baal HaSulam > Prefaces > General preface";
+        try {
+            driver.get(link);
+            archiveDate.navToDailyLessonsSources();
+            Assert.assertTrue(archiveSources.navToSourceAndApply(label), ">>> Doesn't found Sources >>> " + label);
+        }
+        // stop video recording
+        finally { videoRecord.stopRecording(videoPath); }
+
+        // assert all success criteria
+        Assert.assertTrue(archiveSources.checkResultsMoreThanZero(), "Not found count of expected results");
+        archiveSources.checkIfGreaterThanZero();
+        Assert.assertTrue(archiveSources.comp2StringArrays(label.split(">"),
+                archiveSources.openFirstResultAndReturnSources("Part 4: KFS").split("\\.")), "");
+
+        deleteVideoLog(videoPath);
+    }
+
+
+    @Test()
+    @Parameters({"link", "videoPath"})
+    public void topicsAndVerifyInnerTags(String link, String videoPath) throws Exception {
+        videoRecord.startRecording(videoPath);
+        String label = "A-adam hu olam katan";
         driver.get(link);
-
-        archiveDate.navToDailyLessonsDate();
-        archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_YESTERDAY);
-
-        archiveDate.navToDailyLessonsSources();
-        label = "Baal HaSulam > Prefaces > General preface";
-        Assert.assertTrue(archiveSources.navToSourceAndApply(label),">>> Doesn't found Sources >>> " + label);
-
-
         archiveDate.navToDailyLessonsTopics();
-        label = "Union"; //6. What Is Support in the Torah, in the Work
-        Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),">>> Doesn't found Topics >>> " + label);
+        videoRecord.stopRecording(videoPath);
+        Assert.assertTrue(archiveTopics.navToTopicsAndApply(label), ">>> Doesn't found Sources >>> " + label);
 
-        Assert.assertTrue(archiveSources.checkContent(2));
-        System.out.println("Test");
+        Assert.assertTrue(archiveSources.checkResultsMoreThanZero(), "Not found count of expected results");
+        archiveSources.checkIfGreaterThanZero();
+        Assert.assertTrue(archiveTopics.comp2Strings(label, archiveTopics.openFirstResultAndReturnTopics("part 1")),
+                "Not equal inner tags with topics");
 
     }
 
-    // todo - check results after applyed labels -  .ui.sortable.very.basic.table>tbody>tr
 
     private void ValidationsWithSingleLable(String label) {
         String formattedWithSlashLabel = archiveDate.convertToDateFromLabel(label);
+        // need to click on label to open the date picker
+        archiveDate.openDateRangeByClickOnFilter();
         String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_FIRST));
 
-        Assert.assertEquals(formattedWithSlashLabel,dateFromUi,
-                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ",formattedWithSlashLabel,dateFromUi));
+        Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
+                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
 
         dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_SECOND));
 
-        Assert.assertEquals(formattedWithSlashLabel,dateFromUi,
-                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ",formattedWithSlashLabel,dateFromUi));
+        Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
+                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
     }
 
     private void ValidationsWithRangeLable(String label) {
+        archiveDate.openDateRangeByClickOnFilter();
         List<String> labels = archiveDate.parseDateRangeLabelWithRange(label);
 
         String formattedWithSlashLabel = labels.get(0);
         String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_FIRST));
 
-        Assert.assertEquals(formattedWithSlashLabel,dateFromUi,
-                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ",formattedWithSlashLabel,dateFromUi));
+        Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
+                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
 
         formattedWithSlashLabel = labels.get(1);
         dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_SECOND));
 
-        Assert.assertEquals(formattedWithSlashLabel,dateFromUi,
-                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ",formattedWithSlashLabel,dateFromUi));
+        Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
+                String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
     }
 
+    private void deleteVideoLog(String videoPath) throws IOException {
+        if (!videoPath.equals("")) {
+            List<File> toDelete = videoRecord.getCreatedMovieFiles();
+            Files.deleteIfExists(Paths.get(String.valueOf(toDelete.get(0))));
+        }
+    }
 }
 
 

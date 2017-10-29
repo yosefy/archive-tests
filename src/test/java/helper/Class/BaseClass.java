@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class BaseClass {
 
@@ -23,7 +25,7 @@ public class BaseClass {
     protected boolean clickListAndTarget(String list, String target) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         for (WebElement options : listOptions){
-            if (options.getText().trim().equals(target.trim())) {
+            if (options.getText().trim().contains(target.trim())) {
                 click(options);
                 return true;
             }
@@ -32,9 +34,18 @@ public class BaseClass {
     }
 
     protected void click(WebElement elementToClick) {
+        Actions action = new Actions(driver);
+        action.moveToElement(elementToClick).perform();
         this.isElementLoaded(elementToClick);
         this.highlightElement(elementToClick);
         elementToClick.click();
+    }
+
+    // Need to navigate because otherwise selenium can not click on element
+    protected void navigate(String cssToElement){
+        WebElement element = driver.findElement(By.cssSelector(cssToElement));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-250)", "", element);
     }
 
     public boolean check(String list, String target) {
@@ -51,7 +62,7 @@ public class BaseClass {
 
     private void isElementLoaded(WebElement elementToBeLoaded) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(elementToBeLoaded));
+        wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
     }
 
     public void highlightElement(WebElement element) {
@@ -71,19 +82,44 @@ public class BaseClass {
         System.out.println(printValue + " - " + desc);
     }
 
-    public static boolean comp2str(String firstValue, String secondValue) {
-        return firstValue.trim().toLowerCase().equals(secondValue.trim().toLowerCase());
-    }
-
     public List<String> getList(String cssToList) {
         List<WebElement> myList = driver.findElements(By.cssSelector(cssToList));
+        this.isElementLoaded(myList.get(1));
         List<String> listStr = new ArrayList<String>();
-
         for(WebElement list : myList)
             listStr.add(list.getText());
-
         return listStr;
     }
+
+    public String getStringFromWebElementByCSS(String path) {
+        this.highlightElement(driver.findElement(By.cssSelector(path)));
+        return driver.findElement(By.cssSelector(path)).getText();
+    }
+
+    public boolean comp2StringArrays(String[] first, String[] second){
+        if (first.length == second.length) {
+            for (int i = 0; i < first.length; i++) {
+                first[i] = first[i].trim();
+                second[i] = second[i].trim();
+                if (!first[i].equals(second[i]))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean comp2Strings(String first, String second){
+        // Need to get only the last part of the source
+        String[] tokens = second.split(">");
+        for (int i = 0; i < tokens.length; i++)
+            tokens[i] = tokens[i].trim();
+
+        System.out.println(first);
+        System.out.println(tokens[tokens.length-1]);
+
+        return first.trim().equals(tokens[tokens.length - 1].trim());
+    }
+
 }
 
 

@@ -4,9 +4,13 @@
     <test name="ArchiveBB Tests" preserve-order="true">
 
         <parameter name="link" value="http://archive.kbb1.com/" />
-        <!--<parameter name="kb" value="customercare" />-->
-        <!--<parameter name="server" value="server3" />-->
 
+        <!--<parameter name="videoPath" value="\\z1\upload\Boka-Clean" />-->
+        <parameter name="videoPath" value="" />
+
+
+        <!--<parameter name="videoPath" value="C:\SPORT" />-->
+        <!--<parameter name="server" value="server3" />-->
         <classes>
             <class name="ArchiveBB.Test.TestDatePicker">
                 <methods>
@@ -26,9 +30,11 @@
                     </include>
                     <include name="datePickerLastMonthRemoveLabel">
                     </include>
+                    <include name="sourcesAndVerifyInnerSources">
+                    </include>
+                    <include name="topicsAndVerifyInnerTags">
+                    </include>
 
-                    <!--<include name="Sources">-->
-                    <!--</include>-->
                 </methods>
             </class>
         </classes>
