@@ -31,7 +31,7 @@ public class ArchiveDate extends BaseClass {
     public final static String MENU_DAILY_PHOTOS = "Photos";
 
 
-    private final static String DAILY_LESSON_PANEL = ".ui.blue.large.pointing.secondary.index-filters.menu>div>a";
+    public final static String DAILY_LESSON_PANEL = ".ui.blue.large.pointing.secondary.index-filters.menu>div>a";
     private final static String PANEL_DATE = "Date";
     private final static String PANEL_SOURCES = "Sources";
     private final static String PANEL_TOPICS = "Topics";
@@ -127,6 +127,7 @@ public class ArchiveDate extends BaseClass {
 
     public void navToDailyLessonsSources() {
 //        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
+        //todo - open side bar
         clickListAndTarget(DAILY_LESSON_PANEL, PANEL_SOURCES);
     }
     public void navToDailyLessonsDate() {

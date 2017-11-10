@@ -1,4 +1,4 @@
-package ArchiveBB.Test;
+package ArchiveBB.Tests;
 
 import PageObjects.ArchiveSources;
 import PageObjects.ArchiveTopics;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 
-public class TestDatePicker extends InitClass {
+public class DailyLessons extends InitClass {
 
     private ArchiveDate archiveDate;
     private ArchiveSources archiveSources;
@@ -29,11 +29,6 @@ public class TestDatePicker extends InitClass {
         archiveTopics = new ArchiveTopics(driver);
         videoRecord = new VideoRecorder(driver);
     }
-
-
-//    @BeforeClass
-//    @AfterClass
-
 
     @Test()
     @Parameters({"link", "videoPath"})
@@ -279,9 +274,9 @@ public class TestDatePicker extends InitClass {
 
         Assert.assertTrue(archiveSources.checkResultsMoreThanZero(), "Not found count of expected results");
         archiveSources.checkIfGreaterThanZero();
-        Assert.assertTrue(archiveTopics.comp2Strings(label, archiveTopics.openFirstResultAndReturnTopics("part 1")),
+        Assert.assertTrue(archiveTopics.comp2Strings(label,
+                archiveTopics.openFirstResultAndReturnTopics("part 1")),
                 "Not equal inner tags with topics");
-
     }
 
 

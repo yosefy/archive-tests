@@ -14,7 +14,7 @@ public class ArchiveTopics extends BaseClass {
     }
 
     public boolean navToTopicsAndApply(String navToTopic){
-        boolean flag = clickListAndTarget(TOPICS_RESULTS_TABLE,navToTopic);
+        boolean flag = clickListAndTarget(TOPICS_RESULTS_TABLE, navToTopic);
         click(driver.findElement(By.cssSelector(APPLY_BTN)));
         return flag;
     }

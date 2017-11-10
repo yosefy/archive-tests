@@ -16,12 +16,7 @@ public class ArchiveSources extends BaseClass {
 
     private final static String SOURCE_CHILDREN = ".ui.blue.tiny.compact.pointing>a";
     private final static String COLUMNS = ".filter-steps__column-wrapper";
-
-
-//    private final static String APPLY_BTN = ".ui.button:nth-child(1)";
-
     private final static String APPLY_BTN = ".ui.primary.right.floated.button";
-
     public final static String CANCEL_BTN = ".ui.button:nth-child(2)";
     public final static String SOURCE_RESULTS_TABLE = ".ui.sortable.very.basic.table>tbody>tr";
 
@@ -66,7 +61,12 @@ public class ArchiveSources extends BaseClass {
     public String openFirstResultAndReturnSources(String part){
         navigate(".ui.sortable.very.basic.table>tbody>tr a");
         clickListAndTarget(".ui.sortable.very.basic.table>tbody>tr a", part);
-        String sources = getStringFromWebElementByCSS(".ui.list>div:nth-child(1) a");
+        navigate(".ui.list .item a");
+
+
+
+        String sources = getStringFromWebElementByCSS(".ui.list .item span");
+
         System.out.println("Sources-" + sources);
         return sources.trim();
     }

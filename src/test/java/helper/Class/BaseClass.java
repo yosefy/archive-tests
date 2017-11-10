@@ -65,7 +65,7 @@ public class BaseClass {
         wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
     }
 
-    public void highlightElement(WebElement element) {
+    protected void highlightElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='1px solid red'", element);
         try {Thread.sleep(500);}
         catch (InterruptedException e) {e.printStackTrace();}
@@ -82,7 +82,7 @@ public class BaseClass {
         System.out.println(printValue + " - " + desc);
     }
 
-    public List<String> getList(String cssToList) {
+    protected List<String> getList(String cssToList) {
         List<WebElement> myList = driver.findElements(By.cssSelector(cssToList));
         this.isElementLoaded(myList.get(1));
         List<String> listStr = new ArrayList<String>();
@@ -91,9 +91,11 @@ public class BaseClass {
         return listStr;
     }
 
-    public String getStringFromWebElementByCSS(String path) {
-        this.highlightElement(driver.findElement(By.cssSelector(path)));
-        return driver.findElement(By.cssSelector(path)).getText();
+    protected String getStringFromWebElementByCSS(String path) {
+        List<WebElement> listOfSources = driver.findElements(By.cssSelector(path));
+        int sourceNameInDailyLesson = listOfSources.size() - 1;
+        this.highlightElement(listOfSources.get(sourceNameInDailyLesson));
+        return listOfSources.get(sourceNameInDailyLesson).getText();
     }
 
     public boolean comp2StringArrays(String[] first, String[] second){
