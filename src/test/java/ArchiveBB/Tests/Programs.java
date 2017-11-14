@@ -8,7 +8,10 @@ import videoHelper.VideoRecorder;
 import java.util.List;
 import java.util.Map;
 
+import static PageObjects.ArchiveDate.PROGRAMS;
 import static PageObjects.ProgramsGenre.GENRE_MAIN_LEFT_PANEL;
+import static PageObjects.ProgramsGenre.GENRE_PROGRAM_PANEL;
+import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
 
 
 public class Programs extends InitClass{
@@ -32,8 +35,8 @@ public class Programs extends InitClass{
         // do test
         try {
             driver.get(link);
-            programsGenre.navToPrograms();
-            programsGenre.ChoosePanel("All Programs");
+            programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
+            programsGenre.clickListAndTarget(GENRE_MAIN_LEFT_PANEL, GENRE_PROGRAM_PANEL);
             mainMap = programsGenre.getAllProgramsItems();
 
             // get list from vertical panel and over in loop

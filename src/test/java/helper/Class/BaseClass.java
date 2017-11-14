@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static PageObjects.ProgramsGenre.SIDE_BAR;
+import static PageObjects.ProgramsGenre.SIDE_BAR_ICON;
 
 public class BaseClass {
 
@@ -132,6 +134,14 @@ public class BaseClass {
                 return false;
         }
         return true;
+    }
+
+    public void navigateToPanelAndSection(String MAIN_PANEL, String MAIN_SECTION) {
+        boolean ifSideBarIsOpened = driver.findElements(By.cssSelector(SIDE_BAR)).size()!=0;
+        if(!ifSideBarIsOpened)
+            click(driver.findElement(By.cssSelector(SIDE_BAR_ICON)));
+
+        clickListAndTarget(MAIN_PANEL, MAIN_SECTION);
     }
 
 }

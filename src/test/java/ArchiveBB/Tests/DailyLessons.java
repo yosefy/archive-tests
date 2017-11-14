@@ -14,6 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static PageObjects.ArchiveDate.*;
+import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
+
 
 public class DailyLessons extends InitClass {
 
@@ -40,7 +43,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
         }
         // stop video recording
@@ -64,7 +68,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_YESTERDAY);
         }
         // stop video recording
@@ -90,7 +95,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_7_DAYS);
         }
         // stop video recording
@@ -114,7 +120,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_30_DAYS);
         }
         // stop video recording
@@ -139,7 +146,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_MONTH);
         }
         // stop video recording
@@ -164,7 +172,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_THIS_MONTH);
         }
         // stop video recording
@@ -188,7 +197,8 @@ public class DailyLessons extends InitClass {
         String label;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_CUSTOM_RANGE);
         }
         // stop video recording
@@ -212,7 +222,8 @@ public class DailyLessons extends InitClass {
         String today;
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsDate();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             today = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
         }
         // stop video recording
@@ -246,7 +257,8 @@ public class DailyLessons extends InitClass {
         String label = "Baal HaSulam > Prefaces > General preface";
         try {
             driver.get(link);
-            archiveDate.navToDailyLessonsSources();
+            archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+            archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_SOURCES);
             Assert.assertTrue(archiveSources.navToSourceAndApply(label), ">>> Doesn't found Sources >>> " + label);
         }
         // stop video recording
@@ -268,7 +280,10 @@ public class DailyLessons extends InitClass {
         videoRecord.startRecording(videoPath);
         String label = "A-adam hu olam katan";
         driver.get(link);
-        archiveDate.navToDailyLessonsTopics();
+
+        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
+
         videoRecord.stopRecording(videoPath);
         Assert.assertTrue(archiveTopics.navToTopicsAndApply(label), ">>> Doesn't found Sources >>> " + label);
 

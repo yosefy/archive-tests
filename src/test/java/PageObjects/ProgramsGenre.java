@@ -15,16 +15,10 @@ public class ProgramsGenre extends BaseClass {
 
     public final static String GENRE_MAIN_LEFT_PANEL = ".ui.blue.tiny.fluid.vertical.menu>a.item";
     private final static String ALL_PROGRAMS_ITEMS = ".column>div.ui.tiny.list>div";  // .column>div.ui.tiny.list>div  // .ui.tiny.list>div.item
-    private final static String SIDE_BAR = ".layout__sidebar.is-active";
-    private final static String SIDE_BAR_ICON = ".sidebar.icon";
-    private final static String VERTICAL_HAMBURGER_MENU = ".ui.blue.huge.borderless.fluid.vertical.menu>a";
-
-
-    public void ChoosePanel (String target){
-        boolean ifLabelExist = driver.findElements(By.cssSelector(GENRE_MAIN_LEFT_PANEL)).size()!=0;
-        if (ifLabelExist)
-            clickListAndTarget(GENRE_MAIN_LEFT_PANEL, target);
-    }
+    public final static String SIDE_BAR = ".layout__sidebar.is-active";
+    public final static String SIDE_BAR_ICON = ".sidebar.icon";
+    public final static String VERTICAL_HAMBURGER_MENU = ".ui.blue.huge.borderless.fluid.vertical.menu>a";
+    public final static String GENRE_PROGRAM_PANEL = "All Programs";
 
     public Map<String, String> getAllProgramsItems (){
         Map<String,String> myMap = new HashMap<String,String>();
@@ -43,20 +37,4 @@ public class ProgramsGenre extends BaseClass {
         return myMap;
     }
 
-    public void navToPrograms(){
-        boolean ifSideBarIsOpened = driver.findElements(By.cssSelector(SIDE_BAR)).size()!=0;
-        if(!ifSideBarIsOpened)
-            click(driver.findElement(By.cssSelector(SIDE_BAR_ICON)));
-        clickListAndTarget(VERTICAL_HAMBURGER_MENU, "Programs");
-    }
-
-//    // check if all items in secondMap existing in firstMap
-//    public boolean checkProgramsInTable(Map<String, String> firstMap, Map<String, String> secondMap) {
-//        for (Map.Entry<String, String> entry : secondMap.entrySet()) {
-//            System.out.println(entry.getKey() + " = " + entry.getValue());
-//            if (!firstMap.containsKey(entry.getKey()))
-//                return false;
-//        }
-//        return true;
-//    }
 }

@@ -12,29 +12,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static PageObjects.ProgramsGenre.SIDE_BAR;
+import static PageObjects.ProgramsGenre.SIDE_BAR_ICON;
+
 public class ArchiveDate extends BaseClass {
 
     public ArchiveDate(WebDriver driver) {
         super(driver);
     }
 
-
-    private final static String MAIN_VERTICAL_MENU = ".ui.fluid.pointing.vertical.menu>a";
-    private final static String MENU_DAILY_LESSONS = "Daily Lessons";
-    public final static String MENU_DAILY_TV_VIDEO = "TV & Video Programs";
-    public final static String MENU_DAILY_LECTURES_LESSONS = "Lectures & Lessons";
-    public final static String MENU_DAILY_KAB_SOURCES = "Kabbalah Sources";
-    public final static String MENU_DAILY_EVENTS = "Events";
-    public final static String MENU_DAILY_BOOKS = "Books";
-    public final static String MENU_DAILY_TOPICS = "Topics";
-    public final static String MENU_DAILY_PUBLICATIONS = "Publications";
-    public final static String MENU_DAILY_PHOTOS = "Photos";
-
-
     public final static String DAILY_LESSON_PANEL = ".ui.blue.large.pointing.secondary.index-filters.menu>div>a";
-    private final static String PANEL_DATE = "Date";
-    private final static String PANEL_SOURCES = "Sources";
-    private final static String PANEL_TOPICS = "Topics";
+    public final static String PANEL_DATE = "Date";
+    public final static String PANEL_SOURCES = "Sources";
+    public final static String PANEL_TOPICS = "Topics";
+
+    public final static String PROGRAMS = "Programs";
+    public final static String DAILY_LESSONS = "Daily Lessons";
 
     public final static String DATE_DROPDOWN_LIST_SELECTED = ".ui.fluid.item.dropdown>div:nth-child(1)";
     public final static String DATE_DROPDOWN_LIST = ".ui.fluid.item.dropdown>div>div";
@@ -55,8 +48,6 @@ public class ArchiveDate extends BaseClass {
 
     private final static String APPLY_BTN = ".ui.button:nth-child(2)";
     public final static String CANCEL_BTN = ".ui.button:nth-child(1)";
-
-
 
 
     public String saveAndReturnDateRangeLabel(String listToDropDownRange, String range) {
@@ -116,21 +107,6 @@ public class ArchiveDate extends BaseClass {
         print(start.toString(),"start");
         print(end.toString(),"end");
         return start.format(formatter) + " - " + end.format(formatter);
-    }
-
-
-    public void navToDailyLessonsSources() {
-//        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
-        //todo - open side bar
-        clickListAndTarget(DAILY_LESSON_PANEL, PANEL_SOURCES);
-    }
-    public void navToDailyLessonsDate() {
-//        clickListAndTarget(ArchiveDate.MAIN_VERTICAL_MENU, ArchiveDate.MENU_DAILY_LESSONS);
-        clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
-    }
-    public void navToDailyLessonsTopics() {
-//        clickListAndTarget(MAIN_VERTICAL_MENU, MENU_DAILY_LESSONS);
-        clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
     }
 
 }
