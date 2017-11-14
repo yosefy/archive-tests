@@ -36,12 +36,6 @@ public class ArchiveDate extends BaseClass {
     private final static String PANEL_SOURCES = "Sources";
     private final static String PANEL_TOPICS = "Topics";
 
-
-
-//    public final static String filterPageNameCSS = ".sixteen.wide.column>div.ui.segment>a";
-//    public final static String dropDownDatePicker = ".sixteen.wide.column .ui.fluid.item.dropdown .menu.transition>div";
-
-
     public final static String DATE_DROPDOWN_LIST_SELECTED = ".ui.fluid.item.dropdown>div:nth-child(1)";
     public final static String DATE_DROPDOWN_LIST = ".ui.fluid.item.dropdown>div>div";
     public final static String LIST_TODAY = "Today";

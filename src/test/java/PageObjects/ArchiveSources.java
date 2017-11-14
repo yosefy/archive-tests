@@ -63,8 +63,6 @@ public class ArchiveSources extends BaseClass {
         clickListAndTarget(".ui.sortable.very.basic.table>tbody>tr a", part);
         navigate(".ui.list .item a");
 
-
-
         String sources = getStringFromWebElementByCSS(".ui.list .item span");
 
         System.out.println("Sources-" + sources);

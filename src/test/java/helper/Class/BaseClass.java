@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class BaseClass {
@@ -22,10 +23,11 @@ public class BaseClass {
         PageFactory.initElements(driver, this);
     }
 
-    protected boolean clickListAndTarget(String list, String target) {
+    public boolean clickListAndTarget(String list, String target) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         for (WebElement options : listOptions){
             if (options.getText().trim().contains(target.trim())) {
+                highlightElement(options);
                 click(options);
                 return true;
             }
@@ -33,7 +35,7 @@ public class BaseClass {
         return false;
     }
 
-    protected void click(WebElement elementToClick) {
+    public void click(WebElement elementToClick) {
         Actions action = new Actions(driver);
         action.moveToElement(elementToClick).perform();
         this.isElementLoaded(elementToClick);
@@ -42,7 +44,7 @@ public class BaseClass {
     }
 
     // Need to navigate because otherwise selenium can not click on element
-    protected void navigate(String cssToElement){
+    public void navigate(String cssToElement){
         WebElement element = driver.findElement(By.cssSelector(cssToElement));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-250)", "", element);
@@ -82,7 +84,7 @@ public class BaseClass {
         System.out.println(printValue + " - " + desc);
     }
 
-    protected List<String> getList(String cssToList) {
+    public List<String> getList(String cssToList) {
         List<WebElement> myList = driver.findElements(By.cssSelector(cssToList));
         this.isElementLoaded(myList.get(1));
         List<String> listStr = new ArrayList<String>();
@@ -91,7 +93,7 @@ public class BaseClass {
         return listStr;
     }
 
-    protected String getStringFromWebElementByCSS(String path) {
+    public String getStringFromWebElementByCSS(String path) {
         List<WebElement> listOfSources = driver.findElements(By.cssSelector(path));
         int sourceNameInDailyLesson = listOfSources.size() - 1;
         this.highlightElement(listOfSources.get(sourceNameInDailyLesson));
@@ -120,6 +122,16 @@ public class BaseClass {
         System.out.println(tokens[tokens.length-1]);
 
         return first.trim().equals(tokens[tokens.length - 1].trim());
+    }
+
+    // check if all items in secondMap existing in firstMap
+    public boolean checkProgramsInTable(Map<String, String> firstMap, Map<String, String> secondMap) {
+        for (Map.Entry<String, String> entry : secondMap.entrySet()) {
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+            if (!firstMap.containsKey(entry.getKey()))
+                return false;
+        }
+        return true;
     }
 
 }
