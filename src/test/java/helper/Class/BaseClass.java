@@ -8,7 +8,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import videoHelper.VideoRecorder;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -144,6 +149,13 @@ public class BaseClass {
         clickListAndTarget(MAIN_PANEL, MAIN_SECTION);
     }
 
+    private VideoRecorder videoRecord;
+    public void deleteVideoLog(String videoPath) throws IOException {
+        if (!videoPath.equals("")) {
+            List<File> toDelete = videoRecord.getCreatedMovieFiles();
+            Files.deleteIfExists(Paths.get(String.valueOf(toDelete.get(0))));
+        }
+    }
 }
 
 

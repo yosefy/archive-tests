@@ -7,13 +7,16 @@
         <parameter name="videoPath" value="" />
 
         <!--<parameter name="videoPath" value="C:\SPORT" />-->
-        <!--<parameter name="server" value="server3" />-->
 
         <classes>
             <class name="ArchiveBB.Tests.Programs">
                 <methods>
 
-                    <include name="programsFirstTest">
+                    <include name="compareAllProgramsItemsWithRestItems">
+                    </include>
+                    <include name="verifyProgramTopicsWithInnerTags">
+                    </include>
+                    <include name="verifyProgramTopicsPaginationEpisodeSource">
                     </include>
 
                 </methods>

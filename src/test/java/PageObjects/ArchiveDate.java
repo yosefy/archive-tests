@@ -25,10 +25,8 @@ public class ArchiveDate extends BaseClass {
     public final static String PANEL_DATE = "Date";
     public final static String PANEL_SOURCES = "Sources";
     public final static String PANEL_TOPICS = "Topics";
-
     public final static String PROGRAMS = "Programs";
     public final static String DAILY_LESSONS = "Daily Lessons";
-
     public final static String DATE_DROPDOWN_LIST_SELECTED = ".ui.fluid.item.dropdown>div:nth-child(1)";
     public final static String DATE_DROPDOWN_LIST = ".ui.fluid.item.dropdown>div>div";
     public final static String LIST_TODAY = "Today";
@@ -40,12 +38,9 @@ public class ArchiveDate extends BaseClass {
     public final static String LIST_CUSTOM_RANGE = "Custom Range";
     public final static String DATE_FIRST = ".eight:nth-child(1)>div>input";
     public final static String DATE_SECOND = ".eight:nth-child(2)>div>input";
-
     public final static String LABEL = ".filter-tags>div";
     public final static String LABEL_OPEN = ".ui.blue.basic.button";
-
     private final static String REMOVE_LABEL = ".close.icon";
-
     private final static String APPLY_BTN = ".ui.button:nth-child(2)";
     public final static String CANCEL_BTN = ".ui.button:nth-child(1)";
 

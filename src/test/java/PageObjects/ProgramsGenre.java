@@ -14,7 +14,7 @@ public class ProgramsGenre extends BaseClass {
     }
 
     public final static String GENRE_MAIN_LEFT_PANEL = ".ui.blue.tiny.fluid.vertical.menu>a.item";
-    private final static String ALL_PROGRAMS_ITEMS = ".column>div.ui.tiny.list>div";  // .column>div.ui.tiny.list>div  // .ui.tiny.list>div.item
+    private final static String ALL_PROGRAMS_ITEMS = ".column>div.ui.tiny.list>div";
     public final static String SIDE_BAR = ".layout__sidebar.is-active";
     public final static String SIDE_BAR_ICON = ".sidebar.icon";
     public final static String VERTICAL_HAMBURGER_MENU = ".ui.blue.huge.borderless.fluid.vertical.menu>a";

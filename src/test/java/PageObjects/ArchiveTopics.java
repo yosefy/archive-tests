@@ -8,6 +8,8 @@ public class ArchiveTopics extends BaseClass {
 
     private final static String TOPICS_RESULTS_TABLE = ".ui.basic.clearing.bottom.attached.segment.tab.active>div>div>div";
     private final static String APPLY_BTN = ".ui.button:nth-child(1)";
+    public final static String TOPICS_RESULTS = ".ui.sortable.very.basic.table>tbody>tr a";
+    public final static String TAG_INSIDE_PROGRAM = ".ui.list>div:nth-child(1) a";
 
     public ArchiveTopics(WebDriver driver) {
         super(driver);
@@ -20,8 +22,9 @@ public class ArchiveTopics extends BaseClass {
     }
 
     public String openFirstResultAndReturnTopics(String part){
-        clickListAndTarget(".ui.sortable.very.basic.table>tbody>tr a", part);
-        String sources = getStringFromWebElementByCSS(".ui.list>div:nth-child(1) a");
+        clickListAndTarget(TOPICS_RESULTS, part);
+        navigate(TAG_INSIDE_PROGRAM);
+        String sources = getStringFromWebElementByCSS(TAG_INSIDE_PROGRAM);
         String topics = sources.replace("Lesson topics - ","").trim();
         System.out.println("Topics-" + topics);
         return topics;

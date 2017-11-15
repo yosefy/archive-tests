@@ -20,8 +20,6 @@ public class ArchiveSources extends BaseClass {
     public final static String CANCEL_BTN = ".ui.button:nth-child(2)";
     public final static String SOURCE_RESULTS_TABLE = ".ui.sortable.very.basic.table>tbody>tr";
 
-
-
     public boolean navToSourceAndApply(String navToLable) {
         String[] tokens = navToLable.split(">");
         for (int i = 0; i < tokens.length; i++)
