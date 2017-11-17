@@ -103,14 +103,18 @@ public class Programs extends InitClass{
             Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                     ">>> Doesn't found Sources >>> " + label);
 
-            Assert.assertTrue(archiveSources.checkResultsMoreThanZero(),
-                    "Not found count of expected results");
-            // All displayed results in UI under H2
-            archiveSources.checkIfGreaterThanZero();
-            // Check label with inner tag program
-            Assert.assertTrue(archiveTopics.comp2Strings(label,
-                    archiveTopics.openFirstResultAndReturnTopics("TV Program")),
-                    "Not equal inner tags with topics");
+
+
+//            Assert.assertTrue(archiveSources.checkResultsMoreThanZero(),
+//                    "Not found count of expected results");
+//            // All displayed results in UI under H2
+//            archiveSources.checkIfGreaterThanZero();
+//            // Check label with inner tag program
+//            Assert.assertTrue(archiveTopics.comp2Strings(label,
+//                    archiveTopics.openFirstResultAndReturnTopics("TV Program")),
+//                    "Not equal inner tags with topics");
+
+
         }
         // stop video recording
         finally {videoRecord.stopRecording(videoPath);}

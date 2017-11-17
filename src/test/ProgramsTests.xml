@@ -12,10 +12,10 @@
             <class name="ArchiveBB.Tests.Programs">
                 <methods>
 
-                    <include name="compareAllProgramsItemsWithRestItems">
-                    </include>
-                    <include name="verifyProgramTopicsWithInnerTags">
-                    </include>
+                    <!--<include name="compareAllProgramsItemsWithRestItems">-->
+                    <!--</include>-->
+                    <!--<include name="verifyProgramTopicsWithInnerTags">-->
+                    <!--</include>-->
                     <include name="verifyProgramTopicsPaginationEpisodeSource">
                     </include>
 
