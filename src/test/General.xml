@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="It run all steps from Sanity" parallel="none">
+    <!--<listeners>-->
+        <!--<listener class-name="framework.ExecutionListner"/>-->
+        <!--<listener class-name="framework.TestsListener"/>-->
+    <!--</listeners>-->
+    <!-- Setup all base parameters for tests -->
+
+    <!--<parameter name="url_server"-->
+               <!--value="https://server2.nanorep.com/console/login.html" />-->
+    <!--<parameter name="url_widget" value="http://support.en.com" />-->
+    <!--<parameter name="user_name" value="automation@admin:qa" />-->
+    <!--<parameter name="password" value="Nanorep123" />-->
+    <!--<parameter name="user_admin" value="automation@admin" />-->
+    <!--<parameter name="password_admin" value="Nanorep123" />-->
+    <!--<parameter name="base_kb" value="qa" />-->
+    <!--<parameter name="browser" value="firefox" />-->
+
+    <suite-files>
+        <suite-file path="/src/test/DailyLessonsTests.xml" />
+        <suite-file path="/src/test/ProgramsTests.xml" />
+    </suite-files>
+</suite>

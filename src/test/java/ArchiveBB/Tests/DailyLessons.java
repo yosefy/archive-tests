@@ -8,10 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import videoHelper.VideoRecorder;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static PageObjects.ArchiveDate.*;
@@ -52,7 +48,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -77,7 +73,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -104,7 +100,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -129,7 +125,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -155,7 +151,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -181,7 +177,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -206,7 +202,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
         videoRecord.deleteVideoLog(videoPath);
@@ -234,7 +230,7 @@ public class DailyLessons extends InitClass {
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
-        Assert.assertTrue(archiveDate.check(ArchiveDate.LABEL, label));
+        Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_MONTH);
         ValidationsWithRangeLable(label);
@@ -267,6 +263,7 @@ public class DailyLessons extends InitClass {
         // assert all success criteria
         Assert.assertTrue(archiveSources.checkResultsMoreThanZero(), "Not found count of expected results");
         archiveSources.checkIfGreaterThanZero();
+
         Assert.assertTrue(archiveSources.comp2StringArrays(label.split(">"),
                 archiveSources.openFirstResultAndReturnSources("Part 4: KFS").split("\\.")), "");
 
@@ -278,20 +275,24 @@ public class DailyLessons extends InitClass {
     @Parameters({"link", "videoPath"})
     public void topicsAndVerifyInnerTags(String link, String videoPath) throws Exception {
         videoRecord.startRecording(videoPath);
-        String label = "A-adam hu olam katan";
+        String label = "The Mutual Guarantee";
+
         try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
+
         }
         // stop video recording
         finally { videoRecord.stopRecording(videoPath); }
 
-        Assert.assertTrue(archiveTopics.navToTopicsAndApply(label), ">>> Doesn't found Sources >>> " + label);
-        Assert.assertTrue(archiveSources.checkResultsMoreThanZero(), "Not found count of expected results");
+        Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
+                ">>> Doesn't found Sources >>> " + label);
+        Assert.assertTrue(archiveSources.checkResultsMoreThanZero(),
+                "Not found count of expected results");
         archiveSources.checkIfGreaterThanZero();
         Assert.assertTrue(archiveTopics.comp2Strings(label,
-                archiveTopics.openFirstResultAndReturnTopics("part 1")),
+                archiveTopics.openFirstResultAndReturnTopics()),
                 "Not equal inner tags with topics");
 
         videoRecord.deleteVideoLog(videoPath);

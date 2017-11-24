@@ -12,7 +12,7 @@
         <testng.version>6.11</testng.version>
         <selenium.version>3.4.0</selenium.version>
         <monte.version>0.7.7</monte.version>
-
+        <webdrivermanager.version>1.7.2</webdrivermanager.version>
     </properties>
 
     <dependencies>
@@ -38,7 +38,11 @@
             <version>1.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
     </dependencies>
-
 
 </project>

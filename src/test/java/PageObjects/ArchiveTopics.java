@@ -20,13 +20,4 @@ public class ArchiveTopics extends BaseClass {
         click(driver.findElement(By.cssSelector(APPLY_BTN)));
         return flag;
     }
-
-    public String openFirstResultAndReturnTopics(String part){
-        clickListAndTarget(TOPICS_RESULTS, part);
-        navigate(TAG_INSIDE_PROGRAM);
-        String sources = getStringFromWebElementByCSS(TAG_INSIDE_PROGRAM);
-        String topics = sources.replace("Lesson topics - ","").trim();
-        System.out.println("Topics-" + topics);
-        return topics;
-    }
 }

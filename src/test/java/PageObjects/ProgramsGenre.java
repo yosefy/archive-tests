@@ -20,6 +20,7 @@ public class ProgramsGenre extends BaseClass {
     public final static String VERTICAL_HAMBURGER_MENU = ".ui.blue.huge.borderless.fluid.vertical.menu>a";
     public final static String GENRE_PROGRAM_PANEL = "All Programs";
     public final static String PAGINATION_PANEL = ".ui.blue.compact.menu";
+    public final static String PROGRAMS_RESULT_EPISODE = ".ui.sortable.very.basic.table.index-list>tbody>tr>td>div>a";
 
 
     public Map<String, String> getAllProgramsItems (){

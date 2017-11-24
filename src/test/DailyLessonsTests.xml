@@ -6,27 +6,25 @@
         <parameter name="link" value="http://archive.kbb1.com/" />
         <parameter name="videoPath" value="" />
 
-        <!--<parameter name="videoPath" value="C:\SPORT" />-->
-
         <classes>
             <class name="ArchiveBB.Tests.DailyLessons">
                 <methods>
-                    <include name="datePickerToday">
-                    </include>
-                    <include name="datePickerYesterday">
-                    </include>
-                    <include name="datePickerLast7Days">
-                    </include>
-                    <include name="datePickerLast30Days">
-                    </include>
-                    <include name="datePickerLastMonth">
-                    </include>
-                    <include name="datePickerThisMonth">
-                    </include>
-                    <include name="datePickerCustomRange">
-                    </include>
-                    <include name="datePickerLastMonthRemoveLabel">
-                    </include>
+                    <!--<include name="datePickerToday">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerYesterday">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerLast7Days">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerLast30Days">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerLastMonth">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerThisMonth">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerCustomRange">-->
+                    <!--</include>-->
+                    <!--<include name="datePickerLastMonthRemoveLabel">-->
+                    <!--</include>-->
                     <include name="sourcesAndVerifyInnerSources">
                     </include>
                     <include name="topicsAndVerifyInnerTags">

@@ -20,6 +20,8 @@ public class ArchiveSources extends BaseClass {
     public final static String CANCEL_BTN = ".ui.button:nth-child(2)";
     public final static String SOURCE_RESULTS_TABLE = ".ui.sortable.very.basic.table>tbody>tr";
 
+    // .ui.list .item a
+
     public boolean navToSourceAndApply(String navToLable) {
         String[] tokens = navToLable.split(">");
         for (int i = 0; i < tokens.length; i++)
@@ -37,7 +39,7 @@ public class ArchiveSources extends BaseClass {
 
 
     public boolean checkResultsMoreThanZero() {
-        List<String> count = getList(SOURCE_RESULTS_TABLE);
+        List<String> count = getWebElemListReturnStringList(SOURCE_RESULTS_TABLE);
         return count.size() > 0;
     }
 
@@ -56,16 +58,6 @@ public class ArchiveSources extends BaseClass {
         }
     }
 
-    public String openFirstResultAndReturnSources(String part){
-        navigate(".ui.sortable.very.basic.table>tbody>tr a");
-        clickListAndTarget(".ui.sortable.very.basic.table>tbody>tr a", part);
-        navigate(".ui.list .item a");
-
-        String sources = getStringFromWebElementByCSS(".ui.list .item span");
-
-        System.out.println("Sources-" + sources);
-        return sources.trim();
-    }
 }
 
 

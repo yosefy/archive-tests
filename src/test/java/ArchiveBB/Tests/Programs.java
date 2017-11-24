@@ -13,9 +13,7 @@ import java.util.Map;
 import static PageObjects.ArchiveDate.DAILY_LESSON_PANEL;
 import static PageObjects.ArchiveDate.PANEL_TOPICS;
 import static PageObjects.ArchiveDate.PROGRAMS;
-import static PageObjects.ProgramsGenre.GENRE_MAIN_LEFT_PANEL;
-import static PageObjects.ProgramsGenre.GENRE_PROGRAM_PANEL;
-import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
+import static PageObjects.ProgramsGenre.*;
 
 
 public class Programs extends InitClass{
@@ -48,7 +46,7 @@ public class Programs extends InitClass{
             mainMap = programsGenre.getAllProgramsItems();
 
             // get list from vertical panel and over in loop
-            List<String> verticalPanelItems = programsGenre.getList(GENRE_MAIN_LEFT_PANEL);
+            List<String> verticalPanelItems = programsGenre.getWebElemListReturnStringList(GENRE_MAIN_LEFT_PANEL);
             // Compare in loop all items (All Programs) with all child categories
             for (int i = 1; i < verticalPanelItems.size(); i++) {
                 programsGenre.clickListAndTarget(GENRE_MAIN_LEFT_PANEL, verticalPanelItems.get(i));
@@ -81,7 +79,7 @@ public class Programs extends InitClass{
             archiveSources.checkIfGreaterThanZero();
             // Check label with inner tag program
             Assert.assertTrue(archiveTopics.comp2Strings(label,
-                    archiveTopics.openFirstResultAndReturnTopics("TV Program")),
+                    archiveTopics.openFirstResultAndReturnTopics()),
                     "Not equal inner tags with topics");
         }
         // stop video recording
@@ -103,18 +101,7 @@ public class Programs extends InitClass{
             Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                     ">>> Doesn't found Sources >>> " + label);
 
-
-
-//            Assert.assertTrue(archiveSources.checkResultsMoreThanZero(),
-//                    "Not found count of expected results");
-//            // All displayed results in UI under H2
-//            archiveSources.checkIfGreaterThanZero();
-//            // Check label with inner tag program
-//            Assert.assertTrue(archiveTopics.comp2Strings(label,
-//                    archiveTopics.openFirstResultAndReturnTopics("TV Program")),
-//                    "Not equal inner tags with topics");
-
-
+            Assert.assertTrue(programsGenre.paginationUntilEnabled(), "Found empty Episode");
         }
         // stop video recording
         finally {videoRecord.stopRecording(videoPath);}
