@@ -6,7 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import videoHelper.VideoRecorder;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,10 +13,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static PageObjects.ArchiveSources.SOURCE_RESULTS_TABLE;
-import static PageObjects.ArchiveTopics.TAG_INSIDE_PROGRAM;
-import static PageObjects.ArchiveTopics.TOPICS_RESULTS;
 import static PageObjects.ProgramsGenre.*;
 
 public class BaseClass {
@@ -41,36 +36,13 @@ public class BaseClass {
         return false;
     }
 
-    public String openFirstResultAndReturnTopics(){
-        getCssListAndClickOnFirstElement(TOPICS_RESULTS);
-        navigate(TAG_INSIDE_PROGRAM);
-        String sources = getStringFromWebElementByCSS(TAG_INSIDE_PROGRAM);
-        String topics = sources.replace("Lesson topics - ","").trim();
-        System.out.println("Topics-" + topics);
-        return topics;
-    }
-
-    public String openFirstResultAndReturnSources(String part){
-        navigate(SOURCE_RESULTS_TABLE + " a");
-        clickListAndTarget(SOURCE_RESULTS_TABLE + " a", part);
-        navigate(".ui.list .item a");
-
-        String sources = getStringFromWebElementByCSS(".ui.list .item span");
-
-        System.out.println("Sources-" + sources);
-        return sources.trim();
-    }
-
-    public boolean getCssListAndClickOnFirstElement(String list) {
+    public void getCssListAndClickOnFirstElement(String list) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         if (listOptions.get(0).isDisplayed()) {
             navigate(list);
             click(listOptions.get(0));
-            return true;
         }
-        return false;
     }
-
 
     public void click(WebElement elementToClick) {
         Actions action = new Actions(driver);
@@ -86,7 +58,6 @@ public class BaseClass {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-150)", "", element);
     }
-
 
     public boolean getCssListAndCheckTextIfExist(String list, String target) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
@@ -115,7 +86,7 @@ public class BaseClass {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='none'", element);
     }
 
-    public String returnValue(String pathToField) {
+    public String returnValueByAttribute(String pathToField) {
         WebElement field = driver.findElement(By.cssSelector(pathToField));
         this.highlightElement(field);
         return field.getAttribute("value");
@@ -134,35 +105,17 @@ public class BaseClass {
         return listStr;
     }
 
-    public String getStringFromWebElementByCSS(String path) {
-        List<WebElement> listOfSources = driver.findElements(By.cssSelector(path));
-        int sourceNameInDailyLesson = listOfSources.size() - 1;
-        this.highlightElement(listOfSources.get(sourceNameInDailyLesson));
-        return listOfSources.get(sourceNameInDailyLesson).getText();
-    }
-
+    // get two chars[] split by > and check from the end to start
     public boolean comp2StringArrays(String[] first, String[] second) {
         if (first.length == second.length) {
-            for (int i = 0; i < first.length; i++) {
-                first[i] = first[i].trim();
-                second[i] = second[i].trim();
+            for (int i = first.length-1; i > 0 ; i--) {
+                System.out.println(first[i] = first[i].trim());
+                System.out.println(second[i] = second[i].trim());
                 if (!first[i].equals(second[i]))
                     return false;
             }
         }
         return true;
-    }
-
-    public boolean comp2Strings(String first, String second) {
-        // Need to get only the last part of the source
-        String[] tokens = second.split(">");
-        for (int i = 0; i < tokens.length; i++)
-            tokens[i] = tokens[i].trim();
-
-        System.out.println(first);
-        System.out.println(tokens[tokens.length - 1]);
-
-        return first.trim().equals(tokens[tokens.length - 1].trim());
     }
 
     // getCssListAndCheckTextIfExist if all items in secondMap existing in firstMap

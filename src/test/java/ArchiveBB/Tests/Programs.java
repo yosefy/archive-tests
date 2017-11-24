@@ -78,9 +78,9 @@ public class Programs extends InitClass{
             // All displayed results in UI under H2
             archiveSources.checkIfGreaterThanZero();
             // Check label with inner tag program
-            Assert.assertTrue(archiveTopics.comp2Strings(label,
-                    archiveTopics.openFirstResultAndReturnTopics()),
-                    "Not equal inner tags with topics");
+            Assert.assertTrue(archiveTopics.comp2StringArrays(label.split(">"),
+                    archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
+                    "Not found count of expected results");
         }
         // stop video recording
         finally {videoRecord.stopRecording(videoPath);}

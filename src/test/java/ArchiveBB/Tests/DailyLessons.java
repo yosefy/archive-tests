@@ -265,7 +265,8 @@ public class DailyLessons extends InitClass {
         archiveSources.checkIfGreaterThanZero();
 
         Assert.assertTrue(archiveSources.comp2StringArrays(label.split(">"),
-                archiveSources.openFirstResultAndReturnSources("Part 4: KFS").split("\\.")), "");
+                archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
+                "Not found count of expected results");
 
         videoRecord.deleteVideoLog(videoPath);
     }
@@ -281,19 +282,21 @@ public class DailyLessons extends InitClass {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
-
         }
         // stop video recording
         finally { videoRecord.stopRecording(videoPath); }
 
         Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                 ">>> Doesn't found Sources >>> " + label);
+
+
         Assert.assertTrue(archiveSources.checkResultsMoreThanZero(),
                 "Not found count of expected results");
         archiveSources.checkIfGreaterThanZero();
-        Assert.assertTrue(archiveTopics.comp2Strings(label,
-                archiveTopics.openFirstResultAndReturnTopics()),
-                "Not equal inner tags with topics");
+
+        Assert.assertTrue(archiveSources.comp2StringArrays(label.split(">"),
+                archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
+                "Not found count of expected results");
 
         videoRecord.deleteVideoLog(videoPath);
     }
@@ -303,12 +306,12 @@ public class DailyLessons extends InitClass {
         String formattedWithSlashLabel = archiveDate.convertToDateFromLabel(label);
         // need to click on label to open the date picker
         archiveDate.openDateRangeByClickOnFilter();
-        String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_FIRST));
+        String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValueByAttribute(ArchiveDate.DATE_FIRST));
 
         Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
                 String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
 
-        dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_SECOND));
+        dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValueByAttribute(ArchiveDate.DATE_SECOND));
 
         Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
                 String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
@@ -319,13 +322,13 @@ public class DailyLessons extends InitClass {
         List<String> labels = archiveDate.parseDateRangeLabelWithRange(label);
 
         String formattedWithSlashLabel = labels.get(0);
-        String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_FIRST));
+        String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValueByAttribute(ArchiveDate.DATE_FIRST));
 
         Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
                 String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));
 
         formattedWithSlashLabel = labels.get(1);
-        dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValue(ArchiveDate.DATE_SECOND));
+        dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValueByAttribute(ArchiveDate.DATE_SECOND));
 
         Assert.assertEquals(formattedWithSlashLabel, dateFromUi,
                 String.format("The date in label - [%s] doesn't equal to date in UI - [%s] ", formattedWithSlashLabel, dateFromUi));

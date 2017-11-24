@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ArchiveTopics extends BaseClass {
 
-    private final static String TOPICS_RESULTS_TABLE = ".ui.basic.clearing.bottom.attached.segment.tab.active>div>div>div";
+    public final static String TOPICS_RESULTS_TABLE = ".ui.basic.clearing.bottom.attached.segment.tab.active>div>div>div";
     private final static String APPLY_BTN = ".ui.button:nth-child(1)";
     public final static String TOPICS_RESULTS = ".ui.sortable.very.basic.table>tbody>tr a";
     public final static String TAG_INSIDE_PROGRAM = ".ui.list>div:nth-child(1) a";

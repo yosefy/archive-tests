@@ -7,18 +7,12 @@
     <!--</listeners>-->
     <!-- Setup all base parameters for tests -->
 
-    <!--<parameter name="url_server"-->
-               <!--value="https://server2.nanorep.com/console/login.html" />-->
-    <!--<parameter name="url_widget" value="http://support.en.com" />-->
-    <!--<parameter name="user_name" value="automation@admin:qa" />-->
-    <!--<parameter name="password" value="Nanorep123" />-->
-    <!--<parameter name="user_admin" value="automation@admin" />-->
-    <!--<parameter name="password_admin" value="Nanorep123" />-->
-    <!--<parameter name="base_kb" value="qa" />-->
-    <!--<parameter name="browser" value="firefox" />-->
+    <parameter name="link" value="http://archive.kbb1.com/" />
+    <parameter name="videoPath" value="" />
 
     <suite-files>
-        <suite-file path="/src/test/DailyLessonsTests.xml" />
-        <suite-file path="/src/test/ProgramsTests.xml" />
+        <suite-file path="DailyLessonsTests.xml" />
+        <suite-file path="ProgramsTests.xml" />
+        <suite-file path="EventsTests.xml" />
     </suite-files>
 </suite>

@@ -4,9 +4,7 @@ import helper.Class.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
-
 
 public class ArchiveSources extends BaseClass {
 
@@ -16,11 +14,10 @@ public class ArchiveSources extends BaseClass {
 
     private final static String SOURCE_CHILDREN = ".ui.blue.tiny.compact.pointing>a";
     private final static String COLUMNS = ".filter-steps__column-wrapper";
-    private final static String APPLY_BTN = ".ui.primary.right.floated.button";
+    public final static String APPLY_BTN = ".ui.primary.right.floated.button";
     public final static String CANCEL_BTN = ".ui.button:nth-child(2)";
     public final static String SOURCE_RESULTS_TABLE = ".ui.sortable.very.basic.table>tbody>tr";
-
-    // .ui.list .item a
+    public final static String INNER_LESSON_TAGS = ".ui.list div";
 
     public boolean navToSourceAndApply(String navToLable) {
         String[] tokens = navToLable.split(">");
@@ -32,7 +29,7 @@ public class ArchiveSources extends BaseClass {
             flag = clickListAndTarget(String.format(COLUMNS + ":nth-child(%d) a", i), tokens[i - 1]);
             if (!flag) break;
         }
-        navigate(".ui.primary.right.floated.button");
+        navigate(APPLY_BTN);
         click(driver.findElement(By.cssSelector(APPLY_BTN)));
         return flag;
     }
@@ -58,6 +55,22 @@ public class ArchiveSources extends BaseClass {
         }
     }
 
+    public String clickOnFirstAndReturnLabel (String label){
+        String foundLabel = " ";
+        navigate(SOURCE_RESULTS_TABLE + " a");
+        this.getCssListAndClickOnFirstElement(SOURCE_RESULTS_TABLE + " a");
+        List<WebElement> list = driver.findElements(By.cssSelector(INNER_LESSON_TAGS));
+        navigate(INNER_LESSON_TAGS);
+        for (WebElement option : list){
+            if (option.getText().trim().contains(label.trim())) {
+                click(option);
+                foundLabel = option.getText().trim();
+                System.out.println(option.getText());
+                return foundLabel;
+            }
+        }
+        return foundLabel;
+    }
 }
 
 
