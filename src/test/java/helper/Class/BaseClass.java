@@ -150,7 +150,7 @@ public class BaseClass {
             items = this.getWebElemListReturnStringList(PROGRAMS_RESULT_EPISODE);
             for (String item : items) {
                 if (item.equals(" ")) {
-                    System.out.println("Empty Episode found >>>>>> ");
+                    System.out.println("Empty section is found >>>>>> ");
                     return false;
                 }
             }

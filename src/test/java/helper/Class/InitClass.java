@@ -1,14 +1,17 @@
 package helper.Class;
 
+import com.automation.remarks.testng.VideoListener;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners(VideoListener.class)
 public class InitClass {
 
     protected static WebDriver driver;

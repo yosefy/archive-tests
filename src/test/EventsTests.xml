@@ -12,6 +12,8 @@
 
                     <include name="eventsMainAllItemsMultiLang">
                     </include>
+                    <include name="eventsTestPlayer">
+                    </include>
 
                 </methods>
             </class>

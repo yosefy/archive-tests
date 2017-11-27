@@ -2,6 +2,7 @@ package ArchiveBB.Tests;
 import PageObjects.ArchiveSources;
 import PageObjects.ArchiveTopics;
 import PageObjects.ProgramsGenre;
+import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -32,14 +33,15 @@ public class Programs extends InitClass{
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void compareAllProgramsItemsWithRestItems(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
         Map<String,String> mainMap;
         Map<String,String> secondaryMap;
         // do test
-        try {
+//        try {
             driver.get(link);
             programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
             programsGenre.clickListAndTarget(GENRE_MAIN_LEFT_PANEL, GENRE_PROGRAM_PANEL);
@@ -53,20 +55,21 @@ public class Programs extends InitClass{
                 secondaryMap = programsGenre.getAllProgramsItems();
                 Assert.assertTrue(programsGenre.checkProgramsInTable(mainMap, secondaryMap));
             }
-        }
+//        }
         // stop video recording
-        finally {videoRecord.stopRecording(videoPath);}
-        videoRecord.deleteVideoLog(videoPath);
+//        finally {videoRecord.stopRecording(videoPath);}
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void verifyProgramTopicsWithInnerTags(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
         String label = "Anti-Semitism";
         // do test
-        try {
+//        try {
             driver.get(link);
             programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
             programsGenre.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
@@ -81,20 +84,21 @@ public class Programs extends InitClass{
             Assert.assertTrue(archiveTopics.comp2StringArrays(label.split(">"),
                     archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
                     "Not found count of expected results");
-        }
+//        }
         // stop video recording
-        finally {videoRecord.stopRecording(videoPath);}
-        videoRecord.deleteVideoLog(videoPath);
+//        finally {videoRecord.stopRecording(videoPath);}
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void verifyProgramTopicsPaginationEpisodeSource(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
         String label = "Anti-Semitism";
         // do test
-        try {
+//        try {
             driver.get(link);
             programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
             programsGenre.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
@@ -102,9 +106,9 @@ public class Programs extends InitClass{
                     ">>> Doesn't found Sources >>> " + label);
 
             Assert.assertTrue(programsGenre.paginationUntilEnabled(), "Found empty Episode");
-        }
+//        }
         // stop video recording
-        finally {videoRecord.stopRecording(videoPath);}
-        videoRecord.deleteVideoLog(videoPath);
+//        finally {videoRecord.stopRecording(videoPath);}
+//        videoRecord.deleteVideoLog(videoPath);
     }
 }

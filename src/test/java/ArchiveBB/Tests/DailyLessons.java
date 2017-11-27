@@ -2,6 +2,7 @@ package ArchiveBB.Tests;
 
 import PageObjects.ArchiveSources;
 import PageObjects.ArchiveTopics;
+import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
 import PageObjects.ArchiveDate;
 import org.testng.Assert;
@@ -30,200 +31,211 @@ public class DailyLessons extends InitClass {
     }
 
     @Test()
+    @Video
     @Parameters({"link", "videoPath"})
     public void datePickerToday(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
 
         // do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
+
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerYesterday(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
 
         // do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_YESTERDAY);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
+//        Assert.assertTrue(false);
+
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
 
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerLast7Days(String link, String videoPath) throws Exception {
-        // start video recording
-        videoRecord.startRecording(videoPath);
+//        // start video recording
+//        videoRecord.startRecording(videoPath);
 
         // do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_7_DAYS);
-        }
-        // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        }
+//        // stop video recording
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerLast30Days(String link, String videoPath) throws Exception {
-        // start video recording
-        videoRecord.startRecording(videoPath);
+//        // start video recording
+//        videoRecord.startRecording(videoPath);
 
         // do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_30_DAYS);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
-        // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        // if we're here it means the test passed. remove video files
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerLastMonth(String link, String videoPath) throws Exception {
-        // start video recording
-        videoRecord.startRecording(videoPath);
+//        // start video recording
+//        videoRecord.startRecording(videoPath);
 
         //do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_LAST_MONTH);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerThisMonth(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
 
         //do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_THIS_MONTH);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithRangeLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerCustomRange(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
 
         //do test
         String label;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             label = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_CUSTOM_RANGE);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         ValidationsWithSingleLable(label);
         Assert.assertTrue(archiveDate.getCssListAndCheckTextIfExist(ArchiveDate.LABEL, label));
 
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void datePickerLastMonthRemoveLabel(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
 
         // do test
         String today;
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
             today = archiveDate.saveAndReturnDateRangeLabel(ArchiveDate.DATE_DROPDOWN_LIST, ArchiveDate.LIST_TODAY);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // save the label before remove
         String label = today;
@@ -239,26 +251,27 @@ public class DailyLessons extends InitClass {
         ValidationsWithSingleLable(today);
 
         // if we're here it means the test passed. remove video files
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void sourcesAndVerifyInnerSources(String link, String videoPath) throws Exception {
         // start video recording
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
 
         // do test
         String label = "Baal HaSulam > Prefaces > General preface";
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_SOURCES);
             Assert.assertTrue(archiveSources.navToSourceAndApply(label), ">>> Doesn't found Sources >>> " + label);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         // assert all success criteria
         Assert.assertTrue(archiveSources.checkResultsMoreThanZero(), "Not found count of expected results");
@@ -268,23 +281,24 @@ public class DailyLessons extends InitClass {
                 archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
                 "Not found count of expected results");
 
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
 
     @Test()
+    @Video()
     @Parameters({"link", "videoPath"})
     public void topicsAndVerifyInnerTags(String link, String videoPath) throws Exception {
-        videoRecord.startRecording(videoPath);
+//        videoRecord.startRecording(videoPath);
         String label = "The Mutual Guarantee";
 
-        try {
+//        try {
             driver.get(link);
             archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
             archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
-        }
+//        }
         // stop video recording
-        finally { videoRecord.stopRecording(videoPath); }
+//        finally { videoRecord.stopRecording(videoPath); }
 
         Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                 ">>> Doesn't found Sources >>> " + label);
@@ -298,7 +312,7 @@ public class DailyLessons extends InitClass {
                 archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
                 "Not found count of expected results");
 
-        videoRecord.deleteVideoLog(videoPath);
+//        videoRecord.deleteVideoLog(videoPath);
     }
 
 

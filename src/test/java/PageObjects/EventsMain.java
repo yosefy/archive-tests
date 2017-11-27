@@ -15,7 +15,7 @@ public class EventsMain extends BaseClass {
 
     // todo - need to develop
     public final static String EVENTS = "Events";
-    private final static String EVENTS_MAIN_TABLE = ".ui.container.padded>table>tbody>tr";
+    public final static String EVENTS_MAIN_TABLE = ".ui.container.padded>table>tbody>tr";
     public final static String US_FLAG = ".item>a>i.us.flag";
     public final static String RU_FLAG = ".item>a>i.ru.flag";
     public final static String IL_FLAG = ".item>a>i.il.flag";
