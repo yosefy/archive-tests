@@ -5,7 +5,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import videoHelper.VideoRecorder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,7 +52,7 @@ public class BaseClass {
     }
 
     // Need to navigate because otherwise selenium can not click on element
-    public void navigate(String cssToElement) {
+    protected void navigate(String cssToElement) {
         WebElement element = driver.findElement(By.cssSelector(cssToElement));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-150)", "", element);
@@ -99,7 +98,7 @@ public class BaseClass {
     public List<String> getWebElemListReturnStringList(String cssToList) {
         List<WebElement> myList = driver.findElements(By.cssSelector(cssToList));
         this.isElementLoaded(myList.get(1));
-        List<String> listStr = new ArrayList<String>();
+        List<String> listStr = new ArrayList<>();
         for (WebElement list : myList)
             listStr.add(list.getText());
         return listStr;
@@ -136,15 +135,7 @@ public class BaseClass {
         clickListAndTarget(MAIN_PANEL, MAIN_SECTION);
     }
 
-    private VideoRecorder videoRecord;
-    public void deleteVideoLog(String videoPath) throws IOException {
-        if (!videoPath.equals("")) {
-            List<File> toDelete = videoRecord.getCreatedMovieFiles();
-            Files.deleteIfExists(Paths.get(String.valueOf(toDelete.get(0))));
-        }
-    }
-
-    public boolean paginationUntilEnabled() throws Exception {
+    public boolean paginationUntilEnabled() {
         List<String> items;
         while (this.panelStale()) {
             items = this.getWebElemListReturnStringList(PROGRAMS_RESULT_EPISODE);

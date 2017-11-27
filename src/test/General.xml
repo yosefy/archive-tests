@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="It run all steps from Sanity" parallel="none">
+<suite name="It run all steps from Sanity" parallel="false">
     <!--<listeners>-->
         <!--<listener class-name="framework.ExecutionListner"/>-->
         <!--<listener class-name="framework.TestsListener"/>-->
@@ -8,7 +8,6 @@
     <!-- Setup all base parameters for tests -->
 
     <parameter name="link" value="http://archive.kbb1.com/" />
-    <parameter name="videoPath" value="" />
 
     <suite-files>
         <suite-file path="DailyLessonsTests.xml" />
