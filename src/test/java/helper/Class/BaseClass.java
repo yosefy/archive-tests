@@ -43,6 +43,11 @@ public class BaseClass {
         }
     }
 
+    public boolean isAttributeActive(WebElement element){
+        this.highlightElement(element);
+        return element.getAttribute("class").equals("active item");
+    }
+
     public void click(WebElement elementToClick) {
         Actions action = new Actions(driver);
         action.moveToElement(elementToClick).perform();
@@ -75,7 +80,7 @@ public class BaseClass {
         wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
     }
 
-    protected void highlightElement(WebElement element) {
+    public void highlightElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='1px solid red'", element);
         try {
             Thread.sleep(500);
@@ -102,6 +107,10 @@ public class BaseClass {
         for (WebElement list : myList)
             listStr.add(list.getText());
         return listStr;
+    }
+
+    public List<WebElement> getCssListReturnWebElementsList (String cssToList){
+        return driver.findElements(By.cssSelector(cssToList));
     }
 
     // get two chars[] split by > and check from the end to start

@@ -17,6 +17,7 @@ public class VideoPlayer extends BaseClass{
     public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls > div.buttons-wrapper > button";
     public final static String MEDIA_PLAYER_PLAY = "play";
     public final static String MEDIA_PLAYER_PAUSE = "pause";
+    public final static String MEDIA_PLAYER_FORWARD = "step forward icon";
 
 
 
@@ -31,6 +32,10 @@ public class VideoPlayer extends BaseClass{
         }
     }
 
+    public void actionIsActive(WebElement item, String status) {
+
+    }
+
     public boolean checkMediaControl(String listToButtons, String action){
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
         for(WebElement elem : buttons){
@@ -40,6 +45,12 @@ public class VideoPlayer extends BaseClass{
             }
         }
         return false;
+    }
+
+    public String HTMLMediaElement_GetVideoSource(){
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return document.querySelector('video')";
+        return jsExec.executeScript(script).toString();
     }
 
     public boolean HTMLMediaElement_IF_Paused(){

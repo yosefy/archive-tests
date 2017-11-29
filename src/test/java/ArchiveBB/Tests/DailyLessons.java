@@ -28,7 +28,7 @@ public class DailyLessons extends InitClass {
     }
 
     @Test()
-    @Video
+    @Video()
     @Parameters({"link"})
     public void datePickerToday(String link) {
         driver.get(link);

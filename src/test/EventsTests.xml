@@ -9,8 +9,8 @@
             <class name="ArchiveBB.Tests.Events">
                 <methods>
 
-                    <include name="eventsMainAllItemsMultiLang">
-                    </include>
+                    <!--<include name="eventsMainAllItemsMultiLang">-->
+                    <!--</include>-->
                     <include name="eventsTestPlayer">
                     </include>
 
