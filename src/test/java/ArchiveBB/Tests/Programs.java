@@ -39,14 +39,14 @@ public class Programs extends InitClass {
         driver.get(link);
         programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
         programsGenre.clickListAndTarget(GENRE_MAIN_LEFT_PANEL, GENRE_PROGRAM_PANEL);
-        mainMap = programsGenre.getAllProgramsItems();
+        mainMap = programsGenre.getAllProgramsItems(ALL_PROGRAMS_ITEMS);
 
         // get list from vertical panel and over in loop
         List<String> verticalPanelItems = programsGenre.getWebElemListReturnStringList(GENRE_MAIN_LEFT_PANEL);
         // Compare in loop all items (All Programs) with all child categories
         for (int i = 1; i < verticalPanelItems.size(); i++) {
             programsGenre.clickListAndTarget(GENRE_MAIN_LEFT_PANEL, verticalPanelItems.get(i));
-            secondaryMap = programsGenre.getAllProgramsItems();
+            secondaryMap = programsGenre.getAllProgramsItems(ALL_PROGRAMS_ITEMS);
             Assert.assertTrue(programsGenre.checkProgramsInTable(mainMap, secondaryMap));
         }
     }

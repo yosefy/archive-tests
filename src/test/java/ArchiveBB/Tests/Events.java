@@ -1,6 +1,7 @@
 package ArchiveBB.Tests;
 
 import PageObjects.EventsMain;
+import PageObjects.ProgramsGenre;
 import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
 import helper.Class.VideoPlayer;
@@ -11,7 +12,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static PageObjects.EventsMain.*;
 import static PageObjects.ProgramsGenre.*;
@@ -45,30 +48,23 @@ public class Events extends InitClass {
     @Test()
 //    @Video()
     @Parameters({"link"})
-    public void eventsTestPlayer(String link) {
+    public void eventsTestPlayer(String link) throws InterruptedException {
         driver.get(link);
         eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
-
+        // click on EVENTS_Unity_Test
         eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
-
-        List<WebElement> webPlayerItems = eventsMain.getCssListReturnWebElementsList(EVENTS_VERTICAL_MENU);
-        String videoSource = videoPlayer.HTMLMediaElement_GetVideoSource();
-
-        for(WebElement item : webPlayerItems){
-            Assert.assertTrue(eventsMain.isAttributeActive(item),
-                    "WebElement doesn't active");
+        // get list of all elements from vertical menu
+        List<String> webPlayerItemsStr = videoPlayer.getWebElemListReturnListVideoSrc(EVENTS_VERTICAL_MENU);
+        int i = 0;
+        for(WebElement item : eventsMain.getWebElemListReturnWebElementList(EVENTS_VERTICAL_MENU)){
+            eventsMain.click(item);
+            Assert.assertTrue(eventsMain.isAttributeActive(item),"WebElement doesn't active");
+            Assert.assertTrue(webPlayerItemsStr.get(i).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
+                    "Video sources doesn't equals");
             videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
-            Assert.assertEquals(videoSource, videoPlayer.HTMLMediaElement_GetVideoSource(),
-                    "Video source doesn't updated");
+            i++;
         }
-
-
-        videoPlayer.checkMediaControl(MEDIA_PLAYER_CONTROLS,"");
-        //
-        driver.getCurrentUrl();
-
-
 
 //        Assert.assertTrue(videoPlayer.checkMediaControl(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE),
 //                "Action doesn't activated");

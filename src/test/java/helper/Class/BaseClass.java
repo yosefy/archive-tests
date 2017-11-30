@@ -5,6 +5,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import static PageObjects.ProgramsGenre.*;
 
 public class BaseClass {
@@ -35,7 +37,7 @@ public class BaseClass {
         return false;
     }
 
-    public void getCssListAndClickOnFirstElement(String list) {
+    protected void getCssListAndClickOnFirstElement(String list) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         if (listOptions.get(0).isDisplayed()) {
             navigate(list);
@@ -43,7 +45,7 @@ public class BaseClass {
         }
     }
 
-    public boolean isAttributeActive(WebElement element){
+    public boolean isAttributeActive(WebElement element) {
         this.highlightElement(element);
         return element.getAttribute("class").equals("active item");
     }
@@ -75,12 +77,12 @@ public class BaseClass {
         return false;
     }
 
-    private void isElementLoaded(WebElement elementToBeLoaded) {
+    void isElementLoaded(WebElement elementToBeLoaded) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
     }
 
-    public void highlightElement(WebElement element) {
+    protected void highlightElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='1px solid red'", element);
         try {
             Thread.sleep(500);
@@ -109,14 +111,14 @@ public class BaseClass {
         return listStr;
     }
 
-    public List<WebElement> getCssListReturnWebElementsList (String cssToList){
+    public List<WebElement> getWebElemListReturnWebElementList(String cssToList) {
         return driver.findElements(By.cssSelector(cssToList));
     }
 
     // get two chars[] split by > and check from the end to start
     public boolean comp2StringArrays(String[] first, String[] second) {
         if (first.length == second.length) {
-            for (int i = first.length-1; i > 0 ; i--) {
+            for (int i = first.length - 1; i > 0; i--) {
                 System.out.println(first[i] = first[i].trim());
                 System.out.println(second[i] = second[i].trim());
                 if (!first[i].equals(second[i]))
@@ -161,7 +163,7 @@ public class BaseClass {
         return true;
     }
 
-    private boolean panelDisabledItem (){
+    private boolean panelDisabledItem() {
         try {
             List<WebElement> allPanel = driver.findElements(By.cssSelector(PAGINATION_PANEL + ">div"));
             for (WebElement exit : allPanel) {
@@ -172,20 +174,21 @@ public class BaseClass {
                 }
             }
             return true;
-        }catch (Exception ignored){}
+        } catch (Exception ignored) {
+        }
         return true;
     }
 
-    private boolean panelStale(){
-            List<WebElement> singleLeftIcon = driver.findElements(By.cssSelector(PAGINATION_PANEL + ">a>i"));
-            for (WebElement option : singleLeftIcon) {
-                if (option.getAttribute("class").equals("angle right icon")) {
-                    navigate(PAGINATION_PANEL);
-                    highlightElement(option);
-                    click(option);
-                    break;
-                }
+    private boolean panelStale() {
+        List<WebElement> singleLeftIcon = driver.findElements(By.cssSelector(PAGINATION_PANEL + ">a>i"));
+        for (WebElement option : singleLeftIcon) {
+            if (option.getAttribute("class").equals("angle right icon")) {
+                navigate(PAGINATION_PANEL);
+                highlightElement(option);
+                click(option);
+                break;
             }
+        }
         return true;
     }
 }
