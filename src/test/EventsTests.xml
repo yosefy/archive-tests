@@ -11,7 +11,10 @@
 
                     <!--<include name="eventsMainAllItemsMultiLang">-->
                     <!--</include>-->
-                    <include name="eventsTestPlayer">
+                    <!--<include name="eventsTestPlayer">-->
+                    <!--</include>-->
+
+                    <include name="brokenLinks">
                     </include>
 
                 </methods>

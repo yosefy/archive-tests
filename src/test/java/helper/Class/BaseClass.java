@@ -6,6 +6,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -191,6 +194,45 @@ public class BaseClass {
         }
         return true;
     }
+
+    public void CheckBrokenImage(String pathToCss){
+        List<WebElement> list = driver.findElements(By.cssSelector(pathToCss));
+
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return arguments[0].complete" +
+                "&& typeof arguments[0].naturalWidth != 'undefined'" +
+                "&& arguments[0].naturalWidth > 0";
+
+        for(WebElement element : list){
+            try {
+                if (jsExec.executeScript(script, element).equals(false))
+                    System.out.println(String.format("Image [%s] is broken : ",element.getAttribute("src")));
+                else
+                    System.out.println(String.format("Image [%s] doesn't broken : ",element.getAttribute("src")));
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+    }
+
+    public void UploadFileByRobot() throws AWTException {
+        String pathTo = "C:\\Users\\b\\Desktop\\Counter\\Capture.PNG";
+        StringSelection ss = new StringSelection(pathTo);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+
+        //imitate mouse events like ENTER, CTRL+C, CTRL+V
+        Robot robot = new Robot();
+
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+    }
+
 }
 
 

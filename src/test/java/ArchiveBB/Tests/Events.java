@@ -1,7 +1,6 @@
 package ArchiveBB.Tests;
 
 import PageObjects.EventsMain;
-import PageObjects.ProgramsGenre;
 import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
 import helper.Class.VideoPlayer;
@@ -12,9 +11,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
+import java.awt.*;
 import java.util.List;
-import java.util.Map;
 
 import static PageObjects.EventsMain.*;
 import static PageObjects.ProgramsGenre.*;
@@ -48,7 +46,7 @@ public class Events extends InitClass {
     @Test()
 //    @Video()
     @Parameters({"link"})
-    public void eventsTestPlayer(String link) throws InterruptedException {
+    public void eventsTestPlayer(String link) {
         driver.get(link);
         eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
@@ -69,5 +67,22 @@ public class Events extends InitClass {
 //        Assert.assertTrue(videoPlayer.checkMediaControl(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE),
 //                "Action doesn't activated");
 //        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Paused(), "Player Doesn't Started");
+    }
+
+    @Test()
+    public void brokenLinks() throws AWTException {
+//        driver.get("http://the-internet.herokuapp.com/broken_images");
+//        eventsMain.CheckBrokenImage(".example>img");
+
+        driver.get("http://the-internet.herokuapp.com/upload");
+        eventsMain.click(driver.findElement(By.cssSelector("#file-upload")));
+        eventsMain.UploadFileByRobot();
+        eventsMain.click(driver.findElement(By.cssSelector("#file-submit")));
+        Assert.assertTrue(eventsMain.getCssListAndCheckTextIfExist(".example>h3","File Uploaded!"),
+                "Doesn't displayed success message !!!");
+
+//      autoitx4java
+// 		LoggerHelper.debug(String.format(String.format("Getting text from %s using JQuery...", description)));
+        driver.getTitle();
     }
 }

@@ -20,26 +20,12 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <!--<scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.monte</groupId>-->
-            <!--<artifactId>monte-screen-recorder</artifactId>-->
-            <!--<version>${monte.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.automation-remarks</groupId>-->
-            <!--<artifactId>video-recorder-core</artifactId>-->
-            <!--<version>1.0</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.automation-remarks</groupId>
             <artifactId>video-recorder-testng</artifactId>
@@ -50,10 +36,10 @@
             <artifactId>webdrivermanager</artifactId>
             <version>${bonigarcia.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+            <!--<version>${slf4j.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 </project>
