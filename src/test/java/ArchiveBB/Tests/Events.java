@@ -11,12 +11,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.awt.*;
 import java.util.List;
 
 import static PageObjects.EventsMain.*;
-import static PageObjects.ProgramsGenre.*;
-import static helper.Class.VideoPlayer.*;
+import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
+import static helper.Class.VideoPlayer.MEDIA_PLAYER_CONTROLS;
+import static helper.Class.VideoPlayer.MEDIA_PLAYER_FORWARD;
 
 
 public class Events extends InitClass {
@@ -36,17 +36,24 @@ public class Events extends InitClass {
     public void eventsMainAllItemsMultiLang(String link) {
         driver.get(link);
         eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
+        // ENG
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
         int items_count = eventsMain.checkAllEventsItems();
+        // RUS
         eventsMain.click(driver.findElement(By.cssSelector(RU_FLAG)));
+        Assert.assertEquals(items_count,eventsMain.checkAllEventsItems(),
+                "Items counter doesn't equal");
+        // HEB
         eventsMain.click(driver.findElement(By.cssSelector(IL_FLAG)));
+        Assert.assertEquals(items_count,eventsMain.checkAllEventsItems(),
+                "Items counter doesn't equal");
     }
 
 
     @Test()
-//    @Video()
+    @Video()
     @Parameters({"link"})
-    public void eventsTestPlayer(String link) {
+    public void eventsTestPlayerVideoSrcAndForwardBtn(String link) {
         driver.get(link);
         eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
@@ -60,38 +67,19 @@ public class Events extends InitClass {
             Assert.assertTrue(eventsMain.isAttributeActive(item),"WebElement doesn't active");
             Assert.assertTrue(webPlayerItemsStr.get(i).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
                     "Video sources doesn't equals");
+            // Click on Forward Button
             videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
             i++;
         }
-
-//        Assert.assertTrue(videoPlayer.checkMediaControl(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE),
-//                "Action doesn't activated");
-//        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Paused(), "Player Doesn't Started");
     }
 
-    @Test()
-    public void brokenLinks() throws AWTException {
-//        driver.get("http://the-internet.herokuapp.com/broken_images");
-//        eventsMain.CheckBrokenImage(".example>img");
-
-        driver.get("http://the-internet.herokuapp.com/upload");
-        eventsMain.click(driver.findElement(By.cssSelector("#file-upload")));
-        eventsMain.UploadFileByRobot();
-        eventsMain.click(driver.findElement(By.cssSelector("#file-submit")));
-        Assert.assertTrue(eventsMain.getCssListAndCheckTextIfExist(".example>h3","File Uploaded!"),
-                "Doesn't displayed success message !!!");
-
-//      autoitx4java
-// 		LoggerHelper.debug(String.format(String.format("Getting text from %s using JQuery...", description)));
-        driver.getTitle();
-    }
 
     @Test()
     public void playControl(){
 
     }
 
-    @Test()
+    @Test() // Seems like already covered in the test case eventsTestPlayerVideoSrcAndForwardBtn
     public void forwardControl(){
 
     }
