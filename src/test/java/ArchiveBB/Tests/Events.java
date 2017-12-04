@@ -85,4 +85,80 @@ public class Events extends InitClass {
 // 		LoggerHelper.debug(String.format(String.format("Getting text from %s using JQuery...", description)));
         driver.getTitle();
     }
+
+    @Test()
+    public void playControl(){
+
+    }
+
+    @Test()
+    public void forwardControl(){
+
+    }
+
+    @Test()
+    public void backwardControl(){
+
+    }
+
+    @Test()
+    public void timeCode(){
+
+    }
+
+    @Test()
+    public void timeCodeUpdateByPlay(){
+
+    }
+
+    @Test()
+    public void timeCodeUpdateByScroll(){
+
+    }
+
+    @Test()
+    public void timeCodeUpdateByLink(){
+
+    }
+
+    @Test()
+    public void speedSelector(){
+
+    }
+
+    @Test()
+    public void volumeBar(){
+
+    }
+
+    @Test()
+    public void audioVideoToggle(){
+
+    }
+
+    @Test()
+    public void languageSelector(){
+
+    }
+
+    @Test()
+    public void fullScreenToggle(){
+
+    }
+
+    @Test()
+    public void sharingModeOn(){
+
+    }
+
+    @Test()
+    public void sharingModeOff(){
+
+    }
+
+    @Test()
+    public void sharingModeActions(){
+
+    }
+
 }
