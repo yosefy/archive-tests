@@ -4,6 +4,7 @@
     <test name="ArchiveBB TryNewTests - Sanity Tests">
 
         <parameter name="link" value="http://archive.kbb1.com/" />
+        <parameter name="pathToDownloadFiles" value="C:\SPORT" />
 
         <classes>
             <class name="ArchiveBB.Tests.TryNewTests">

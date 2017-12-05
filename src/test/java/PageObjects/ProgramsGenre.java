@@ -28,7 +28,6 @@ public class ProgramsGenre extends BaseClass {
         List<WebElement> allItems = driver.findElements(By.cssSelector(listToCss));
         String key,value;
         for (WebElement run : allItems) {
-//            highlightElement(run);
             key = run.getAttribute("data-value");
             value = run.getText();
             if (key!= null) {

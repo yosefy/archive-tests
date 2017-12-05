@@ -4,20 +4,15 @@ import PageObjects.ArchiveSources;
 import PageObjects.ArchiveTopics;
 import PageObjects.EventsMain;
 import PageObjects.ProgramsGenre;
-import com.automation.remarks.video.annotations.Video;
+import helper.Class.FilesClass;
 import helper.Class.InitClass;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Map;
-
-import static PageObjects.ArchiveDate.*;
-import static PageObjects.ProgramsGenre.*;
+import java.io.IOException;
 
 
 public class TryNewTests extends InitClass {
@@ -26,6 +21,7 @@ public class TryNewTests extends InitClass {
     private EventsMain eventsMain;
     private ArchiveTopics archiveTopics;
     private ArchiveSources archiveSources;
+    private FilesClass filesClass;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -33,24 +29,50 @@ public class TryNewTests extends InitClass {
         archiveTopics = new ArchiveTopics(driver);
         archiveSources = new ArchiveSources(driver);
         eventsMain = new EventsMain(driver);
+        filesClass = new FilesClass();
     }
 
     // https://github.com/tourdedave/the-internet
     // http://elementalselenium.com/tips
 
     @Test()
-    public void brokenLinks() throws AWTException {
+    @Parameters({"pathToDownloadFiles"})
+    public void brokenLinks(String pathToDownloadFiles) {
 //        driver.get("http://the-internet.herokuapp.com/broken_images");
 //        eventsMain.CheckBrokenImage(".example>img");
 
-        driver.get("http://the-internet.herokuapp.com/upload");
-        eventsMain.click(driver.findElement(By.cssSelector("#file-upload")));
-        eventsMain.UploadFileByRobot();
-        eventsMain.click(driver.findElement(By.cssSelector("#file-submit")));
-        Assert.assertTrue(eventsMain.getCssListAndCheckTextIfExist(".example>h3","File Uploaded!"),
-                "Doesn't displayed success message !!!");
+//        driver.get("http://the-internet.herokuapp.com/upload");
+//        eventsMain.click(driver.findElement(By.cssSelector("#file-upload")));
+//        eventsMain.UploadFileByRobot();
+//        eventsMain.click(driver.findElement(By.cssSelector("#file-submit")));
+//        Assert.assertTrue(eventsMain.getCssListAndCheckTextIfExist(".example>h3","File Uploaded!"),
+//                "Doesn't displayed success message !!!");
 
+        Assert.assertTrue(filesClass.replaceFilesOrCreateNewFolder(pathToDownloadFiles),"Folder doesn't created");
+
+        driver.get("http://the-internet.herokuapp.com/download");
+//        List<WebElement> allDownloadebleLinks = driver.findElements(By.cssSelector(".example>a"));
+//
+//        WebElement downloadButton = allDownloadebleLinks.get(0);
+//
+//        System.out.println(downloadButton.getAttribute("href"));
+//        String sourceLocation = downloadButton.getAttribute("href");
+//        String wget_command = "cmd /c C:\\Wget\\wget.exe -P C:\\SPORT --no-check-certificate " + sourceLocation;
+//
+//        try {
+//            Process exec = Runtime.getRuntime().exec(wget_command);
+//            int exitVal = exec.waitFor();
+//            System.out.println("Exit value: " + exitVal);
+//        } catch (InterruptedException | IOException ex) {
+//            System.out.println(ex.toString());
+//        }
+
+
+        eventsMain.getCssListAndClickOnFirstElement(".example>a");
+//        eventsMain.click(driver.findElement(By.cssSelector("#file-upload")));
         driver.getTitle();
+
+
     }
 
 }

@@ -22,6 +22,7 @@ public class EventsMain extends BaseClass {
     public final static String IL_FLAG = ".item>a>i.il.flag";
 
     public final static String EVENTS_Unity_Test = "Unity Evening - “The Story of Kabbalah LaAm”";
+    public final static String EVENTS_CONVENTION_GEO_2017 = "Convention in Georgia 2017";
 
 
     public int checkAllEventsItems(){
