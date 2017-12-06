@@ -14,6 +14,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static PageObjects.EventsMain.*;
+import static PageObjects.ProgramsGenre.SIDE_BAR;
+import static PageObjects.ProgramsGenre.SIDE_BAR_PART;
 import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
 import static helper.Class.VideoPlayerClass.*;
 
@@ -112,6 +114,14 @@ public class Player extends InitClass{
             if (j==0)
                 Assert.assertTrue(videoPlayer.checkMediaControlState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_BACKWARD_DISABLED),
                     "The MEDIA_PLAYER_BACKWARD_DISABLED item doesn't disabled");
+        }
+    }
+
+    @Test
+    public void decreaseTheTimeToOpenPanel(){
+        driver.get("https://archive.kbb1.com/");
+        if (driver.manage().window().getSize().getWidth() <1505 ){
+
         }
     }
 

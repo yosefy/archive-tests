@@ -11,7 +11,7 @@
             <class name="ArchiveBB.Tests.Player">
                 <methods>
 
-                    <include name="playerTimeCode">
+                    <include name="playerForwardBtnAndBackwardBtn">
                     </include>
 
                 </methods>

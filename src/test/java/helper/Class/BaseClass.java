@@ -149,8 +149,8 @@ public class BaseClass {
     }
 
     public void navigateToPanelAndSection(String MAIN_PANEL, String MAIN_SECTION) {
-        boolean ifSideBarIsOpened = driver.findElements(By.cssSelector(SIDE_BAR)).size() != 0;
-        if (!ifSideBarIsOpened)
+        // Check browser size and decide if displayed hamburger or not
+        if (driver.manage().window().getSize().getWidth() <1505 )
             click(driver.findElement(By.cssSelector(SIDE_BAR_ICON)));
 
         clickListAndTarget(MAIN_PANEL, MAIN_SECTION);
