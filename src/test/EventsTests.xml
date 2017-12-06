@@ -11,10 +11,9 @@
 
                     <!--<include name="eventsMainAllItemsMultiLang">-->
                     <!--</include>-->
-                    <!--<include name="eventsTestPlayer">-->
+                    <!--<include name="eventsTestPlayerVideoSrcAndForwardBtn">-->
                     <!--</include>-->
-
-                    <include name="brokenLinks">
+                    <include name="eventsTestPlayerVideoPlayBtn">
                     </include>
 
                 </methods>

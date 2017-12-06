@@ -2,8 +2,10 @@ package helper.Class;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
@@ -16,6 +18,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static PageObjects.ProgramsGenre.*;
 
@@ -40,7 +43,7 @@ public class BaseClass {
         return false;
     }
 
-    protected void getCssListAndClickOnFirstElement(String list) {
+    public void getCssListAndClickOnFirstElement(String list) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         if (listOptions.get(0).isDisplayed()) {
             navigate(list);

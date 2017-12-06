@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ArchiveBB TryNewTests - Sanity Tests" parallel="false">
+    <test name="ArchiveBB TryNewTests - Sanity Tests">
+
+        <parameter name="link" value="http://archive.kbb1.com/" />
+        <parameter name="pathToDownloadFiles" value="C:\SPORT" />
+
+        <classes>
+            <class name="ArchiveBB.Tests.TryNewTests">
+                <methods>
+
+                    <include name="brokenLinks">
+                    </include>
+
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Tests -->
+</suite> <!-- Suite -->

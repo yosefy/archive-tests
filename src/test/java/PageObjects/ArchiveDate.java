@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static PageObjects.ProgramsGenre.SIDE_BAR;
-import static PageObjects.ProgramsGenre.SIDE_BAR_ICON;
 
 public class ArchiveDate extends BaseClass {
 

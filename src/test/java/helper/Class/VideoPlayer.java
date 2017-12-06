@@ -31,6 +31,11 @@ public class VideoPlayer extends BaseClass {
                 click(elem);
             }
         }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean checkMediaControl(String listToButtons, String action) {
