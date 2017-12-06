@@ -10,9 +10,9 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoPlayer extends BaseClass {
+public class VideoPlayerClass extends BaseClass {
 
-    public VideoPlayer(WebDriver driver) {
+    public VideoPlayerClass(WebDriver driver) {
         super(driver);
     }
 
@@ -20,6 +20,9 @@ public class VideoPlayer extends BaseClass {
     public final static String MEDIA_PLAYER_PLAY = "play";
     public final static String MEDIA_PLAYER_PAUSE = "pause";
     public final static String MEDIA_PLAYER_FORWARD = "step forward icon";
+    public final static String MEDIA_PLAYER_FORWARD_DISABLED = "step forward disabled icon";
+    public final static String MEDIA_PLAYER_BACKWARD = "step backward icon";
+    public final static String MEDIA_PLAYER_BACKWARD_DISABLED = "step backward disabled icon";
 
 
     public void action(String listToButtons, String action) {
@@ -31,14 +34,10 @@ public class VideoPlayer extends BaseClass {
                 click(elem);
             }
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait(500);
     }
 
-    public boolean checkMediaControl(String listToButtons, String action) {
+    public boolean checkMediaControlState(String listToButtons, String action) {
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
         for (WebElement elem : buttons) {
             if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
@@ -62,7 +61,9 @@ public class VideoPlayer extends BaseClass {
     }
 
     public String HTMLMediaElement_GetVideoSource() {
-        return ((ChromeDriver) driver).findElementByTagName("video").getAttribute("src");
+        String source = ((ChromeDriver) driver).findElementByTagName("video").getAttribute("src");
+        System.out.println("Current SRC: " + source);
+        return source;
     }
 
     public boolean HTMLMediaElement_IF_Paused() {

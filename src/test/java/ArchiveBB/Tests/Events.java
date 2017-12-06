@@ -3,19 +3,14 @@ package ArchiveBB.Tests;
 import PageObjects.EventsMain;
 import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
-import helper.Class.VideoPlayer;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static PageObjects.EventsMain.*;
 import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
-import static helper.Class.VideoPlayer.*;
 
 
 public class Events extends InitClass {

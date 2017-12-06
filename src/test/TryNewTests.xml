@@ -7,10 +7,11 @@
         <parameter name="pathToDownloadFiles" value="C:\SPORT" />
 
         <classes>
-            <class name="ArchiveBB.Tests.TryNewTests">
+            <!--<class name="ArchiveBB.Tests.TryNewTests">-->
+            <class name="ArchiveBB.Tests.Player">
                 <methods>
 
-                    <include name="brokenLinks">
+                    <include name="playerTimeCode">
                     </include>
 
                 </methods>

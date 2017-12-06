@@ -51,7 +51,7 @@ public class BaseClass {
         }
     }
 
-    public boolean isAttributeActive(WebElement element) {
+    public boolean isWebElemAttributeActiveItem(WebElement element) {
         this.highlightElement(element);
         return element.getAttribute("class").equals("active item");
     }
@@ -90,12 +90,16 @@ public class BaseClass {
 
     protected void highlightElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='1px solid red'", element);
+        this.wait(500);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='none'", element);
+    }
+
+    public void wait (int milliseconds){
         try {
-            Thread.sleep(500);
+            Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='none'", element);
     }
 
     public String returnValueByAttribute(String pathToField) {
@@ -117,7 +121,7 @@ public class BaseClass {
         return listStr;
     }
 
-    public List<WebElement> getWebElemListReturnWebElementList(String cssToList) {
+    public List<WebElement> getCssPathReturnWebElementList(String cssToList) {
         return driver.findElements(By.cssSelector(cssToList));
     }
 
