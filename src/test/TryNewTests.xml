@@ -8,10 +8,10 @@
 
         <classes>
             <!--<class name="ArchiveBB.Tests.TryNewTests">-->
-            <class name="ArchiveBB.Tests.TryNewTests">
+            <class name="ArchiveBB.Tests.Player">
                 <methods>
 
-                    <include name="buildHashMapFromMp3Files">
+                    <include name="playerTimeCode">
                     </include>
 
                 </methods>

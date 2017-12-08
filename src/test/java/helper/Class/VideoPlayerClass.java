@@ -16,13 +16,16 @@ public class VideoPlayerClass extends BaseClass {
         super(driver);
     }
 
-    public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls>div.buttons-wrapper>button";
     public final static String MEDIA_PLAYER_PLAY = "play";
     public final static String MEDIA_PLAYER_PAUSE = "pause";
     public final static String MEDIA_PLAYER_FORWARD = "step forward icon";
     public final static String MEDIA_PLAYER_FORWARD_DISABLED = "step forward disabled icon";
     public final static String MEDIA_PLAYER_BACKWARD = "step backward icon";
     public final static String MEDIA_PLAYER_BACKWARD_DISABLED = "step backward disabled icon";
+
+    public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls>div.buttons-wrapper>button";
+    public final static String MEDIA_PLAYER_TIMECODE = ".mediaplayer__timecode>time";
+
 
 
     public void action(String listToButtons, String action) {
@@ -42,6 +45,7 @@ public class VideoPlayerClass extends BaseClass {
         for (WebElement elem : buttons) {
             if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
                 highlightElement(elem);
+                System.out.println(elem.getText());
                 return true;
             }
         }
@@ -58,6 +62,19 @@ public class VideoPlayerClass extends BaseClass {
             listStr.add(this.HTMLMediaElement_GetVideoSource());
         }
         return listStr;
+    }
+
+    public String[] getTimeCode (){
+        String[] time = new String[2];
+        List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
+        time[0] = element.get(0).getText();
+        time[1] = element.get(1).getText();
+        // wait until displayed duration time
+        while (time[1].equals("00:00")) {
+            element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
+            time[1] = element.get(1).getText();
+        }
+        return time;
     }
 
     public String HTMLMediaElement_GetVideoSource() {

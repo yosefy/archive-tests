@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static PageObjects.EventsMain.*;
@@ -115,25 +116,41 @@ public class Player extends InitClass{
         }
     }
 
-//    @Test
-//    public void decreaseTheTimeToOpenPanel(){
-//        driver.get("https://archive.kbb1.com/");
-//        if (driver.manage().window().getSize().getWidth() <1505 ){
-//
-//        }
-//    }
-
+    // todo ----------------------------->>>>>>>>>>
+    // todo --------- learn java  https://www.youtube.com/playlist?list=PLPjzC7XXuyAlD-JeryvYJ8fjzN-A9s_Ub
+    // todo --------- python ------------
 
     @Test()
-    public void playerTimeCode(){
-        // todo ----------------------------->>>>>>>>>>
-        // todo --------- learn java  https://www.youtube.com/playlist?list=PLPjzC7XXuyAlD-JeryvYJ8fjzN-A9s_Ub
-        // todo --------- python ------------
+    @Parameters({"link"})
+    public void playerTimeCode(String link){
+        driver.get(link);
+        eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
+        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
+        // click on EVENTS_Unity_Test
+        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+        // navigate to list items and get all lessons
+        for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)) {
+            videoPlayer.click(item);
+            System.out.println(item.getText());
+
+            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+            String[] timeCode = videoPlayer.getTimeCode();
+
+            Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+
+
+        }
+
+        // get name and time duration
+        // compare with time that displayed in player
+
     }
 
     @Test()
     public void timeCodeUpdateByPlay(){
-
+        // sdfjslfj
+        // kkspfsf
     }
 
     @Test()
