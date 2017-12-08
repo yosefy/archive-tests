@@ -126,6 +126,9 @@ public class BaseClass {
     }
 
     // get two chars[] split by > and check from the end to start
+    /**
+    *   Two strings should have the same length
+     **/
     public boolean comp2StringArrays(String[] first, String[] second) {
         if (first.length == second.length) {
             for (int i = first.length - 1; i > 0; i--) {

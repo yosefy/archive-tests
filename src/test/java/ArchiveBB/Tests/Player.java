@@ -116,10 +116,6 @@ public class Player extends InitClass{
         }
     }
 
-    // todo ----------------------------->>>>>>>>>>
-    // todo --------- learn java  https://www.youtube.com/playlist?list=PLPjzC7XXuyAlD-JeryvYJ8fjzN-A9s_Ub
-    // todo --------- python ------------
-
     @Test()
     @Parameters({"link"})
     public void playerTimeCode(String link){
@@ -128,24 +124,26 @@ public class Player extends InitClass{
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
         // click on EVENTS_Unity_Test
         eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
-
         // navigate to list items and get all lessons
         for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)) {
             videoPlayer.click(item);
             System.out.println(item.getText());
-
             videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
             String[] timeCode = videoPlayer.getTimeCode();
-
             Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
-
-
+            // get timeCode from player side list
+            String[] timeFromPlayList = item.getText().trim().split("-");
+            // compare file duration
+            System.out.println("Displayed time in playlist: " + timeFromPlayList[timeFromPlayList.length - 1].trim());
+            System.out.println("Displayed time in player: " + timeCode[1].trim());
+            Assert.assertFalse(!timeFromPlayList[timeFromPlayList.length - 1].trim().equals(timeCode[1].trim()),
+                    "Duration doesn't equals");
         }
-
-        // get name and time duration
-        // compare with time that displayed in player
-
     }
+
+    // todo ----------------------------->>>>>>>>>>
+    // todo --------- learn java  https://www.youtube.com/playlist?list=PLPjzC7XXuyAlD-JeryvYJ8fjzN-A9s_Ub
+    // todo --------- python ------------
 
     @Test()
     public void timeCodeUpdateByPlay(){
