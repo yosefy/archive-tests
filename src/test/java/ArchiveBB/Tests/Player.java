@@ -14,8 +14,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static PageObjects.EventsMain.*;
-import static PageObjects.ProgramsGenre.SIDE_BAR;
-import static PageObjects.ProgramsGenre.SIDE_BAR_PART;
 import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
 import static helper.Class.VideoPlayerClass.*;
 
@@ -117,18 +115,20 @@ public class Player extends InitClass{
         }
     }
 
-    @Test
-    public void decreaseTheTimeToOpenPanel(){
-        driver.get("https://archive.kbb1.com/");
-        if (driver.manage().window().getSize().getWidth() <1505 ){
-
-        }
-    }
+//    @Test
+//    public void decreaseTheTimeToOpenPanel(){
+//        driver.get("https://archive.kbb1.com/");
+//        if (driver.manage().window().getSize().getWidth() <1505 ){
+//
+//        }
+//    }
 
 
     @Test()
     public void playerTimeCode(){
-
+        // todo ----------------------------->>>>>>>>>>
+        // todo --------- learn java  https://www.youtube.com/playlist?list=PLPjzC7XXuyAlD-JeryvYJ8fjzN-A9s_Ub
+        // todo --------- python ------------
     }
 
     @Test()

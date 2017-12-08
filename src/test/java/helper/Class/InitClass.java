@@ -48,7 +48,6 @@ public class InitClass {
         cap.setCapability(ChromeOptions.CAPABILITY, options);
         driver = new ChromeDriver(cap);
 
-
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }

@@ -12,7 +12,10 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 
 public class TryNewTests extends InitClass {
@@ -75,4 +78,17 @@ public class TryNewTests extends InitClass {
 
     }
 
+    @Test()
+    public void buildHashMapFromMp3Files() throws IOException, NoSuchAlgorithmException {
+        // old files to compare
+        // \\Bbo-092\d$\רדיו כללי\radio old - need to compare
+        // new files to compare
+        // \\Bbo-092\d$\_new_radio\haim hdashim\Test-Lo Lagaat\Makor Old
+
+        String absolutePath = "C:\\SPORT";
+        Map<String, String> mp3Mapped;
+        mp3Mapped = filesClass.returnHashMapWithChecksumAndFileName(absolutePath);
+        System.out.println(mp3Mapped);
+
+    }
 }
