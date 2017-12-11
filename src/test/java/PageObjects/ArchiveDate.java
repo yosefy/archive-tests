@@ -53,9 +53,9 @@ public class ArchiveDate extends BaseClass {
     }
 
     public List<String> parseDateRangeLabelWithRange(String label) {
-        List<String> myList = new ArrayList<String>();
+        List<String> myList = new ArrayList<>();
         if (label.contains("-")) {
-            myList = new ArrayList<String>(Arrays.asList(label.split("-")));
+            myList = new ArrayList<>(Arrays.asList(label.split("-")));
             for (int i = 0; i < myList.size(); i++)
                 myList.set(i, convertToDateFromLabel(myList.get(i)));
             return myList;

@@ -147,58 +147,82 @@ public class Player extends InitClass{
 
     @Test()
     public void timeCodeUpdateByPlay(){
-        // sdfjslfj
-        // kkspfsf
+        // click on play button
+        // verify that player timecode is increased
     }
 
     @Test()
     public void timeCodeUpdateByScroll(){
-
+        // click on play
+        // scroll to the right
+        // VERIFY START TIME UPDATED
     }
 
     @Test()
     public void timeCodeUpdateByLink(){
-
+        // open predefined link with start and end times
+        // https://archive.kbb1.com/lessons/part/5E2Itk4w?language=en&sstart=150.000&send=300.000
+        // open sharing option
+        // get time from controllers end == end && start == start
     }
 
     @Test()
     public void speedSelector(){
-
+        // star play with regular speed during 5 sec and store the run time
+        // change to 1.5 speed and run 5 sec and store the run time and compare
+        // change to 2 speed and compare with previous rum time
     }
 
     @Test()
     public void volumeBar(){
-
+        // mute mode
+        // 1 line volume
+        // 3 line volume maximum
     }
 
     @Test()
     public void audioVideoToggle(){
-
+        // verify src type (audio / video)
+        // start video / audio
+        // switch to audio check player in audio mode and verify
+        // switch to video mode and verify
     }
 
     @Test()
     public void languageSelector(){
-
+        // open language selector
+        // assert if opened
+        // assert language list present
+        // switch language and assert URL video source
     }
 
     @Test()
     public void fullScreenToggle(){
-
+        // investigate size of player
     }
 
     @Test()
     public void sharingModeOn(){
-
+        // click on share
+        // verify that displayed (share option, link option, back to play, right and left share controls)
     }
 
     @Test()
     public void sharingModeOff(){
-
+        // click back to play
+        // verify that doesn't dispayed ...
     }
 
     @Test()
     public void sharingModeActions(){
-
+        // enter sharing mode
+        // move start time control
+        // assert time updated
+        // move end time control
+        // assert time updated
+        // copy link and open in new tap and paste copied link
+        // compare copied link with source link
+        //
     }
 
 }

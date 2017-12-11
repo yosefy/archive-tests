@@ -65,6 +65,7 @@ public class VideoPlayerClass extends BaseClass {
     }
 
     public String[] getTimeCode (){
+        // todo - get current time and get exception after the minute
         String[] time = new String[2];
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
         time[0] = element.get(0).getText();
