@@ -130,7 +130,7 @@ public class Player extends InitClass{
             System.out.println(item.getText());
             videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
             String[] timeCode = videoPlayer.getTimeCode();
-            Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+            Assert.assertTrue(!timeCode[1].equals("00:00"),"End time doesn't equal 00:00");
             // get timeCode from player side list
             String[] timeFromPlayList = item.getText().trim().split("-");
             // compare file duration

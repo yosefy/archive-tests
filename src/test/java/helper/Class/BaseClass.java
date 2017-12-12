@@ -1,6 +1,10 @@
 package helper.Class;
 
+import com.sun.xml.internal.ws.model.WrapperBeanGenerator;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -10,11 +14,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +94,7 @@ public class BaseClass {
         wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
     }
 
-    protected void highlightElement(WebElement element) {
+    public void highlightElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='1px solid red'", element);
         this.wait(500);
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='none'", element);
@@ -243,6 +249,178 @@ public class BaseClass {
         robot.keyRelease(KeyEvent.VK_ENTER);
     }
 
+
+    public boolean waitForMessageDisplayed(Integer _seconds, String pathToCSS, String message) {
+        LocalTime now = LocalTime.now();
+        int currentMinute = now.getMinute();
+        int nextMinute = 0;
+        System.out.println("currentMinute is: " + currentMinute);
+
+        WebElement savingLbl;
+        boolean flag;
+        for (int second = 0; ; second++) {
+            if (second >= _seconds) {
+                // click on button
+                driver.findElement(By.cssSelector(".example>p>a")).click();
+                // check if displayed block message
+                try {
+                    flag = driver.findElements(By.cssSelector(pathToCSS)).size() == 1;
+                    if (flag) {
+                        savingLbl = driver.findElement(By.cssSelector(pathToCSS));
+                        highlightElement(savingLbl);
+                        System.out.println(savingLbl.getText());
+                        if (savingLbl.getText().equals(message))
+                            return true;
+                    }
+                } catch (Exception ignored) {
+                }
+                nextMinute = now.getMinute();
+                System.out.println("Waiting : " + nextMinute +" minute");
+                System.out.println("Waiting for changes to be saved...");
+            }
+
+            if (nextMinute - currentMinute >= _seconds) {
+                System.out.println(String.format("The message - [%s] didn't displayed during [%s] !!!",
+                        message,_seconds.toString()));
+                return false;
+            }
+        }
+    }
+
+
+    public void dragAndDrop(WebElement from, WebElement to) {
+        Actions builder = new Actions(driver);
+        builder.keyDown(Keys.CONTROL)
+                .click(from)
+                .dragAndDrop(from, to)
+                .keyUp(Keys.CONTROL);
+        Action selected = builder.build();
+        selected.perform();
+
+
+//        Actions builder = new Actions(Actions builder = new Actions(fDriver);
+//    builder.keyDown(Keys.CONTROL)
+//        .click(element)
+//        .dragAndDrop(element, elementDropped)
+//        .keyUp(Keys.CONTROL);
+//
+//        Action selected = builder.build();
+//
+//        selected.perform(););
+//        builder.clickAndHold(from).build().perform();
+//        builder.moveToElement(to).build().perform();
+//        builder.release(to).build().perform();
+
+//        Actions builder = new Actions(driver);
+//        Action dragAndDrop = builder.clickAndHold(cssPathToWebElem)
+//                .moveToElement(cssPathFromWebElem)
+//                .release(cssPathToWebElem)
+//                .build();
+//        dragAndDrop.perform();
+    }
+
+
+    public void sliderLeftByArrow(int numberOfTimes, String pathToCssWebElement) {
+        Actions moveSlider = new Actions(driver);
+        WebElement element = driver.findElement(By.cssSelector(pathToCssWebElement));
+        if (numberOfTimes>0) {
+            moveSlider.click(element).build().perform();
+            for (int i = 0; i < numberOfTimes; i++) {
+                moveSlider.sendKeys(Keys.ARROW_LEFT).build().perform();
+                wait(200);
+            }
+        }
+    }
+
+    public void sliderRightByArrow(int numberOfTimes, String pathToCssWebElement) {
+        Actions moveSlider = new Actions(driver);
+        WebElement element = driver.findElement(By.cssSelector(pathToCssWebElement));
+        if (numberOfTimes>0) {
+            moveSlider.click(element).build().perform();
+            for (int i = 0; i < numberOfTimes; i++) {
+                moveSlider.sendKeys(Keys.ARROW_RIGHT).build().perform();
+                wait(200);
+            }
+        }
+    }
+
+    public void clickByCoordinates(String s) {
+        WebElement element = driver.findElement(By.cssSelector(s));
+        int width = element.getSize().getWidth();
+        int height = element.getSize().getHeight();
+        System.out.println(width);
+        System.out.println(height);
+        this.scrollToElementIgnoringSteakHeader(element,10);
+
+        driver.getTitle();
+    }
+
+    public void scrollToElementIgnoringSteakHeader(WebElement element, int coordinateYCorretion) {
+            int x = element.getLocation().x;
+            int y = element.getLocation().y + coordinateYCorretion;
+            ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
+        }
+
+        public void scrollTo(WebElement element, String description) {
+            int x = element.getLocation().x;
+            int y = element.getLocation().y;
+            ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
+        }
+
+
+
+    public void dragAndDropElement(WebElement dragFrom, WebElement dragTo, int xOffset) throws Exception {
+        //Setup robot
+        Robot robot = new Robot();
+        robot.setAutoDelay(50);
+
+        //Fullscreen page so selenium coordinates are same as robot coordinates
+        robot.keyPress(KeyEvent.VK_F11);
+        Thread.sleep(2000);
+
+        //Get size of elements
+        Dimension fromSize = dragFrom.getSize();
+        Dimension toSize = dragTo.getSize();
+
+        //Get centre distance
+        int xCentreFrom = fromSize.width / 2;
+        int yCentreFrom = fromSize.height / 2;
+        int xCentreTo = toSize.width / 2;
+        int yCentreTo = toSize.height / 2;
+
+        //Get x and y of WebElement to drag to
+        Point toLocation = dragTo.getLocation();
+        Point fromLocation = dragFrom.getLocation();
+
+        //Make Mouse coordinate centre of element and account for offset
+        toLocation.x += xOffset + xCentreTo;
+        toLocation.y += yCentreTo;
+        fromLocation.x += xCentreFrom;
+        fromLocation.y += yCentreFrom;
+
+        //Move mouse to drag from location
+        robot.mouseMove(fromLocation.x, fromLocation.y);
+
+        //Click and drag
+        robot.mousePress(InputEvent.BUTTON1_MASK);
+
+        //Drag events require more than one movement to register
+        //Just appearing at destination doesn't work so move halfway first
+        robot.mouseMove(((toLocation.x - fromLocation.x) / 2) + fromLocation.x, ((toLocation.y - fromLocation.y) / 2) + fromLocation.y);
+
+        //Move to final position
+        robot.mouseMove(toLocation.x, toLocation.y);
+
+        //Drop
+        robot.mouseRelease(InputEvent.BUTTON1_MASK);
+    }
 }
+
+
+
+
+
+
+
 
 

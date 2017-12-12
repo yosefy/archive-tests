@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +66,11 @@ public class VideoPlayerClass extends BaseClass {
     }
 
     public String[] getTimeCode (){
-        // todo - get current time and get exception after the minute
+        LocalTime now = LocalTime.now();
+        int currentMinute = now.getMinute();
+        int nextMinute;
+        System.out.println("currentMinute is: " + currentMinute);
+
         String[] time = new String[2];
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
         time[0] = element.get(0).getText();
@@ -74,6 +79,11 @@ public class VideoPlayerClass extends BaseClass {
         while (time[1].equals("00:00")) {
             element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
             time[1] = element.get(1).getText();
+            nextMinute = now.getMinute();
+            if (nextMinute - currentMinute >= 2) {
+                System.out.println("The player didn't get end time !!!");
+                break;
+            }
         }
         return time;
     }
