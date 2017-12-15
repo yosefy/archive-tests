@@ -3,23 +3,25 @@
 <suite name="ArchiveBB TryNewTests - Sanity Tests" parallel="false">
     <test name="ArchiveBB TryNewTests - Sanity Tests">
 
-        <!--<parameter name="link" value="http://archive.kbb1.com/" />-->
+        <parameter name="link" value="https://archive.kbb1.com/lessons/part/dPcZLO2d?language=en" />
         <!--<parameter name="pathToDownloadFiles" value="C:\SPORT" />-->
 
         <classes>
-            <class name="ArchiveBB.Tests.TryNewTests">
+            <class name="ArchiveBB.Tests.Player">
             <!--<class name="ArchiveBB.Tests.Player">-->
                 <methods>
-                    <!--<include name="playerTimeCode">-->
-                    <!--</include>-->
+                    <include name="playerTimeCode">
+                    </include>
+                    <include name="timeCodeUpdateByPlay">
+                    </include>
                     <!--<include name="notificationMessage">-->
                     <!--</include>-->
                     <!--<include name="DragAndDrop">-->
                     <!--</include>-->
                     <!--<include name="HorizontalSlider">-->
                     <!--</include>-->
-                    <include name="clickByCoordinates">
-                    </include>
+                    <!--<include name="clickByCoordinates">-->
+                    <!--</include>-->
 
                 </methods>
             </class>
