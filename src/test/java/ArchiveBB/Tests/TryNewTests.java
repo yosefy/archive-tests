@@ -9,7 +9,6 @@ import helper.Class.InitClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +17,9 @@ import org.testng.annotations.Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 
 public class TryNewTests extends InitClass {
@@ -189,15 +190,33 @@ public class TryNewTests extends InitClass {
             JavascriptExecutor jse = (JavascriptExecutor) driver;
             jse.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         }
-
     }
 
     @Test
     public void CoordinatesInside (){
         driver.get("http://the-internet.herokuapp.com/context_menu");
-        programsGenre.clickByCoordinates("#hot-spot");
+        programsGenre.getCoordinatesOfElement("#hot-spot");
+    }
 
+    @Test()
+    public void names() throws IOException, NoSuchAlgorithmException {
 
+        String test = "C:\\SPORT";
+
+        // small folder for test
+        String absolutePathTONewFiles = "\\\\Bbo-092\\d$\\רדיו כללי\\radio old - need to compare";
+        // big folder for compare
+        String absolutePathToExistingFiles = "\\\\Bbo-092\\d$\\_new_radio\\haim hdashim\\Test-Lo Lagaat\\Makor Old";
+
+        Map<String, String> smallFolder, bigFolder;
+
+        smallFolder = filesClass.returnHashMapWithChecksumAndFileName(absolutePathTONewFiles);
+        System.out.println("Size of small folder: " + smallFolder.size());
+
+        bigFolder = filesClass.returnHashMapWithChecksumAndFileName(absolutePathToExistingFiles);
+        System.out.println("Size of big folder: " + bigFolder.size());
+
+        filesClass.get2MapsAndCompare(smallFolder, bigFolder);
     }
 }
 

@@ -29,29 +29,31 @@ public class VideoPlayerClass extends BaseClass {
 
 
 
-    public void action(String listToButtons, String action) {
+    public boolean actionAndReturnState(String listToButtons, String action) {
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
         for (WebElement elem : buttons) {
             if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
                 highlightElement(elem);
                 System.out.println(elem.getText());
                 click(elem);
-            }
-        }
-        wait(500);
-    }
-
-    public boolean checkMediaControlState(String listToButtons, String action) {
-        List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
-        for (WebElement elem : buttons) {
-            if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
-                highlightElement(elem);
-                System.out.println(elem.getText());
                 return true;
             }
         }
+        wait(500);
         return false;
     }
+
+//    public boolean checkMediaControlState(String listToButtons, String action) {
+//        List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
+//        for (WebElement elem : buttons) {
+//            if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
+//                highlightElement(elem);
+//                System.out.println(elem.getText());
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public List<String> getWebElemListReturnListVideoSrc(String eventsVerticalMenu) {
         List<WebElement> videoSrcList = driver.findElements(By.cssSelector(eventsVerticalMenu));

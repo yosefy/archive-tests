@@ -18,7 +18,10 @@
                     <!--</include>-->
                     <!--<include name="HorizontalSlider">-->
                     <!--</include>-->
-                    <include name="clickByCoordinates">
+                    <!--<include name="clickByCoordinates">-->
+                    <!--</include>-->
+
+                    <include name="CoordinatesInside">
                     </include>
 
                 </methods>

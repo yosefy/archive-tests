@@ -608,12 +608,12 @@
 //
 //        public void hoverItem(WebElement element) {
 //
-//            Actions action = new Actions(getDriver());
-//            action.moveToElement(element).build().perform();
+//            Actions actionAndReturnState = new Actions(getDriver());
+//            actionAndReturnState.moveToElement(element).build().perform();
 //        }
 //        public void drugAndDrop(WebElement source, WebElement destination) {
-//            Actions action = new Actions(getDriver());
-//            action.dragAndDrop(source, destination).build().perform();
+//            Actions actionAndReturnState = new Actions(getDriver());
+//            actionAndReturnState.dragAndDrop(source, destination).build().perform();
 //        }
 //
 //
@@ -720,7 +720,7 @@
 //         */
 //        public void moveElement(WebElement source, WebElement target) {
 //		/*
-//		 * Actions action = new Actions (driver); action.dragAndDrop(sourse,
+//		 * Actions actionAndReturnState = new Actions (driver); actionAndReturnState.dragAndDrop(sourse,
 //		 * target).perform();
 //		 */
 //
@@ -1503,7 +1503,7 @@
 //        }
 //
 //        public void moveElement(int fromX, int fromY, int toX, int toY, String description) {
-//            LoggerHelper.info(String.format("Perform drag-and-drop action with %s: from coordinates (%d, %d) to (%d, %d)",
+//            LoggerHelper.info(String.format("Perform drag-and-drop actionAndReturnState with %s: from coordinates (%d, %d) to (%d, %d)",
 //                    description, fromX + 5, fromY + correctionOfBrowserMenu() + 5, toX + 5,
 //                    toY + correctionOfBrowserMenu() + 5));
 //            if (controlRobot == null) {

@@ -250,7 +250,7 @@ public class BaseClass {
     }
 
 
-    public boolean waitForMessageDisplayed(Integer _seconds, String pathToCSS, String message) {
+    public boolean waitForMessageDisplayed(Integer minutesForWait, String pathToCSS, String message) {
         LocalTime now = LocalTime.now();
         int currentMinute = now.getMinute();
         int nextMinute = 0;
@@ -259,7 +259,7 @@ public class BaseClass {
         WebElement savingLbl;
         boolean flag;
         for (int second = 0; ; second++) {
-            if (second >= _seconds) {
+            if (second >= minutesForWait) {
                 // click on button
                 driver.findElement(By.cssSelector(".example>p>a")).click();
                 // check if displayed block message
@@ -279,9 +279,9 @@ public class BaseClass {
                 System.out.println("Waiting for changes to be saved...");
             }
 
-            if (nextMinute - currentMinute >= _seconds) {
+            if (nextMinute - currentMinute >= minutesForWait) {
                 System.out.println(String.format("The message - [%s] didn't displayed during [%s] !!!",
-                        message,_seconds.toString()));
+                        message,minutesForWait.toString()));
                 return false;
             }
         }
@@ -344,14 +344,17 @@ public class BaseClass {
         }
     }
 
-    public void clickByCoordinates(String s) {
+    public void getCoordinatesOfElement(String s) {
         WebElement element = driver.findElement(By.cssSelector(s));
-        int width = element.getSize().getWidth();
-        int height = element.getSize().getHeight();
-        System.out.println(width);
-        System.out.println(height);
-        this.scrollToElementIgnoringSteakHeader(element,10);
+        Point point = element.getLocation();
 
+        int xcord = point.getX();
+        System.out.println("Element's Position by X: " + xcord);
+        int ycord = point.getY();
+        System.out.println("Element's Position by Y: " + ycord);
+
+        Actions builder = new Actions(driver);
+        builder.moveToElement(element, xcord, ycord + 50).click().build().perform();
         driver.getTitle();
     }
 

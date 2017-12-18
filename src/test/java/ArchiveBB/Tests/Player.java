@@ -11,7 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static PageObjects.EventsMain.*;
@@ -47,7 +46,7 @@ public class Player extends InitClass{
             Assert.assertTrue(webPlayerItemsStr.get(i).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
                     "Video sources doesn't equals");
             // Click on Forward Button
-            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
+            videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
             i++;
         }
     }
@@ -66,13 +65,13 @@ public class Player extends InitClass{
             eventsMain.click(item);
             Assert.assertTrue(eventsMain.isWebElemAttributeActiveItem(item),"WebElement doesn't active");
             // Click on Play Button
-            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+            videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
             Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Paused(),"Video doesn't started");
             // Check if displayed Pause btn instead of Play btn
-            Assert.assertTrue(videoPlayer.checkMediaControlState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE),
+            Assert.assertTrue(videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE),
                     "Play button doesn't replaced by Pause button");
             // Click on Forward Button
-            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
+            videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
         }
     }
 
@@ -95,12 +94,12 @@ public class Player extends InitClass{
             Assert.assertTrue(webPlayerItemsStr.get(i).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
                     "Video sources doesn't equals");
             // Click on Forward Button
-            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
+            videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD);
             i++;
             // Check the last element - Should be disabled
             if (i == webPlayerItemsStr.size())
                 // Verify if Forward button is disabled
-                Assert.assertTrue(videoPlayer.checkMediaControlState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD_DISABLED),
+                Assert.assertTrue(videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_FORWARD_DISABLED),
                         "The MEDIA_PLAYER_FORWARD_DISABLED item doesn't disabled");
         }
         // This block testing Backward button and in the end of iteration verify disabled Backward button
@@ -109,9 +108,9 @@ public class Player extends InitClass{
             Assert.assertTrue(webPlayerItemsStr.get(j).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
                     "Video sources doesn't equals");
             // click backward btn
-            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_BACKWARD);
+            videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_BACKWARD);
             if (j==0)
-                Assert.assertTrue(videoPlayer.checkMediaControlState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_BACKWARD_DISABLED),
+                Assert.assertTrue(videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_BACKWARD_DISABLED),
                     "The MEDIA_PLAYER_BACKWARD_DISABLED item doesn't disabled");
         }
     }
@@ -128,7 +127,7 @@ public class Player extends InitClass{
         for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)) {
             videoPlayer.click(item);
             System.out.println(item.getText());
-            videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+            videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
             String[] timeCode = videoPlayer.getTimeCode();
             Assert.assertTrue(!timeCode[1].equals("00:00"),"End time doesn't equal 00:00");
             // get timeCode from player side list
@@ -141,9 +140,6 @@ public class Player extends InitClass{
         }
     }
 
-    // todo ----------------------------->>>>>>>>>>
-    // todo --------- learn java  https://www.youtube.com/playlist?list=PLPjzC7XXuyAlD-JeryvYJ8fjzN-A9s_Ub
-    // todo --------- python ------------
 
     @Test()
     public void timeCodeUpdateByPlay(){
