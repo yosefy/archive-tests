@@ -26,7 +26,7 @@ public class VideoPlayerClass extends BaseClass {
 
     public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls>div.buttons-wrapper>button";
     public final static String MEDIA_PLAYER_TIMECODE = ".mediaplayer__timecode>time";
-    public final static String MEDIA_PLAYER_SEEKBAR = ".mediaplayer__seekbar>seekbar__knob";
+    public final static String MEDIA_PLAYER_SEEKBAR = ".seekbar__knob";
 
 
 

@@ -345,16 +345,16 @@ public class BaseClass {
 
     public void getCoordinatesOfElement(String s) {
         WebElement element = driver.findElement(By.cssSelector(s));
-        Point point = element.getLocation();
+        highlightElement(element);
 
+        Point point = element.getLocation();
         int xcord = point.getX();
         System.out.println("Element's Position by X: " + xcord);
         int ycord = point.getY();
         System.out.println("Element's Position by Y: " + ycord);
 
         Actions builder = new Actions(driver);
-        builder.moveToElement(element, xcord, ycord + 50).click().build().perform();
-        driver.getTitle();
+        builder.dragAndDropBy(element, xcord, ycord + 50).click().build().perform();
     }
 
     public void scrollToElementIgnoringSteakHeader(WebElement element, int coordinateYCorretion) {

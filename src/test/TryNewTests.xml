@@ -10,10 +10,10 @@
             <class name="ArchiveBB.Tests.Player">
             <!--<class name="ArchiveBB.Tests.Player">-->
                 <methods>
-                    <include name="playerTimeCode">
-                    </include>
-                    <include name="timeCodeUpdateByPlay">
-                    </include>
+                    <!--<include name="playerTimeCode">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByPlay">-->
+                    <!--</include>-->
                     <!--<include name="notificationMessage">-->
                     <!--</include>-->
                     <!--<include name="DragAndDrop">-->
@@ -23,7 +23,7 @@
                     <!--<include name="clickByCoordinates">-->
                     <!--</include>-->
 
-                    <include name="CoordinatesInside">
+                    <include name="timeCodeUpdateByScroll">
                     </include>
 
                 </methods>

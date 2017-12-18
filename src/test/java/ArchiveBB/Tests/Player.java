@@ -147,7 +147,7 @@ public class Player extends InitClass{
     @Parameters({"link"})
     public void playerTimeCode(String link){
         driver.get(link);
-        videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
         Assert.assertTrue(!timeCode[1].equals("00:00"),"End time equal 00:00");
@@ -165,7 +165,7 @@ public class Player extends InitClass{
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
         System.out.println("Displayed time in player: " + timeCode[0].trim());
-        videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
         eventsMain.wait(10000);
         timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
@@ -182,20 +182,18 @@ public class Player extends InitClass{
         driver.get(link);
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
-        System.out.println("Displayed time in player: " + timeCode[0].trim());
-        // TODO: implement move seekbar
-        videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_SEEKBAR);
+        // Drag and Drop SeekBar
+        videoPlayer.getCoordinatesOfElement(MEDIA_PLAYER_SEEKBAR);
         timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
-        System.out.println("Displayed time in player: " + timeCode[0].trim());
     }
 
+    // todo - need to finish 
     @Test()
     public void timeCodeUpdateByLink(){
         // open predefined link with start and end times
-        // https://archive.kbb1.com/lessons/part/5E2Itk4w?language=en&sstart=150.000&send=300.000
-        // open sharing option
-        // get time from controllers end == end && start == start
+        // https://archive.kbb1.com/lessons/part/5E2Itk4w?language=en&sstart=150.000
+        // get time and compare 2:30
     }
 
     @Test()
