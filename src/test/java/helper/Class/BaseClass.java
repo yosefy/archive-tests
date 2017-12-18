@@ -357,21 +357,49 @@ public class BaseClass {
         builder.dragAndDropBy(element, xcord, ycord + 50).click().build().perform();
     }
 
+    public void clickByXCoordinatesOfElement(String s) throws AWTException, InterruptedException {
+        WebElement element = driver.findElement(By.cssSelector(s));
+        Robot robot = new Robot();
+
+        Point point = element.getLocation();
+        int xcord = point.getX();
+        System.out.println("Element's Position by X: " + xcord);
+        int ycord = point.getY();
+        System.out.println("Element's Position by Y: " + ycord);
+
+//        Actions builder = new Actions(driver);
+//        builder.moveToElement(element).moveByOffset(xcord, ycord+50).click().perform();
+//        driver.getTitle();
+//        builder.moveToElement(element).moveToElement(element,xcord, ycord+50).click().perform();
+////        builder.clickAndHold(ycord + 50).click().build().perform();
+//        driver.getTitle();
+//        builder.moveToElement(element).click()
+
+        driver.getTitle();
+        robot.mouseMove(xcord, ycord);
+        robot.mouseMove(xcord+50, ycord);
+        robot.mouseMove(xcord, ycord+50);
+
+
+        driver.getTitle();
+
+    }
+
+
     public void scrollToElementIgnoringSteakHeader(WebElement element, int coordinateYCorretion) {
-            int x = element.getLocation().x;
-            int y = element.getLocation().y + coordinateYCorretion;
-            ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
-        }
+        int x = element.getLocation().x;
+        int y = element.getLocation().y + coordinateYCorretion;
+        ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
+    }
 
-        public void scrollTo(WebElement element, String description) {
-            int x = element.getLocation().x;
-            int y = element.getLocation().y;
-            ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
-        }
+    public void scrollTo(WebElement element, String description) {
+        int x = element.getLocation().x;
+        int y = element.getLocation().y;
+        ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
+    }
 
 
-
-    public void dragAndDropElement(WebElement dragFrom, WebElement dragTo, int xOffset) throws Exception {
+    public void dragAndDropElementByRobotOnHorizontal(WebElement dragFrom, WebElement dragTo, int xOffset) throws Exception {
         //Setup robot
         Robot robot = new Robot();
         robot.setAutoDelay(50);
@@ -415,6 +443,15 @@ public class BaseClass {
 
         //Drop
         robot.mouseRelease(InputEvent.BUTTON1_MASK);
+        robot.keyPress(KeyEvent.VK_F11);
+        Thread.sleep(2000);
+    }
+
+    public void dragAndDropElementByActionOnVertical(WebElement dragFrom, int yOffset) {
+        navigate(".fa.fa-bars");
+        Actions action = new Actions(driver);
+        action.clickAndHold(dragFrom).moveByOffset(0, yOffset).build().perform();
+        driver.getTitle();
     }
 }
 

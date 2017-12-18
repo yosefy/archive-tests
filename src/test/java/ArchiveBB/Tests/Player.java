@@ -188,7 +188,7 @@ public class Player extends InitClass{
         Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
     }
 
-    // todo - need to finish 
+    // todo - need to finish
     @Test()
     public void timeCodeUpdateByLink(){
         // open predefined link with start and end times

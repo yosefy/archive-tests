@@ -14,8 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.awt.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -98,7 +97,7 @@ public class TryNewTests extends InitClass {
     }
 
     @Test
-    public void DragAndDrop () throws IOException {
+    public void DragAndDrop () throws Exception {
 //        driver.get("http://jqueryui.com/droppable/");
 //        Actions act = new Actions(driver);
 //        WebElement iFrame = driver.findElement(By.tagName("iframe"));
@@ -111,35 +110,41 @@ public class TryNewTests extends InitClass {
 //        System.out.println(To.getLocation());
 //        act.dragAndDrop(From, To).build().perform();
 
+        driver.get("https://skidding.github.io/dragdealer/#demos");
+        WebElement from = driver.findElement(By.cssSelector(".fa.fa-bars"));
+        WebElement to = driver.findElement(By.cssSelector(".fa.fa-bars"));
 
-//        Actions act = new Actions(driver);
-        driver.get("http://the-internet.herokuapp.com/drag_and_drop");
-        WebElement from = driver.findElement(By.cssSelector(".column:nth-child(1)"));
-        WebElement to = driver.findElement(By.cssSelector(".column:nth-child(2)"));
+//        driver.get("http://the-internet.herokuapp.com/drag_and_drop");
+//        WebElement from = driver.findElement(By.cssSelector(".column:nth-child(1)"));
+//        WebElement to = driver.findElement(By.cssSelector(".column:nth-child(2)"));
 
-        String js_filepath = "C:\\Users\\b\\Desktop\\Counter\\drag_and_drop.js";
-    //        String js_filepath = "C:\\Users\\b\\Desktop\\Counter\\drag_test.js";
 
-        String java_script="";
-        String text;
 
-        BufferedReader input = new BufferedReader(new FileReader(js_filepath));
-        StringBuilder buffer = new StringBuilder();
+        eventsMain.dragAndDropElementByActionOnVertical(from,40);
 
-        while ((text = input.readLine()) != null)
-            buffer.append(text).append(" ");
-        java_script = buffer.toString();
-
-        input.close();
-
-        String source = "__htmlview0--Button1";
-        String target = "__htmlview0--homePage-intHeader";
-
-        java_script = java_script + "$('#"+source+"').simulate( '#" +target+ "');" ;
-
-//        driver.executeScript(dragAndDrop, draggable, droppable);
-        ((JavascriptExecutor) driver).executeScript(java_script, from,to);
-//        ((JavascriptExecutor) driver).executeScript(java_script);
+//        String js_filepath = "C:\\Users\\b\\Desktop\\Counter\\drag_and_drop.js";
+//        String js_filepath = "C:\\Users\\b\\Desktop\\Counter\\drag_test.js";
+//
+//        String java_script="";
+//        String text;
+//
+//        BufferedReader input = new BufferedReader(new FileReader(js_filepath));
+//        StringBuilder buffer = new StringBuilder();
+//
+//        while ((text = input.readLine()) != null)
+//            buffer.append(text).append(" ");
+//        java_script = buffer.toString();
+//
+//        input.close();
+//
+//        String source = "__htmlview0--Button1";
+//        String target = "__htmlview0--homePage-intHeader";
+//
+//        java_script = java_script + "$('#"+source+"').simulate( '#" +target+ "');" ;
+//
+////        driver.executeScript(dragAndDrop, draggable, droppable);
+//        ((JavascriptExecutor) driver).executeScript(java_script, from,to);
+////        ((JavascriptExecutor) driver).executeScript(java_script);
 
 
         driver.getTitle();
@@ -193,9 +198,9 @@ public class TryNewTests extends InitClass {
     }
 
     @Test
-    public void CoordinatesInside (){
+    public void CoordinatesInside () throws InterruptedException, AWTException {
         driver.get("http://the-internet.herokuapp.com/context_menu");
-        programsGenre.getCoordinatesOfElement("#hot-spot");
+        programsGenre.clickByXCoordinatesOfElement("#hot-spot");
     }
 
     @Test()
