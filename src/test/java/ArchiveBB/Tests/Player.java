@@ -7,6 +7,7 @@ import helper.Class.VideoPlayerClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -115,9 +116,10 @@ public class Player extends InitClass{
         }
     }
 
+    // TODO: This one should be moved to PlaylistTests
     @Test()
     @Parameters({"link"})
-    public void playerTimeCode(String link){
+    public void playerTimeCodeToPlaylistCompare(String link){
         driver.get(link);
         eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
@@ -135,23 +137,57 @@ public class Player extends InitClass{
             // compare file duration
             System.out.println("Displayed time in playlist: " + timeFromPlayList[timeFromPlayList.length - 1].trim());
             System.out.println("Displayed time in player: " + timeCode[1].trim());
-            Assert.assertFalse(!timeFromPlayList[timeFromPlayList.length - 1].trim().equals(timeCode[1].trim()),
-                    "Duration doesn't equals");
+            //Assert.assertFalse(!timeFromPlayList[timeFromPlayList.length - 1].trim().equals(timeCode[1].trim()),
+            //        "Duration doesn't equals");
         }
     }
 
 
     @Test()
-    public void timeCodeUpdateByPlay(){
-        // click on play button
-        // verify that player timecode is increased
+    @Parameters({"link"})
+    public void playerTimeCode(String link){
+        driver.get(link);
+        videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+        String[] timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+        Assert.assertTrue(!timeCode[1].equals("00:00"),"End time equal 00:00");
+        // compare file duration
+        System.out.println("Displayed start time in player: " + timeCode[0].trim());
+        System.out.println("Displayed start time in player: " + timeCode[1].trim());
     }
 
     @Test()
-    public void timeCodeUpdateByScroll(){
+    @Parameters({"link"})
+    public void timeCodeUpdateByPlay(String link){
+        // click on play button
+        // verify that player timecode is increased
+        driver.get(link);
+        String[] timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+        System.out.println("Displayed time in player: " + timeCode[0].trim());
+        videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+        eventsMain.wait(10000);
+        timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
+        System.out.println("Displayed time in player: " + timeCode[0].trim());
+    }
+
+
+    @Test()
+    @Parameters({"link"})
+    public void timeCodeUpdateByScroll(String link){
         // click on play
         // scroll to the right
         // VERIFY START TIME UPDATED
+        driver.get(link);
+        String[] timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+        System.out.println("Displayed time in player: " + timeCode[0].trim());
+        // TODO: implement move seekbar
+        videoPlayer.action(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_SEEKBAR);
+        timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
+        System.out.println("Displayed time in player: " + timeCode[0].trim());
     }
 
     @Test()
