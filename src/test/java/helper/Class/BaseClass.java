@@ -1,6 +1,5 @@
 package helper.Class;
 
-import com.sun.xml.internal.ws.model.WrapperBeanGenerator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
