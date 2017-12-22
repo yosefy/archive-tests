@@ -13,5 +13,6 @@
         <suite-file path="DailyLessonsTests.xml" />
         <suite-file path="ProgramsTests.xml" />
         <suite-file path="EventsTests.xml" />
+        <!--<suite-file path="Player.xml" />-->
     </suite-files>
 </suite>

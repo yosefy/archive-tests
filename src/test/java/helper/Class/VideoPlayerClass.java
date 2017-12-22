@@ -58,7 +58,7 @@ public class VideoPlayerClass extends BaseClass {
 
     public List<String> getWebElemListReturnListVideoSrc(String eventsVerticalMenu) {
         List<WebElement> videoSrcList = driver.findElements(By.cssSelector(eventsVerticalMenu));
-        this.isElementLoaded(videoSrcList.get(1));
+        this.isElementLoaded(videoSrcList.get(0));
         List<String> listStr = new ArrayList<>();
         for (WebElement list : videoSrcList) {
             click(list);

@@ -15,6 +15,8 @@ public class EventsMain extends BaseClass {
 
     public final static String EVENTS = "Events";
     public final static String EVENTS_MAIN_TABLE = ".ui.container.padded>table>tbody>tr";
+    public final static String EVENTS_MAIN_TABLE_LINKS = ".ui.container.padded>table>tbody>tr>td>a";
+
     public final static String EVENTS_VERTICAL_MENU = ".ui.small.fluid.vertical.menu>a";
 
     public final static String US_FLAG = ".item>a>i.us.flag";

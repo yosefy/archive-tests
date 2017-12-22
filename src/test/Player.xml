@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ArchiveBB Player - Sanity Tests" parallel="false">
+    <test name="ArchiveBB Player - Sanity Tests">
+
+        <parameter name="link" value="http://archive.kbb1.com/" />
+
+        <classes>
+            <class name="ArchiveBB.Tests.Player">
+                <methods>
+                    <include name="playerVideoSrcAndForwardBtn">
+                    </include>
+                    <include name="playerPlayBtnAndPauseBtn">
+                    </include>
+                    <include name="playerForwardBtnAndBackwardBtn">
+                    </include>
+
+                    <!--<include name="playerTimeCodeToPlaylistCompare">-->
+                    <!--</include>-->
+                    <!--<include name="playerTimeCode">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByPlay">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByScroll">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByLink">-->
+                    <!--</include>-->
+
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Tests -->
+</suite> <!-- Suite -->

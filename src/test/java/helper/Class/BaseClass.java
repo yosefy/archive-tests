@@ -56,6 +56,22 @@ public class BaseClass {
         }
     }
 
+    public void waitForClickabilityOfElementLocated(WebElement element, int timeoutInSeconds) {
+        new WebDriverWait(driver, timeoutInSeconds).until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void getCssListAndClickOnElementByText(String list, String text) {
+        List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
+        for(WebElement element : listOptions){
+            if (element.getText().equals(text)){
+                this.waitForClickabilityOfElementLocated(element,50000);
+                navigate(list);
+                click(listOptions.get(0));
+                break;
+            }
+        }
+    }
+
     public boolean isWebElemAttributeActiveItem(WebElement element) {
         this.highlightElement(element);
         return element.getAttribute("class").equals("active item");
@@ -156,12 +172,17 @@ public class BaseClass {
         return true;
     }
 
-    public void navigateToPanelAndSection(String MAIN_PANEL, String MAIN_SECTION) {
+    public void navigateToPanelAndSection(String MAIN_SECTION) {
         // Check browser size and decide if displayed hamburger or not
         if (driver.manage().window().getSize().getWidth() <1505 )
             click(driver.findElement(By.cssSelector(SIDE_BAR_ICON)));
 
-        clickListAndTarget(MAIN_PANEL, MAIN_SECTION);
+        clickListAndTarget(VERTICAL_HAMBURGER_MENU, MAIN_SECTION);
+    }
+
+    public void chooseSectionAndOpenItemByText(String section, String cssPathToOpenFirstElement, String text){
+        this.navigateToPanelAndSection(section);
+        this.getCssListAndClickOnElementByText(cssPathToOpenFirstElement, text);
     }
 
     public boolean paginationUntilEnabled() {
@@ -248,7 +269,6 @@ public class BaseClass {
         robot.keyRelease(KeyEvent.VK_ENTER);
     }
 
-
     public boolean waitForMessageDisplayed(Integer minutesForWait, String pathToCSS, String message) {
         LocalTime now = LocalTime.now();
         int currentMinute = now.getMinute();
@@ -286,7 +306,6 @@ public class BaseClass {
         }
     }
 
-
     public void dragAndDrop(WebElement from, WebElement to) {
         Actions builder = new Actions(driver);
         builder.keyDown(Keys.CONTROL)
@@ -317,7 +336,6 @@ public class BaseClass {
 //                .build();
 //        dragAndDrop.perform();
     }
-
 
     public void sliderLeftByArrow(int numberOfTimes, String pathToCssWebElement) {
         Actions moveSlider = new Actions(driver);
@@ -385,7 +403,6 @@ public class BaseClass {
 
     }
 
-
     public void scrollToElementIgnoringSteakHeader(WebElement element, int coordinateYCorretion) {
         int x = element.getLocation().x;
         int y = element.getLocation().y + coordinateYCorretion;
@@ -397,7 +414,6 @@ public class BaseClass {
         int y = element.getLocation().y;
         ((JavascriptExecutor) driver).executeScript(String.format("window.scrollTo(%d,%d)", x, y), "");
     }
-
 
     public void dragAndDropElementByRobotOnHorizontal(WebElement dragFrom, WebElement dragTo, int xOffset) throws Exception {
         //Setup robot
@@ -453,6 +469,8 @@ public class BaseClass {
         action.clickAndHold(dragFrom).moveByOffset(0, yOffset).build().perform();
         driver.getTitle();
     }
+
+
 }
 
 

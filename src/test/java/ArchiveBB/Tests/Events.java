@@ -27,7 +27,7 @@ public class Events extends InitClass {
     @Parameters({"link"})
     public void eventsMainAllItemsMultiLang(String link) {
         driver.get(link);
-        eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
+        eventsMain.navigateToPanelAndSection(EVENTS);
         // ENG
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
         int items_count = eventsMain.checkAllEventsItems();

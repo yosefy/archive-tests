@@ -1,13 +1,11 @@
 package ArchiveBB.Tests;
 
 import PageObjects.EventsMain;
-import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
 import helper.Class.VideoPlayerClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -15,7 +13,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static PageObjects.EventsMain.*;
-import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
 import static helper.Class.VideoPlayerClass.*;
 
 public class Player extends InitClass{
@@ -30,14 +27,18 @@ public class Player extends InitClass{
     }
 
     @Test()
-    @Video()
+//    @Video()
     @Parameters({"link"})
     public void playerVideoSrcAndForwardBtn(String link) {
         driver.get(link);
-        eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
-        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
-        // click on EVENTS_Unity_Test
-        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+//        eventsMain.navigateToPanelAndSection(EVENTS);
+//        // click on EVENTS_Unity_Test
+//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+//        // Navigate to Events section and click on first link in list
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
+
         // get list of all elements from vertical menu
         List<String> webPlayerItemsStr = videoPlayer.getWebElemListReturnListVideoSrc(EVENTS_VERTICAL_MENU);
         int i = 0;
@@ -53,14 +54,18 @@ public class Player extends InitClass{
     }
 
     @Test()
-    @Video()
+//    @Video()
     @Parameters({"link"})
     public void playerPlayBtnAndPauseBtn(String link){
         driver.get(link);
-        eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
-        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
-        // click on EVENTS_Unity_Test
-        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+//        eventsMain.navigateToPanelAndSection(EVENTS);
+//        // click on EVENTS_Unity_Test
+//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+        // Navigate to Events section and click on first link in list
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
+
         // get list of web elements from vertical menu
         for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)){
             eventsMain.click(item);
@@ -77,14 +82,17 @@ public class Player extends InitClass{
     }
 
     @Test()
-    @Video()
+//    @Video()
     @Parameters({"link"})
     public void playerForwardBtnAndBackwardBtn(String link) {
         driver.get(link);
-        eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
-        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
-        // click on EVENTS_Unity_Test
-        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+//        eventsMain.navigateToPanelAndSection(EVENTS);
+//        // click on EVENTS_Unity_Test
+//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
+
         // get list of all elements from vertical menu
         List<String> webPlayerItemsStr = videoPlayer.getWebElemListReturnListVideoSrc(EVENTS_VERTICAL_MENU);
         int i = 0;
@@ -121,10 +129,14 @@ public class Player extends InitClass{
     @Parameters({"link"})
     public void playerTimeCodeToPlaylistCompare(String link){
         driver.get(link);
-        eventsMain.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, EVENTS);
-        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
-        // click on EVENTS_Unity_Test
-        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+//        eventsMain.navigateToPanelAndSection(EVENTS);
+//        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
+//        // click on EVENTS_Unity_Test
+//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
+
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
+
         // navigate to list items and get all lessons
         for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)) {
             videoPlayer.click(item);

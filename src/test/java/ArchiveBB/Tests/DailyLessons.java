@@ -32,7 +32,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerToday(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_TODAY);
         // assert all success criteria
@@ -45,7 +45,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerYesterday(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_YESTERDAY);
         // assert all success criteria
@@ -59,7 +59,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerLast7Days(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_LAST_7_DAYS);
         // assert all success criteria
@@ -72,7 +72,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerLast30Days(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_LAST_30_DAYS);
         // assert all success criteria
@@ -86,7 +86,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerLastMonth(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_LAST_MONTH);
         // assert all success criteria
@@ -100,7 +100,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerThisMonth(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_THIS_MONTH);
         // assert all success criteria
@@ -113,7 +113,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerCustomRange(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String label = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_CUSTOM_RANGE);
         // assert all success criteria
@@ -126,7 +126,7 @@ public class DailyLessons extends InitClass {
     @Parameters({"link"})
     public void datePickerLastMonthRemoveLabel(String link) {
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_DATE);
         String today = archiveDate.saveAndReturnDateRangeLabel(DATE_DROPDOWN_LIST, LIST_TODAY);
         // save the label before remove
@@ -149,7 +149,7 @@ public class DailyLessons extends InitClass {
     public void sourcesAndVerifyInnerSources(String link) {
         String label = "Baal HaSulam > Prefaces > General preface";
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_SOURCES);
         Assert.assertTrue(archiveSources.navToSourceAndApply(label),
                 ">>> Doesn't found Sources >>> " + label);
@@ -170,7 +170,7 @@ public class DailyLessons extends InitClass {
     public void topicsAndVerifyInnerTags(String link) {
         String label = "The Mutual Guarantee";
         driver.get(link);
-        archiveDate.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, DAILY_LESSONS);
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
         archiveDate.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
         Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                 ">>> Doesn't found Sources >>> " + label);

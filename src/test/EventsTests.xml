@@ -9,11 +9,7 @@
             <class name="ArchiveBB.Tests.Events">
                 <methods>
 
-                    <!--<include name="eventsMainAllItemsMultiLang">-->
-                    <!--</include>-->
-                    <!--<include name="eventsTestPlayerVideoSrcAndForwardBtn">-->
-                    <!--</include>-->
-                    <include name="eventsTestPlayerVideoPlayBtn">
+                    <include name="eventsMainAllItemsMultiLang">
                     </include>
 
                 </methods>

@@ -37,7 +37,7 @@ public class Programs extends InitClass {
         Map<String, String> mainMap;
         Map<String, String> secondaryMap;
         driver.get(link);
-        programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
+        programsGenre.navigateToPanelAndSection(PROGRAMS);
         programsGenre.clickListAndTarget(GENRE_MAIN_LEFT_PANEL, GENRE_PROGRAM_PANEL);
         mainMap = programsGenre.getAllProgramsItems(ALL_PROGRAMS_ITEMS);
 
@@ -57,7 +57,7 @@ public class Programs extends InitClass {
     public void verifyProgramTopicsWithInnerTags(String link) {
         String label = "Anti-Semitism";
         driver.get(link);
-        programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
+        programsGenre.navigateToPanelAndSection(PROGRAMS);
         programsGenre.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
         Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                 ">>> Doesn't found Sources >>> " + label);
@@ -78,7 +78,7 @@ public class Programs extends InitClass {
     public void verifyProgramTopicsPaginationEpisodeSource(String link) {
         String label = "Anti-Semitism";
         driver.get(link);
-        programsGenre.navigateToPanelAndSection(VERTICAL_HAMBURGER_MENU, PROGRAMS);
+        programsGenre.navigateToPanelAndSection(PROGRAMS);
         programsGenre.clickListAndTarget(DAILY_LESSON_PANEL, PANEL_TOPICS);
         Assert.assertTrue(archiveTopics.navToTopicsAndApply(label),
                 ">>> Doesn't found Sources >>> " + label);
