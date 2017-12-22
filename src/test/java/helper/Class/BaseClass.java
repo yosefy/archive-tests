@@ -60,6 +60,7 @@ public class BaseClass {
         new WebDriverWait(driver, timeoutInSeconds).until(ExpectedConditions.elementToBeClickable(element));
     }
 
+
     public void getCssListAndClickOnElementByText(String list, String text) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         for(WebElement element : listOptions){
@@ -80,7 +81,7 @@ public class BaseClass {
     public void click(WebElement elementToClick) {
         Actions action = new Actions(driver);
         action.moveToElement(elementToClick).perform();
-        this.isElementLoaded(elementToClick);
+//        this.isElementLoaded(elementToClick);
         this.highlightElement(elementToClick);
         elementToClick.click();
     }
@@ -105,8 +106,10 @@ public class BaseClass {
     }
 
     void isElementLoaded(WebElement elementToBeLoaded) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 15);
+            wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
+        }catch (Exception ignore){}
     }
 
     public void highlightElement(WebElement element) {
@@ -470,7 +473,12 @@ public class BaseClass {
         driver.getTitle();
     }
 
-
+    public int getCurrentMachineSecond(){
+        LocalTime now = LocalTime.now();
+        int currentSecond = now.getSecond();
+        System.out.println("currentSecond is: " + currentSecond);
+        return currentSecond;
+    }
 }
 
 

@@ -4,7 +4,6 @@ import PageObjects.ArchiveSources;
 import PageObjects.ArchiveTopics;
 import PageObjects.EventsMain;
 import PageObjects.ProgramsGenre;
-import com.sun.org.glassfish.gmbal.Description;
 import helper.Class.FilesClass;
 import helper.Class.InitClass;
 import org.openqa.selenium.By;
@@ -92,7 +91,6 @@ public class TryNewTests extends InitClass {
 //    }
 
     @Test
-    @Description("Some detailed test description")
     public void notificationMessage (){
         driver.get("http://the-internet.herokuapp.com/notification_message_rendered");
         Assert.assertTrue(programsGenre.waitForMessageDisplayed(5,"#flash","Action successful\n" + "×"));

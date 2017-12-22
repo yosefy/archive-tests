@@ -8,13 +8,12 @@
         <classes>
             <class name="ArchiveBB.Tests.Player">
                 <methods>
-                    <include name="playerVideoSrcAndForwardBtn">
-                    </include>
-                    <include name="playerPlayBtnAndPauseBtn">
-                    </include>
-                    <include name="playerForwardBtnAndBackwardBtn">
-                    </include>
-
+                    <!--<include name="playerVideoSrcAndForwardBtn">-->
+                    <!--</include>-->
+                    <!--<include name="playerPlayBtnAndPauseBtn">-->
+                    <!--</include>-->
+                    <!--<include name="playerForwardBtnAndBackwardBtn">-->
+                    <!--</include>-->
                     <!--<include name="playerTimeCodeToPlaylistCompare">-->
                     <!--</include>-->
                     <!--<include name="playerTimeCode">-->
@@ -25,6 +24,10 @@
                     <!--</include>-->
                     <!--<include name="timeCodeUpdateByLink">-->
                     <!--</include>-->
+
+                    <include name="speedSelectorRegular">
+                    </include>
+
 
                 </methods>
             </class>

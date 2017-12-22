@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static PageObjects.ArchiveDate.DAILY_LESSONS;
+import static PageObjects.ArchiveDate.DAILY_LESSONS_SECOND_ITEM;
 import static PageObjects.EventsMain.*;
 import static helper.Class.VideoPlayerClass.*;
 
@@ -31,14 +33,7 @@ public class Player extends InitClass{
     @Parameters({"link"})
     public void playerVideoSrcAndForwardBtn(String link) {
         driver.get(link);
-
-//        eventsMain.navigateToPanelAndSection(EVENTS);
-//        // click on EVENTS_Unity_Test
-//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
-
-//        // Navigate to Events section and click on first link in list
         eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
-
         // get list of all elements from vertical menu
         List<String> webPlayerItemsStr = videoPlayer.getWebElemListReturnListVideoSrc(EVENTS_VERTICAL_MENU);
         int i = 0;
@@ -58,11 +53,6 @@ public class Player extends InitClass{
     @Parameters({"link"})
     public void playerPlayBtnAndPauseBtn(String link){
         driver.get(link);
-
-//        eventsMain.navigateToPanelAndSection(EVENTS);
-//        // click on EVENTS_Unity_Test
-//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
-
         // Navigate to Events section and click on first link in list
         eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
 
@@ -86,11 +76,6 @@ public class Player extends InitClass{
     @Parameters({"link"})
     public void playerForwardBtnAndBackwardBtn(String link) {
         driver.get(link);
-
-//        eventsMain.navigateToPanelAndSection(EVENTS);
-//        // click on EVENTS_Unity_Test
-//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
-
         eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
 
         // get list of all elements from vertical menu
@@ -124,17 +109,10 @@ public class Player extends InitClass{
         }
     }
 
-    // TODO: This one should be moved to PlaylistTests
     @Test()
     @Parameters({"link"})
     public void playerTimeCodeToPlaylistCompare(String link){
         driver.get(link);
-
-//        eventsMain.navigateToPanelAndSection(EVENTS);
-//        eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
-//        // click on EVENTS_Unity_Test
-//        eventsMain.clickListAndTarget(EVENTS_MAIN_TABLE + " a", EVENTS_Unity_Test);
-
         eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
 
         // navigate to list items and get all lessons
@@ -154,12 +132,11 @@ public class Player extends InitClass{
         }
     }
 
-
     @Test()
     @Parameters({"link"})
     public void playerTimeCode(String link){
         driver.get(link);
-        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
         Assert.assertTrue(!timeCode[1].equals("00:00"),"End time equal 00:00");
@@ -171,27 +148,24 @@ public class Player extends InitClass{
     @Test()
     @Parameters({"link"})
     public void timeCodeUpdateByPlay(String link){
-        // click on play button
-        // verify that player timecode is increased
         driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
         System.out.println("Displayed time in player: " + timeCode[0].trim());
         videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+
         eventsMain.wait(10000);
         timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
         System.out.println("Displayed time in player: " + timeCode[0].trim());
     }
 
-
     @Test()
     @Parameters({"link"})
     public void timeCodeUpdateByScroll(String link){
-        // click on play
-        // scroll to the right
-        // VERIFY START TIME UPDATED
         driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
         // Drag and Drop SeekBar
@@ -200,19 +174,38 @@ public class Player extends InitClass{
         Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
     }
 
-    // todo - need to finish
     @Test()
-    public void timeCodeUpdateByLink(){
-        // open predefined link with start and end times
-        // https://archive.kbb1.com/lessons/part/5E2Itk4w?language=en&sstart=150.000
-        // get time and compare 2:30
+    @Parameters({"link"})
+    public void timeCodeUpdateByLink(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        // click on second element
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        String currentUrl = driver.getCurrentUrl();
+        currentUrl += "?sstart=150.000";
+        System.out.println(currentUrl);
+        driver.get(currentUrl);
+
+        String[]timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("02:30"),"Start time equal 00:00");
     }
 
     @Test()
-    public void speedSelector(){
-        // star play with regular speed during 5 sec and store the run time
-        // change to 1.5 speed and run 5 sec and store the run time and compare
-        // change to 2 speed and compare with previous rum time
+    @Parameters({"link"})
+    public void speedSelectorRegular(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+        String[] timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+        eventsMain.wait(10000);
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE);
+        timeCode = videoPlayer.getTimeCode();
+        int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
+        System.out.println(minutes);
+        Assert.assertTrue(minutes >= 10,String.format("Start time expected: 10:00, get: %s", timeCode[0]));
     }
 
     @Test()

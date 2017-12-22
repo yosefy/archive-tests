@@ -25,6 +25,8 @@ public class ArchiveDate extends BaseClass {
     public final static String PANEL_TOPICS = "Topics";
     public final static String PROGRAMS = "Programs";
     public final static String DAILY_LESSONS = "Daily Lessons";
+    public final static String DAILY_LESSONS_SECOND_ITEM = ".ui.container.padded>table>tbody>tr>td:nth-child(1)>a";
+
     public final static String DATE_DROPDOWN_LIST_SELECTED = ".ui.fluid.item.dropdown>div:nth-child(1)";
     public final static String DATE_DROPDOWN_LIST = ".ui.fluid.item.dropdown>div>div";
     public final static String LIST_TODAY = "Today";

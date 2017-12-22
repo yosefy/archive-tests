@@ -21,6 +21,7 @@ public class VideoPlayerClass extends BaseClass {
     public final static String MEDIA_PLAYER_PAUSE = "pause";
     public final static String MEDIA_PLAYER_FORWARD = "step forward icon";
     public final static String MEDIA_PLAYER_FORWARD_DISABLED = "step forward disabled icon";
+
     public final static String MEDIA_PLAYER_BACKWARD = "step backward icon";
     public final static String MEDIA_PLAYER_BACKWARD_DISABLED = "step backward disabled icon";
 
@@ -35,8 +36,8 @@ public class VideoPlayerClass extends BaseClass {
         for (WebElement elem : buttons) {
             if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
                 highlightElement(elem);
-                System.out.println(elem.getText());
                 click(elem);
+                System.out.println(elem.getText());
                 return true;
             }
         }
