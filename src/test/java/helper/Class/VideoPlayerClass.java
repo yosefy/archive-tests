@@ -28,6 +28,17 @@ public class VideoPlayerClass extends BaseClass {
     public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls>div.buttons-wrapper>button";
     public final static String MEDIA_PLAYER_TIMECODE = ".mediaplayer__timecode>time";
     public final static String MEDIA_PLAYER_SEEKBAR = ".seekbar__knob";
+    public final static String MEDIA_PLAYER_CONTROLS_RATE = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > button";
+    public final static String MEDIA_PLAYER_CONTROLS_RATE_LIST = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > div div>span";
+
+    public final static String MEDIA_PLAYER_RATE_1X = "1x";
+    public final static String MEDIA_PLAYER_RATE_1_5X = "1.5x";
+    public final static String MEDIA_PLAYER_RATE_2X = "2x";
+
+    public final static String MEDIA_PLAYER_MUTE = ".mediaplayer__volume>button";
+    public final static String MEDIA_PLAYER_VOLUME = ".mediaplayer__volume";
+    public final static String MEDIA_PLAYER_VOLUME_WRAPPER = ".volume-popover__wrapper";
+
 
 
 
@@ -43,6 +54,24 @@ public class VideoPlayerClass extends BaseClass {
         }
         wait(500);
         return false;
+    }
+
+
+    public void choosePlayerRate (String MEDIA_PLAYER_RATE) {
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_CONTROLS_RATE)));
+        clickListAndTarget(MEDIA_PLAYER_CONTROLS_RATE_LIST, MEDIA_PLAYER_RATE);
+    }
+
+    public void clickOnMute(){
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
+    }
+
+    public void updateVolumeControl (int y){
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
+
+        WebElement tryElem = driver.findElement(By.cssSelector(MEDIA_PLAYER_VOLUME_WRAPPER));
+        scrollToElementIgnoringSteakHeader(tryElem, y);
+        dragAndDropElementByActionOnVertical(tryElem,y);
     }
 
 //    public boolean checkMediaControlState(String listToButtons, String action) {

@@ -1,17 +1,18 @@
 package ArchiveBB.Tests;
 
+import PageObjects.ArchiveDate;
 import PageObjects.ArchiveSources;
 import PageObjects.ArchiveTopics;
 import com.automation.remarks.video.annotations.Video;
 import helper.Class.InitClass;
-import PageObjects.ArchiveDate;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static PageObjects.ArchiveDate.*;
-import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
 
 
 public class DailyLessons extends InitClass {

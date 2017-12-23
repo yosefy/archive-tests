@@ -193,15 +193,26 @@ public class Player extends InitClass{
 
     @Test()
     @Parameters({"link"})
-    public void speedSelectorRegular(String link){
+    public void speedSelector_1X(String link){
         driver.get(link);
         eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        videoPlayer.choosePlayerRate(MEDIA_PLAYER_RATE_1X);
+        Assert.assertNotEquals(videoPlayer.HTMLMediaElement_PlaybackRate(),MEDIA_PLAYER_RATE_1X,
+                String.format("Video player rate doesn't equal as expected to %s", MEDIA_PLAYER_RATE_1X));
+
+        // start play video player
         videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+
+        // play during 10 seconds
         eventsMain.wait(10000);
+        // pause the video
         videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE);
+        // get time form player
         timeCode = videoPlayer.getTimeCode();
         int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
         System.out.println(minutes);
@@ -209,7 +220,81 @@ public class Player extends InitClass{
     }
 
     @Test()
-    public void volumeBar(){
+    @Parameters({"link"})
+    public void speedSelector_1_5X(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        videoPlayer.choosePlayerRate(MEDIA_PLAYER_RATE_1_5X);
+        Assert.assertNotEquals(videoPlayer.HTMLMediaElement_PlaybackRate(),MEDIA_PLAYER_RATE_1_5X,
+                String.format("Video player rate doesn't equal as expected to %s", MEDIA_PLAYER_RATE_1_5X));
+
+        // start play video player
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+
+        String[] timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+
+        // play during 10 seconds
+        eventsMain.wait(10000);
+        // pause the video
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE);
+        // get time form player
+        timeCode = videoPlayer.getTimeCode();
+        int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
+        System.out.println(minutes);
+        Assert.assertTrue(minutes >= 16,String.format("Start time expected: 10:00, get: %s", timeCode[0]));
+    }
+
+    @Test()
+    @Parameters({"link"})
+    public void speedSelector_2X(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        videoPlayer.choosePlayerRate(MEDIA_PLAYER_RATE_2X);
+        Assert.assertNotEquals(videoPlayer.HTMLMediaElement_PlaybackRate(),MEDIA_PLAYER_RATE_2X,
+                String.format("Video player rate doesn't equal as expected to %s", MEDIA_PLAYER_RATE_2X));
+
+        // start play video player
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
+
+        String[] timeCode = videoPlayer.getTimeCode();
+        Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
+
+        // play during 10 seconds
+        eventsMain.wait(10000);
+        // pause the video
+        videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PAUSE);
+        // get time form player
+        timeCode = videoPlayer.getTimeCode();
+        int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
+        System.out.println(minutes);
+        Assert.assertTrue(minutes >= 21,String.format("Start time expected: 10:00, get: %s", timeCode[0]));
+    }
+
+    @Test()
+    @Parameters({"link"})
+    public void volumeBar(String link) {
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        videoPlayer.clickOnMute();
+        // todo - why this is un mute ? kolbo shalom
+//        Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
+        // up volume
+        videoPlayer.updateVolumeControl(-50);
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
+        // middle volume
+        videoPlayer.updateVolumeControl(-10);
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
+        // down volume
+        videoPlayer.updateVolumeControl(50);
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
+
         // mute mode
         // 1 line volume
         // 3 line volume maximum

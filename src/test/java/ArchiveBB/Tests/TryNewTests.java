@@ -98,6 +98,7 @@ public class TryNewTests extends InitClass {
 
     @Test
     public void DragAndDrop () throws Exception {
+
 //        driver.get("http://jqueryui.com/droppable/");
 //        Actions act = new Actions(driver);
 //        WebElement iFrame = driver.findElement(By.tagName("iframe"));

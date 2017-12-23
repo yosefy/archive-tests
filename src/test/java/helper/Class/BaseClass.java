@@ -467,7 +467,7 @@ public class BaseClass {
     }
 
     public void dragAndDropElementByActionOnVertical(WebElement dragFrom, int yOffset) {
-        navigate(".fa.fa-bars");
+//        navigate(".fa.fa-bars");
         Actions action = new Actions(driver);
         action.clickAndHold(dragFrom).moveByOffset(0, yOffset).build().perform();
         driver.getTitle();

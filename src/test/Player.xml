@@ -24,10 +24,15 @@
                     <!--</include>-->
                     <!--<include name="timeCodeUpdateByLink">-->
                     <!--</include>-->
+                    <!--<include name="speedSelector_1X">-->
+                    <!--</include>-->
+                    <!--<include name="speedSelector_1_5X">-->
+                    <!--</include>-->
+                    <!--<include name="speedSelector_2X">-->
+                    <!--</include>-->
 
-                    <include name="speedSelectorRegular">
+                    <include name="volumeBar">
                     </include>
-
 
                 </methods>
             </class>
