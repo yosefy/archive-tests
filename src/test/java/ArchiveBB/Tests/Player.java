@@ -284,7 +284,7 @@ public class Player extends InitClass{
 
         videoPlayer.clickOnMute();
         // todo - why this is un mute ? kolbo shalom
-//        Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
+        Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
         // up volume
         videoPlayer.updateVolumeControl(-50);
         Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
@@ -301,11 +301,23 @@ public class Player extends InitClass{
     }
 
     @Test()
-    public void audioVideoToggle(){
+    @Parameters({"link"})
+    public void audioVideoToggle(String link){
         // verify src type (audio / video)
         // start video / audio
         // switch to audio check player in audio mode and verify
         // switch to video mode and verify
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        while (!videoPlayer.isPlayerAudioVideoToggleLoaded())
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Video(), "We're not in video mode");
+        videoPlayer.clickAudioVideo();
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Audio(), "We're not in audio mode");
+        videoPlayer.clickAudioVideo();
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Video(), "We're not in video mode");
+
     }
 
     @Test()

@@ -1,9 +1,6 @@
 package helper.Class;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 
@@ -38,6 +35,7 @@ public class VideoPlayerClass extends BaseClass {
     public final static String MEDIA_PLAYER_MUTE = ".mediaplayer__volume>button";
     public final static String MEDIA_PLAYER_VOLUME = ".mediaplayer__volume";
     public final static String MEDIA_PLAYER_VOLUME_WRAPPER = ".volume-popover__wrapper";
+    public final static String MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE = ".mediaplayer__audiovideo";
 
 
 
@@ -64,6 +62,10 @@ public class VideoPlayerClass extends BaseClass {
 
     public void clickOnMute(){
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
+    }
+
+    public void clickAudioVideo(){
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE)));
     }
 
     public void updateVolumeControl (int y){
@@ -146,6 +148,34 @@ public class VideoPlayerClass extends BaseClass {
         return Double.parseDouble(result);
     }
 
+    public boolean HTMLMediaElement_IF_Video() {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return document.querySelector('video').tagName";
+        try {
+            String result = jsExec.executeScript(script).toString();
+            return result.equals("VIDEO");
+        }catch (WebDriverException e){
+            return false;
+        }
+    }
+
+    public boolean HTMLMediaElement_IF_Audio() {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return document.querySelector('audio').tagName";
+        try {
+            String result = jsExec.executeScript(script).toString();
+            return result.equals("AUDIO");
+        }catch (WebDriverException e){
+            return false;
+        }
+    }
+
+    public boolean isPlayerAudioVideoToggleLoaded(){
+        List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE));
+
+        return element != null;
+
+    }
 }
 
 
