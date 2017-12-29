@@ -8,28 +8,28 @@
         <classes>
             <class name="ArchiveBB.Tests.Player">
                 <methods>
-                    <!--<include name="playerVideoSrcAndForwardBtn">-->
-                    <!--</include>-->
-                    <!--<include name="playerPlayBtnAndPauseBtn">-->
-                    <!--</include>-->
-                    <!--<include name="playerForwardBtnAndBackwardBtn">-->
-                    <!--</include>-->
-                    <!--<include name="playerTimeCodeToPlaylistCompare">-->
-                    <!--</include>-->
-                    <!--<include name="playerTimeCode">-->
-                    <!--</include>-->
-                    <!--<include name="timeCodeUpdateByPlay">-->
-                    <!--</include>-->
-                    <!--<include name="timeCodeUpdateByScroll">-->
-                    <!--</include>-->
-                    <!--<include name="timeCodeUpdateByLink">-->
-                    <!--</include>-->
-                    <!--<include name="speedSelector_1X">-->
-                    <!--</include>-->
-                    <!--<include name="speedSelector_1_5X">-->
-                    <!--</include>-->
-                    <!--<include name="speedSelector_2X">-->
-                    <!--</include>-->
+                    <include name="playerVideoSrcAndForwardBtn">
+                    </include>
+                    <include name="playerPlayBtnAndPauseBtn">
+                    </include>
+                    <include name="playerForwardBtnAndBackwardBtn">
+                    </include>
+                    <include name="playerTimeCodeToPlaylistCompare">
+                    </include>
+                    <include name="playerTimeCode">
+                    </include>
+                    <include name="timeCodeUpdateByPlay">
+                    </include>
+                    <include name="timeCodeUpdateByScroll">
+                    </include>
+                    <include name="timeCodeUpdateByLink">
+                    </include>
+                    <include name="speedSelector_1X">
+                    </include>
+                    <include name="speedSelector_1_5X">
+                    </include>
+                    <include name="speedSelector_2X">
+                    </include>
 
                     <include name="volumeBar">
                     </include>

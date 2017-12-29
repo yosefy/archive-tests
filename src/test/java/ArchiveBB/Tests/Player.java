@@ -3,6 +3,10 @@ package ArchiveBB.Tests;
 import PageObjects.EventsMain;
 import helper.Class.InitClass;
 import helper.Class.VideoPlayerClass;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -276,6 +280,9 @@ public class Player extends InitClass{
     }
 
     @Test()
+    @Description("verify volume bar")
+    @Severity(SeverityLevel.MINOR)
+    @Issue("434")
     @Parameters({"link"})
     public void volumeBar(String link) {
         driver.get(link);
@@ -301,6 +308,9 @@ public class Player extends InitClass{
     }
 
     @Test()
+    @Description("verify src type (audio / video)")
+    @Severity(SeverityLevel.BLOCKER)
+    @Issue("433")
     @Parameters({"link"})
     public void audioVideoToggle(String link){
         // verify src type (audio / video)
@@ -321,7 +331,14 @@ public class Player extends InitClass{
     }
 
     @Test()
-    public void languageSelector(){
+    @Description("Multilanguage test case")
+    @Severity(SeverityLevel.NORMAL)
+    @Issue("432")
+    @Parameters({"link"})
+    public void languageSelector(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
         // open language selector
         // assert if opened
         // assert language list present
