@@ -1,5 +1,6 @@
-package helper.Class;
+package pages;
 
+import helpers.BasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -8,9 +9,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoPlayerClass extends BaseClass {
+public class VideoPlayer extends BasePageObject {
 
-    public VideoPlayerClass(WebDriver driver) {
+    public VideoPlayer(WebDriver driver) {
         super(driver);
     }
 
@@ -36,6 +37,9 @@ public class VideoPlayerClass extends BaseClass {
     public final static String MEDIA_PLAYER_VOLUME = ".mediaplayer__volume";
     public final static String MEDIA_PLAYER_VOLUME_WRAPPER = ".volume-popover__wrapper";
     public final static String MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE = ".mediaplayer__audiovideo";
+
+    public final static String MEDIA_PLAYER_LANGUAGES = ".mediaplayer__languages>div";
+    public final static String MEDIA_DOWNLOADS_LANGUAGES = ".content__aside-unit>div>div>div>div";
 
 
 
@@ -76,25 +80,13 @@ public class VideoPlayerClass extends BaseClass {
         dragAndDropElementByActionOnVertical(tryElem,y);
     }
 
-//    public boolean checkMediaControlState(String listToButtons, String action) {
-//        List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
-//        for (WebElement elem : buttons) {
-//            if (((RemoteWebElement) elem).findElementByTagName("i").getAttribute("class").contains(action)) {
-//                highlightElement(elem);
-//                System.out.println(elem.getText());
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public List<String> getWebElemListReturnListVideoSrc(String eventsVerticalMenu) {
         List<WebElement> videoSrcList = driver.findElements(By.cssSelector(eventsVerticalMenu));
-        this.isElementLoaded(videoSrcList.get(0));
+        isElementLoaded(videoSrcList.get(0));
         List<String> listStr = new ArrayList<>();
         for (WebElement list : videoSrcList) {
             click(list);
-            this.isElementLoaded(list);
+            isElementLoaded(list);
             listStr.add(this.HTMLMediaElement_GetVideoSource());
         }
         return listStr;
@@ -172,10 +164,34 @@ public class VideoPlayerClass extends BaseClass {
 
     public boolean isPlayerAudioVideoToggleLoaded(){
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE));
-
         return element != null;
-
     }
+
+    public List<String> getListOfLanguagesFromPlayer() {
+        // open language drop down if closed
+        if (!driver.findElement(By.cssSelector(MEDIA_PLAYER_LANGUAGES + ">div")).getText().contains("visible"))
+            click(driver.findElement(By.cssSelector(MEDIA_PLAYER_LANGUAGES + ">button")));
+        highlightElement(driver.findElement(By.cssSelector(MEDIA_PLAYER_LANGUAGES + ">button")));
+        List<String> list = getWebElemListReturnStringList(MEDIA_PLAYER_LANGUAGES + ">div>div");
+        // close opened language menu
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_LANGUAGES + ">button")));
+        return list;
+    }
+
+    // todo - need to move to other page object class
+    public List<String> getListOfLanguagesFromMediaDownloads(){
+        WebElement languageMenu = driver.findElement(By.cssSelector(MEDIA_DOWNLOADS_LANGUAGES));
+        if (!languageMenu.getText().contains("active"))
+            click(languageMenu);
+        highlightElement(languageMenu);
+        List<String> list = getWebElemListReturnStringList(MEDIA_DOWNLOADS_LANGUAGES + ">div>div>span");
+        // close opened language menu
+        click(languageMenu);
+        return list;
+    }
+
+
 }
+
 
 

@@ -1,11 +1,11 @@
-package ArchiveBB.Tests;
+package suites;
 
-import PageObjects.ArchiveSources;
-import PageObjects.ArchiveTopics;
-import PageObjects.EventsMain;
-import PageObjects.ProgramsGenre;
-import helper.Class.FilesClass;
-import helper.Class.InitClass;
+import pages.ArchiveSources;
+import pages.ArchiveTopics;
+import pages.EventsMain;
+import pages.ProgramsGenre;
+import helpers.FilesClass;
+import helpers.BaseSuite;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class TryNewTests extends InitClass {
+public class TryNewTests extends BaseSuite {
 
     private ProgramsGenre programsGenre;
     private EventsMain eventsMain;

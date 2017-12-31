@@ -1,4 +1,4 @@
-package helper.Class;
+package helpers;
 
 import com.automation.remarks.testng.VideoListener;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(VideoListener.class)
-public class InitClass {
+public class BaseSuite {
 
     protected static WebDriver driver;
 

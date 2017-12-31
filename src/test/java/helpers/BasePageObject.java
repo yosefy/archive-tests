@@ -1,37 +1,30 @@
-package helper.Class;
+package helpers;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import static PageObjects.ProgramsGenre.*;
+import static pages.ProgramsGenre.*;
 
-public class BaseClass {
+public class BasePageObject {
 
     protected WebDriver driver;
 
-    public BaseClass(WebDriver driver) {
+    public BasePageObject(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -105,7 +98,7 @@ public class BaseClass {
         return false;
     }
 
-    void isElementLoaded(WebElement elementToBeLoaded) {
+    public void isElementLoaded(WebElement elementToBeLoaded) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 15);
             wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));

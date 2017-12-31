@@ -1,24 +1,14 @@
-package helper.Class;
+package helpers;
 
-import com.google.common.collect.MapDifference;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import org.apache.commons.io.FilenameUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static PageObjects.ProgramsGenre.ALL_PROGRAMS_ITEMS;
-import static helper.Class.InitClass.driver;
 
 public class FilesClass {
 

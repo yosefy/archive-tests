@@ -6,7 +6,7 @@
         <parameter name="link" value="http://archive.kbb1.com/" />
 
         <classes>
-            <class name="ArchiveBB.Tests.DailyLessons">
+            <class name="DailyLessons">
                 <methods>
                     <include name="datePickerToday">
                     </include>

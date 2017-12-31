@@ -1,17 +1,11 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
-import org.openqa.selenium.By;
+import helpers.BasePageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class EventsTypes extends BasePageObject {
 
-public class ProgramsTopic extends BaseClass {
-
-    public ProgramsTopic(WebDriver driver) {
+    public EventsTypes(WebDriver driver) {
         super(driver);
     }
 

@@ -13,6 +13,7 @@
         <bonigarcia.version>1.7.2</bonigarcia.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <allure.version>2.0-BETA19</allure.version>
         <aspectj.version>1.8.10</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -42,8 +43,10 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>2.0-BETA19</version>
-            <scope>test</scope>
+            <version>${allure.version}</version>
+            <!--<version>2.0-BETA19</version>-->
+            <!--<scope>test</scope>-->
+            <!--http://www.swtestacademy.com/allure-testng/-->
         </dependency>
 
         <!--<dependency>-->

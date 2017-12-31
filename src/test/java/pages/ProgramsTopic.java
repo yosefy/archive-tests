@@ -1,11 +1,11 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.WebDriver;
 
-public class EventsTypes extends BaseClass {
+public class ProgramsTopic extends BasePageObject {
 
-    public EventsTypes(WebDriver driver) {
+    public ProgramsTopic(WebDriver driver) {
         super(driver);
     }
 

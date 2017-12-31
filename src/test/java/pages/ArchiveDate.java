@@ -1,6 +1,6 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class ArchiveDate extends BaseClass {
+public class ArchiveDate extends BasePageObject {
 
     public ArchiveDate(WebDriver driver) {
         super(driver);

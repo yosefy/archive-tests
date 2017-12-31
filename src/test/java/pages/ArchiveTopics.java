@@ -1,10 +1,10 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ArchiveTopics extends BaseClass {
+public class ArchiveTopics extends BasePageObject {
 
     public final static String TOPICS_RESULTS_TABLE = ".ui.basic.clearing.bottom.attached.segment.tab.active>div>div>div";
     private final static String APPLY_BTN = ".ui.button:nth-child(1)";

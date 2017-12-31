@@ -1,18 +1,9 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
-import org.openqa.selenium.By;
+import helpers.BasePageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class ProgramsDate extends BaseClass {
+public class ProgramsDate extends BasePageObject {
 
     public ProgramsDate(WebDriver driver) {
         super(driver);

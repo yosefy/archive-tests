@@ -1,19 +1,18 @@
-package ArchiveBB.Tests;
+package suites;
 
-import PageObjects.EventsMain;
+import pages.EventsMain;
 import com.automation.remarks.video.annotations.Video;
-import helper.Class.InitClass;
+import helpers.BaseSuite;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static PageObjects.EventsMain.*;
-import static PageObjects.ProgramsGenre.VERTICAL_HAMBURGER_MENU;
+import static pages.EventsMain.*;
 
 
-public class Events extends InitClass {
+public class Events extends BaseSuite {
 
     private EventsMain eventsMain;
 

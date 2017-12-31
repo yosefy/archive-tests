@@ -1,13 +1,13 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class EventsMain extends BaseClass {
+public class EventsMain extends BasePageObject {
 
     public EventsMain(WebDriver driver) {
         super(driver);

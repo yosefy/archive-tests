@@ -1,9 +1,9 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.WebDriver;
 
-public class EventsYear extends BaseClass {
+public class EventsYear extends BasePageObject {
 
     public EventsYear(WebDriver driver) {
         super(driver);

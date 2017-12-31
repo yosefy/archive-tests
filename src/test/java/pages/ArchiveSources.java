@@ -1,12 +1,12 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class ArchiveSources extends BaseClass {
+public class ArchiveSources extends BasePageObject {
 
     public ArchiveSources(WebDriver driver) {
         super(driver);
@@ -14,7 +14,7 @@ public class ArchiveSources extends BaseClass {
 
     private final static String SOURCE_CHILDREN = ".ui.blue.tiny.compact.pointing>a";
     private final static String COLUMNS = ".filter-steps__column-wrapper";
-    public final static String APPLY_BTN = ".ui.primary.right.floated.button";
+    private final static String APPLY_BTN = ".ui.primary.right.floated.button";
     public final static String CANCEL_BTN = ".ui.button:nth-child(2)";
     public final static String SOURCE_RESULTS_TABLE = ".ui.sortable.very.basic.table>tbody>tr";
     public final static String INNER_LESSON_TAGS = ".ui.list div";

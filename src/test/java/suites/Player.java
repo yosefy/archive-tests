@@ -1,13 +1,12 @@
-package ArchiveBB.Tests;
+package suites;
 
-import PageObjects.EventsMain;
-import helper.Class.InitClass;
-import helper.Class.VideoPlayerClass;
+import org.openqa.selenium.By;
+import pages.EventsMain;
+import helpers.BaseSuite;
+import pages.VideoPlayer;
 import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -16,20 +15,20 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static PageObjects.ArchiveDate.DAILY_LESSONS;
-import static PageObjects.ArchiveDate.DAILY_LESSONS_SECOND_ITEM;
-import static PageObjects.EventsMain.*;
-import static helper.Class.VideoPlayerClass.*;
+import static pages.ArchiveDate.DAILY_LESSONS;
+import static pages.ArchiveDate.DAILY_LESSONS_SECOND_ITEM;
+import static pages.EventsMain.*;
+import static pages.VideoPlayer.*;
 
-public class Player extends InitClass{
+public class Player extends BaseSuite {
 
     private EventsMain eventsMain;
-    private VideoPlayerClass videoPlayer;
+    private VideoPlayer videoPlayer;
 
     @BeforeMethod
     public void beforeMethod() {
         eventsMain = new EventsMain(driver);
-        videoPlayer = new VideoPlayerClass(driver);
+        videoPlayer = new VideoPlayer(driver);
     }
 
     @Test()
@@ -282,7 +281,7 @@ public class Player extends InitClass{
     @Test()
     @Description("verify volume bar")
     @Severity(SeverityLevel.MINOR)
-    @Issue("434")
+//    @Issue("434")
     @Parameters({"link"})
     public void volumeBar(String link) {
         driver.get(link);
@@ -301,16 +300,12 @@ public class Player extends InitClass{
         // down volume
         videoPlayer.updateVolumeControl(50);
         Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
-
-        // mute mode
-        // 1 line volume
-        // 3 line volume maximum
     }
 
     @Test()
     @Description("verify src type (audio / video)")
     @Severity(SeverityLevel.BLOCKER)
-    @Issue("433")
+//    @Issue("433")
     @Parameters({"link"})
     public void audioVideoToggle(String link){
         // verify src type (audio / video)
@@ -327,18 +322,23 @@ public class Player extends InitClass{
         Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Audio(), "We're not in audio mode");
         videoPlayer.clickAudioVideo();
         Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_Video(), "We're not in video mode");
-
     }
 
     @Test()
     @Description("Multilanguage test case")
     @Severity(SeverityLevel.NORMAL)
-    @Issue("432")
+//    @Issue("432")
     @Parameters({"link"})
     public void languageSelector(String link){
         driver.get(link);
         eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+        List<String> listFromPlayer = videoPlayer.getListOfLanguagesFromPlayer();
+        List<String> listFromMediaDownloads = videoPlayer.getListOfLanguagesFromMediaDownloads();
+
+        boolean b  = listFromPlayer.equals(listFromMediaDownloads);
+        System.out.println(b);
+
         // open language selector
         // assert if opened
         // assert language list present
@@ -359,7 +359,7 @@ public class Player extends InitClass{
     @Test()
     public void sharingModeOff(){
         // click back to play
-        // verify that doesn't dispayed ...
+        // verify that doesn't displayed ...
     }
 
     @Test()
@@ -371,7 +371,6 @@ public class Player extends InitClass{
         // assert time updated
         // copy link and open in new tap and paste copied link
         // compare copied link with source link
-        //
     }
 
 }

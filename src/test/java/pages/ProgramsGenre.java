@@ -1,13 +1,13 @@
-package PageObjects;
+package pages;
 
-import helper.Class.BaseClass;
+import helpers.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.*;
 
-public class ProgramsGenre extends BaseClass {
+public class ProgramsGenre extends BasePageObject {
 
     public ProgramsGenre(WebDriver driver) {
         super(driver);

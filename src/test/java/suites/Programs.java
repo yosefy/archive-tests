@@ -1,23 +1,23 @@
-package ArchiveBB.Tests;
+package suites;
 
-import PageObjects.ArchiveSources;
-import PageObjects.ArchiveTopics;
-import PageObjects.ProgramsGenre;
+import pages.ArchiveSources;
+import pages.ArchiveTopics;
+import pages.ProgramsGenre;
 import com.automation.remarks.video.annotations.Video;
-import helper.Class.InitClass;
+import helpers.BaseSuite;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.List;
 import java.util.Map;
 
-import static PageObjects.ArchiveDate.DAILY_LESSON_PANEL;
-import static PageObjects.ArchiveDate.PANEL_TOPICS;
-import static PageObjects.ArchiveDate.PROGRAMS;
-import static PageObjects.ProgramsGenre.*;
+import static pages.ArchiveDate.DAILY_LESSON_PANEL;
+import static pages.ArchiveDate.PANEL_TOPICS;
+import static pages.ArchiveDate.PROGRAMS;
+import static pages.ProgramsGenre.*;
 
 
-public class Programs extends InitClass {
+public class Programs extends BaseSuite {
 
     private ProgramsGenre programsGenre;
     private ArchiveTopics archiveTopics;

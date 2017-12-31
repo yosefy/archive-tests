@@ -1,10 +1,10 @@
-package ArchiveBB.Tests;
+package suites;
 
-import PageObjects.ArchiveDate;
-import PageObjects.ArchiveSources;
-import PageObjects.ArchiveTopics;
+import pages.ArchiveDate;
+import pages.ArchiveSources;
+import pages.ArchiveTopics;
 import com.automation.remarks.video.annotations.Video;
-import helper.Class.InitClass;
+import helpers.BaseSuite;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -12,10 +12,10 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static PageObjects.ArchiveDate.*;
+import static pages.ArchiveDate.*;
 
 
-public class DailyLessons extends InitClass {
+public class DailyLessons extends BaseSuite {
 
     private ArchiveDate archiveDate;
     private ArchiveSources archiveSources;
