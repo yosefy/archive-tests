@@ -7,7 +7,9 @@ import org.openqa.selenium.remote.RemoteWebElement;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VideoPlayer extends BasePageObject {
 
@@ -41,7 +43,29 @@ public class VideoPlayer extends BasePageObject {
     public final static String MEDIA_PLAYER_LANGUAGES = ".mediaplayer__languages>div";
     public final static String MEDIA_DOWNLOADS_LANGUAGES = ".content__aside-unit>div>div>div>div";
 
+    public final static String MEDIA_PLAYER_FULL_SCREEN = ".player-button.player-control-fullscreen";
+    public final static String MEDIA_PLAYER_SHARE = ".player-button.player-control-edit-slice";
 
+
+    public final HashMap<String, String> allLanguagesHash = new HashMap<String, String>() {{
+        put("en","English");
+        put("he","Hebrew");
+        put("ru","Russian");
+        put("es","Spanish");
+        put("it","Italian");
+        put("de","German");
+        put("fr","French");
+        put("hu","Hungarian");
+        put("zh","Chinese");
+        put("pt","Portuguese");
+        put("tr","Turkish");
+        put("lt","Lithuanian");
+        put("ja","Japanese");
+        put("bg","Bulgarian");
+        put("ka","Georgian");
+        put("ro","Romanian");
+        put("ua","Ukrainian");
+    }};
 
 
     public boolean actionAndReturnState(String listToButtons, String action) {
@@ -72,9 +96,13 @@ public class VideoPlayer extends BasePageObject {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE)));
     }
 
+    public void clickOnShare(){
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_SHARE)));
+    }
+
+
     public void updateVolumeControl (int y){
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
-
         WebElement tryElem = driver.findElement(By.cssSelector(MEDIA_PLAYER_VOLUME_WRAPPER));
         scrollToElementIgnoringSteakHeader(tryElem, y);
         dragAndDropElementByActionOnVertical(tryElem,y);
@@ -162,6 +190,20 @@ public class VideoPlayer extends BasePageObject {
         }
     }
 
+
+    public boolean HTMLMediaElement_IF_FullScreen() {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return document.webkitIsFullScreen";
+        return ((Boolean) jsExec.executeScript(script)).compareTo(false) == 0;
+    }
+
+    public String HTMLMediaElement_IF_CURRENT_TIME() {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return document.querySelector('video').currentTime/60";
+        return jsExec.executeScript(script).toString();
+    }
+
+
     public boolean isPlayerAudioVideoToggleLoaded(){
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE));
         return element != null;
@@ -191,6 +233,11 @@ public class VideoPlayer extends BasePageObject {
     }
 
 
+    public Map<String,String> listFromPlayerToHash(List<String> languages){
+        Map<String,String> playerLanguagesMap = new HashMap<>();
+        for (String i : languages) playerLanguagesMap.put(allLanguagesHash.get(i), i);
+        return playerLanguagesMap;
+    }
 }
 
 

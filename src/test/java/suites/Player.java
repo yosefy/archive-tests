@@ -1,5 +1,6 @@
 package suites;
 
+import io.qameta.allure.Issue;
 import org.openqa.selenium.By;
 import pages.EventsMain;
 import helpers.BaseSuite;
@@ -14,6 +15,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static pages.ArchiveDate.DAILY_LESSONS;
 import static pages.ArchiveDate.DAILY_LESSONS_SECOND_ITEM;
@@ -280,8 +282,8 @@ public class Player extends BaseSuite {
 
     @Test()
     @Description("verify volume bar")
-    @Severity(SeverityLevel.MINOR)
-//    @Issue("434")
+    @Severity(SeverityLevel.BLOCKER)
+    @Issue("AR-85")
     @Parameters({"link"})
     public void volumeBar(String link) {
         driver.get(link);
@@ -289,7 +291,6 @@ public class Player extends BaseSuite {
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
 
         videoPlayer.clickOnMute();
-        // todo - why this is un mute ? kolbo shalom
         Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_Muted(),"Video doesn't muted");
         // up volume
         videoPlayer.updateVolumeControl(-50);
@@ -304,14 +305,8 @@ public class Player extends BaseSuite {
 
     @Test()
     @Description("verify src type (audio / video)")
-    @Severity(SeverityLevel.BLOCKER)
-//    @Issue("433")
     @Parameters({"link"})
     public void audioVideoToggle(String link){
-        // verify src type (audio / video)
-        // start video / audio
-        // switch to audio check player in audio mode and verify
-        // switch to video mode and verify
         driver.get(link);
         eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
@@ -326,8 +321,6 @@ public class Player extends BaseSuite {
 
     @Test()
     @Description("Multilanguage test case")
-    @Severity(SeverityLevel.NORMAL)
-//    @Issue("432")
     @Parameters({"link"})
     public void languageSelector(String link){
         driver.get(link);
@@ -335,31 +328,47 @@ public class Player extends BaseSuite {
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
         List<String> listFromPlayer = videoPlayer.getListOfLanguagesFromPlayer();
         List<String> listFromMediaDownloads = videoPlayer.getListOfLanguagesFromMediaDownloads();
+        Assert.assertTrue(listFromMediaDownloads.size()==listFromPlayer.size(),
+                "Size of list doesn't equal");
 
-        boolean b  = listFromPlayer.equals(listFromMediaDownloads);
-        System.out.println(b);
+        Map<String,String> languageHashFromPlayer = videoPlayer.listFromPlayerToHash(listFromPlayer);
 
-        // open language selector
-        // assert if opened
-        // assert language list present
-        // switch language and assert URL video source
+        for (String item : listFromMediaDownloads)
+            Assert.assertTrue(languageHashFromPlayer.containsKey(item));
     }
 
     @Test()
-    public void fullScreenToggle(){
-        // investigate size of player
+    @Parameters({"link"})
+    public void fullScreenToggle(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player in full screen mode");
+        videoPlayer.click(driver.findElement(By.cssSelector(MEDIA_PLAYER_FULL_SCREEN)));
+        Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player doesn't full screen mode");
+        videoPlayer.click(driver.findElement(By.cssSelector(MEDIA_PLAYER_FULL_SCREEN)));
+        Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player in full screen mode");
     }
 
+
     @Test()
-    public void sharingModeOn(){
+    @Parameters({"link"})
+    public void sharingModeOn(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        System.out.println(videoPlayer.HTMLMediaElement_IF_CURRENT_TIME());
+
         // click on share
-        // verify that displayed (share option, link option, back to play, right and left share controls)
+        // verify that displayed 5 elements (share option, link option, back to play, right and left share controls)
     }
 
     @Test()
     public void sharingModeOff(){
         // click back to play
         // verify that doesn't displayed ...
+        // open bug - when back from sharing mode started to play todo
     }
 
     @Test()

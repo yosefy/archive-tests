@@ -30,11 +30,15 @@
                     <!--</include>-->
                     <!--<include name="speedSelector_2X">-->
                     <!--</include>-->
-                    <!--<include name="volumeBar">-->
+                    <include name="volumeBar">
+                    </include>
+                    <!--<include name="languageSelector">-->
+                    <!--</include>-->
+                    <!--<include name="fullScreenToggle">-->
                     <!--</include>-->
 
-                    <include name="languageSelector">
-                    </include>
+                    <!--<include name="sharingModeOn">-->
+                    <!--</include>-->
 
 
                 </methods>
