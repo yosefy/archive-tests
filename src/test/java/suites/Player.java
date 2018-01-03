@@ -2,6 +2,7 @@ package suites;
 
 import io.qameta.allure.Issue;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import pages.EventsMain;
 import helpers.BaseSuite;
 import pages.VideoPlayer;
@@ -359,9 +360,24 @@ public class Player extends BaseSuite {
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
 
         System.out.println(videoPlayer.HTMLMediaElement_IF_CURRENT_TIME());
-
         // click on share
+        videoPlayer.clickOnShare();
         // verify that displayed 5 elements (share option, link option, back to play, right and left share controls)
+
+    }
+
+    @Test()
+    @Parameters({"link"})
+    public void playerButtons(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        WebElement player = driver.findElement(By.cssSelector(MEDIA_PLAYER));
+        player.sendKeys(Keys.END);
+
+        driver.getTitle();
+
     }
 
     @Test()

@@ -46,6 +46,9 @@ public class VideoPlayer extends BasePageObject {
     public final static String MEDIA_PLAYER_FULL_SCREEN = ".player-button.player-control-fullscreen";
     public final static String MEDIA_PLAYER_SHARE = ".player-button.player-control-edit-slice";
 
+    public final static String MEDIA_PLAYER = ".mediaplayer__onscreen-controls";
+
+
 
     public final HashMap<String, String> allLanguagesHash = new HashMap<String, String>() {{
         put("en","English");
