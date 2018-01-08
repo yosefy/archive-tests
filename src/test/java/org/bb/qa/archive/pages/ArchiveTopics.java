@@ -3,7 +3,7 @@ package org.bb.qa.archive.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ArchiveTopics extends BasePageObject {
+public class ArchiveTopics extends PageObject {
 
     public final static String TOPICS_RESULTS_TABLE = ".ui.basic.clearing.bottom.attached.segment.tab.active>div>div>div";
     public final static String TOPICS_RESULTS = ".ui.sortable.very.basic.table>tbody>tr a";

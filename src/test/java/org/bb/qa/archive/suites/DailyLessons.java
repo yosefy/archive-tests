@@ -1,6 +1,7 @@
 package org.bb.qa.archive.suites;
 
 import com.automation.remarks.video.annotations.Video;
+import org.bb.qa.archive.helpers.Utils;
 import org.bb.qa.archive.pages.ArchiveDate;
 import org.bb.qa.archive.pages.ArchiveSources;
 import org.bb.qa.archive.pages.ArchiveTopics;
@@ -158,7 +159,7 @@ public class DailyLessons extends BaseSuite {
                 "Not found count of expected results");
         archiveSources.checkIfGreaterThanZero();
 
-        Assert.assertTrue(archiveSources.comp2StringArrays(label.split(">"),
+        Assert.assertTrue(Utils.comp2StringArrays(label.split(">"),
                 archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
                 "Not found count of expected results");
     }
@@ -177,7 +178,7 @@ public class DailyLessons extends BaseSuite {
         Assert.assertTrue(archiveSources.checkResultsMoreThanZero(),
                 "Not found count of expected results");
         archiveSources.checkIfGreaterThanZero();
-        Assert.assertTrue(archiveSources.comp2StringArrays(label.split(">"),
+        Assert.assertTrue(Utils.comp2StringArrays(label.split(">"),
                 archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
                 "Not found count of expected results");
     }

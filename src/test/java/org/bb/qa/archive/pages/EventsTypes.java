@@ -2,7 +2,7 @@ package org.bb.qa.archive.pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class EventsTypes extends BasePageObject {
+public class EventsTypes extends PageObject {
 
     public EventsTypes(WebDriver driver) {
         super(driver);

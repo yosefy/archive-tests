@@ -1,13 +1,14 @@
 package org.bb.qa.archive.suites;
 
 import com.automation.remarks.video.annotations.Video;
+import org.bb.qa.archive.helpers.Utils;
+import org.bb.qa.archive.pages.ArchiveSources;
+import org.bb.qa.archive.pages.ArchiveTopics;
+import org.bb.qa.archive.pages.ProgramsGenre;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.bb.qa.archive.pages.ArchiveSources;
-import org.bb.qa.archive.pages.ArchiveTopics;
-import org.bb.qa.archive.pages.ProgramsGenre;
 
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class Programs extends BaseSuite {
         // All displayed results in UI under H2
         archiveSources.checkIfGreaterThanZero();
         // Check label with inner tag program
-        Assert.assertTrue(archiveTopics.comp2StringArrays(label.split(">"),
+        Assert.assertTrue(Utils.comp2StringArrays(label.split(">"),
                 archiveSources.clickOnFirstAndReturnLabel(label).split(">")),
                 "Not found count of expected results");
     }

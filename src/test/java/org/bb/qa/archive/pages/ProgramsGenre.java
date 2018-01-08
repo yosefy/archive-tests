@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProgramsGenre extends BasePageObject {
+public class ProgramsGenre extends PageObject {
 
     public final static String GENRE_MAIN_LEFT_PANEL = ".ui.blue.tiny.fluid.vertical.menu>a.item";
     public final static String ALL_PROGRAMS_ITEMS = ".column>div.ui.tiny.list>div";
@@ -17,6 +17,7 @@ public class ProgramsGenre extends BasePageObject {
     public final static String GENRE_PROGRAM_PANEL = "All Programs";
     public final static String PAGINATION_PANEL = ".ui.blue.compact.menu";
     public final static String PROGRAMS_RESULT_EPISODE = ".ui.sortable.very.basic.table.index-list>tbody>tr>td>div>a";
+
     public ProgramsGenre(WebDriver driver) {
         super(driver);
     }
@@ -29,8 +30,6 @@ public class ProgramsGenre extends BasePageObject {
             key = run.getAttribute("data-value");
             value = run.getText();
             if (key != null) {
-                System.out.println("Data Value is :" + key);
-                System.out.println("Key Value is :" + value);
                 myMap.put(key, value.trim());
             }
         }

@@ -25,13 +25,16 @@ public class Events extends BaseSuite {
     public void eventsMainAllItemsMultiLang(String link) {
         driver.get(link);
         eventsMain.navigateToPanelAndSection(EVENTS);
+
         // ENG
         eventsMain.click(driver.findElement(By.cssSelector(US_FLAG)));
         int items_count = eventsMain.checkAllEventsItems();
+
         // RUS
         eventsMain.click(driver.findElement(By.cssSelector(RU_FLAG)));
         Assert.assertEquals(items_count, eventsMain.checkAllEventsItems(),
                 "Items counter doesn't equal");
+
         // HEB
         eventsMain.click(driver.findElement(By.cssSelector(IL_FLAG)));
         Assert.assertEquals(items_count, eventsMain.checkAllEventsItems(),

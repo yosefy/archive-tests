@@ -1,18 +1,18 @@
 package org.bb.qa.archive.pages;
 
+import org.bb.qa.archive.helpers.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class ArchiveDate extends BasePageObject {
+public class ArchiveDate extends PageObject {
 
     public final static String DAILY_LESSON_PANEL = ".ui.blue.large.pointing.secondary.index-filters.menu>div>a";
     public final static String PANEL_DATE = "Date";
@@ -37,6 +37,7 @@ public class ArchiveDate extends BasePageObject {
     public final static String CANCEL_BTN = ".ui.button:nth-child(1)";
     private final static String REMOVE_LABEL = ".close.icon";
     private final static String APPLY_BTN = ".ui.button:nth-child(2)";
+
     public ArchiveDate(WebDriver driver) {
         super(driver);
     }
@@ -55,23 +56,16 @@ public class ArchiveDate extends BasePageObject {
         if (label.contains("-")) {
             myList = new ArrayList<>(Arrays.asList(label.split("-")));
             for (int i = 0; i < myList.size(); i++)
-                myList.set(i, convertToDateFromLabel(myList.get(i)));
+                myList.set(i, Utils.convertToDateFromLabel(myList.get(i)));
             return myList;
         } else {
-            myList.set(0, convertToDateFromLabel(label));
+            myList.set(0, Utils.convertToDateFromLabel(label));
             return myList;
         }
     }
 
-    public String convertToDateFromLabel(String value) {
-        LocalDate dateName = LocalDate.parse(value.trim(), DateTimeFormatter.ofPattern("d MMM yyyy"));
-        System.out.println("DateTimeFormatter.ofPattern(d MMM yyyy)- " + dateName.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        return dateName.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
-
     public String convertToDateFromUi(String dateFromUi) {
         LocalDate dateName = LocalDate.parse(dateFromUi.trim(), DateTimeFormatter.ofPattern("M/d/yyyy"));
-        System.out.println("DateTimeFormatter.ofPattern(M/d/yyyy)- " + dateName.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         return dateName.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
@@ -84,18 +78,6 @@ public class ArchiveDate extends BasePageObject {
 
     public void removeLabel() {
         click(driver.findElement(By.cssSelector(REMOVE_LABEL)));
-    }
-
-    private String getCurateLabelLastMonth() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
-        YearMonth thisMonth = YearMonth.now();
-        YearMonth lastMonth = thisMonth.minusMonths(1);
-        LocalDate initial = LocalDate.of(lastMonth.getYear(), lastMonth.getMonth(), 1);
-        LocalDate start = initial.withDayOfMonth(1);
-        LocalDate end = initial.withDayOfMonth(initial.lengthOfMonth());
-        print(start.toString(), "start");
-        print(end.toString(), "end");
-        return start.format(formatter) + " - " + end.format(formatter);
     }
 
 }

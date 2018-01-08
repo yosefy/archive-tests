@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class VideoPlayer extends BasePageObject {
+public class VideoPlayer extends PageObject {
 
     public final static String MEDIA_PLAYER_PLAY = "play";
     public final static String MEDIA_PLAYER_PAUSE = "pause";
