@@ -1,6 +1,5 @@
-package pages;
+package org.bb.qa.archive.pages;
 
-import helpers.BasePageObject;
 import org.openqa.selenium.WebDriver;
 
 public class ProgramsDate extends BasePageObject {
@@ -42,7 +41,6 @@ public class ProgramsDate extends BasePageObject {
 //        click(applyBtn);
 //        return driver.findElement(By.cssSelector(LABEL)).getText().trim();
 //    }
-
 
 
 }

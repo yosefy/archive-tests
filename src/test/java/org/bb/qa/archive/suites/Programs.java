@@ -1,20 +1,19 @@
-package suites;
+package org.bb.qa.archive.suites;
 
-import pages.ArchiveSources;
-import pages.ArchiveTopics;
-import pages.ProgramsGenre;
 import com.automation.remarks.video.annotations.Video;
-import helpers.BaseSuite;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.bb.qa.archive.pages.ArchiveSources;
+import org.bb.qa.archive.pages.ArchiveTopics;
+import org.bb.qa.archive.pages.ProgramsGenre;
 
 import java.util.List;
 import java.util.Map;
 
-import static pages.ArchiveDate.DAILY_LESSON_PANEL;
-import static pages.ArchiveDate.PANEL_TOPICS;
-import static pages.ArchiveDate.PROGRAMS;
-import static pages.ProgramsGenre.*;
+import static org.bb.qa.archive.pages.ArchiveDate.*;
+import static org.bb.qa.archive.pages.ProgramsGenre.*;
 
 
 public class Programs extends BaseSuite {

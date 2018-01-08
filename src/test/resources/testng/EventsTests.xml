@@ -3,10 +3,10 @@
 <suite name="ArchiveBB Events - Sanity Tests" parallel="false">
     <test name="ArchiveBB Events - Sanity Tests">
 
-        <parameter name="link" value="http://archive.kbb1.com/" />
+        <parameter name="link" value="http://archive.kbb1.com/"/>
 
         <classes>
-            <class name="suites.Events">
+            <class name="org.bb.qa.archive.suites.Events">
                 <methods>
 
                     <include name="eventsMainAllItemsMultiLang">

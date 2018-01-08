@@ -1,4 +1,4 @@
-package helpers;
+package org.bb.qa.archive.suites;
 
 import com.automation.remarks.testng.VideoListener;
 import io.github.bonigarcia.wdm.ChromeDriverManager;

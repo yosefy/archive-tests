@@ -1,23 +1,23 @@
-package pages;
+package org.bb.qa.archive.pages;
 
-import helpers.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import java.util.List;
 
 public class ArchiveSources extends BasePageObject {
 
-    public ArchiveSources(WebDriver driver) {
-        super(driver);
-    }
-
-    private final static String SOURCE_CHILDREN = ".ui.blue.tiny.compact.pointing>a";
-    private final static String COLUMNS = ".filter-steps__column-wrapper";
-    private final static String APPLY_BTN = ".ui.primary.right.floated.button";
     public final static String CANCEL_BTN = ".ui.button:nth-child(2)";
     public final static String SOURCE_RESULTS_TABLE = ".ui.sortable.very.basic.table>tbody>tr";
     public final static String INNER_LESSON_TAGS = ".ui.list div";
+    private final static String SOURCE_CHILDREN = ".ui.blue.tiny.compact.pointing>a";
+    private final static String COLUMNS = ".filter-steps__column-wrapper";
+    private final static String APPLY_BTN = ".ui.primary.right.floated.button";
+
+    public ArchiveSources(WebDriver driver) {
+        super(driver);
+    }
 
     public boolean navToSourceAndApply(String navToLable) {
         String[] tokens = navToLable.split(">");
@@ -25,7 +25,7 @@ public class ArchiveSources extends BasePageObject {
             tokens[i] = tokens[i].trim();
 
         boolean flag = false;
-        for (int i = 1; i <= tokens.length ; i++) {
+        for (int i = 1; i <= tokens.length; i++) {
             flag = clickListAndTarget(String.format(COLUMNS + ":nth-child(%d) a", i), tokens[i - 1]);
             if (!flag) break;
         }
@@ -44,8 +44,8 @@ public class ArchiveSources extends BasePageObject {
         String[] result;
         List<WebElement> h2 = driver.findElements(By.tagName("H2"));
         System.out.println("number of H2 tags are:" + h2.size());
-        for(WebElement option : h2){
-            if (option.getText().contains("Results")){
+        for (WebElement option : h2) {
+            if (option.getText().contains("Results")) {
                 System.out.println(option.getText());
                 highlightElement(option);
                 result = option.getText().split("of");
@@ -55,13 +55,13 @@ public class ArchiveSources extends BasePageObject {
         }
     }
 
-    public String clickOnFirstAndReturnLabel (String label){
+    public String clickOnFirstAndReturnLabel(String label) {
         String foundLabel = " ";
         navigate(SOURCE_RESULTS_TABLE + " a");
         this.getCssListAndClickOnFirstElement(SOURCE_RESULTS_TABLE + " a");
         List<WebElement> list = driver.findElements(By.cssSelector(INNER_LESSON_TAGS));
         navigate(INNER_LESSON_TAGS);
-        for (WebElement option : list){
+        for (WebElement option : list) {
             if (option.getText().trim().contains(label.trim())) {
                 click(option);
                 foundLabel = option.getText().trim();

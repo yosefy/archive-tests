@@ -1,4 +1,4 @@
-package helpers;
+package org.bb.qa.archive.helpers;
 
 import org.apache.commons.io.FilenameUtils;
 

@@ -1,11 +1,6 @@
-package suites;
+package org.bb.qa.archive.suites;
 
-import pages.ArchiveSources;
-import pages.ArchiveTopics;
-import pages.EventsMain;
-import pages.ProgramsGenre;
-import helpers.FilesClass;
-import helpers.BaseSuite;
+import org.bb.qa.archive.helpers.FilesClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -13,6 +8,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.bb.qa.archive.pages.ArchiveSources;
+import org.bb.qa.archive.pages.ArchiveTopics;
+import org.bb.qa.archive.pages.EventsMain;
+import org.bb.qa.archive.pages.ProgramsGenre;
 
 import java.awt.*;
 import java.io.IOException;
@@ -91,13 +90,13 @@ public class TryNewTests extends BaseSuite {
 //    }
 
     @Test
-    public void notificationMessage (){
+    public void notificationMessage() {
         driver.get("http://the-internet.herokuapp.com/notification_message_rendered");
-        Assert.assertTrue(programsGenre.waitForMessageDisplayed(5,"#flash","Action successful\n" + "×"));
+        Assert.assertTrue(programsGenre.waitForMessageDisplayed(5, "#flash", "Action successful\n" + "×"));
     }
 
     @Test
-    public void DragAndDrop () throws Exception {
+    public void DragAndDrop() throws Exception {
 
 //        driver.get("http://jqueryui.com/droppable/");
 //        Actions act = new Actions(driver);
@@ -120,8 +119,7 @@ public class TryNewTests extends BaseSuite {
 //        WebElement to = driver.findElement(By.cssSelector(".column:nth-child(2)"));
 
 
-
-        eventsMain.dragAndDropElementByActionOnVertical(from,40);
+        eventsMain.dragAndDropElementByActionOnVertical(from, 40);
 
 //        String js_filepath = "C:\\Users\\b\\Desktop\\Counter\\drag_and_drop.js";
 //        String js_filepath = "C:\\Users\\b\\Desktop\\Counter\\drag_test.js";
@@ -172,34 +170,34 @@ public class TryNewTests extends BaseSuite {
 
 
     @Test
-    public void HorizontalSlider (){
+    public void HorizontalSlider() {
         driver.get("http://the-internet.herokuapp.com/horizontal_slider");
-        programsGenre.sliderLeftByArrow(5,".sliderContainer>input");
-        programsGenre.sliderRightByArrow(7,".sliderContainer>input");
+        programsGenre.sliderLeftByArrow(5, ".sliderContainer>input");
+        programsGenre.sliderRightByArrow(7, ".sliderContainer>input");
         driver.getTitle();
     }
 
     @Test
-    public void Hover (){
+    public void Hover() {
         driver.get("http://the-internet.herokuapp.com/hovers");
         Actions action = new Actions(driver);
         List<WebElement> allItems = driver.findElements(By.cssSelector(".figure>img"));
-        for(WebElement element : allItems){
+        for (WebElement element : allItems) {
             action.moveToElement(element).build().perform();
         }
     }
 
     @Test
-    public void infinite_scroll () {
+    public void infinite_scroll() {
         driver.get("http://the-internet.herokuapp.com/infinite_scroll");
-        while(true){
+        while (true) {
             JavascriptExecutor jse = (JavascriptExecutor) driver;
             jse.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         }
     }
 
     @Test
-    public void CoordinatesInside () throws InterruptedException, AWTException {
+    public void CoordinatesInside() throws InterruptedException, AWTException {
         driver.get("http://the-internet.herokuapp.com/context_menu");
         programsGenre.clickByXCoordinatesOfElement("#hot-spot");
     }

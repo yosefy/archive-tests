@@ -1,11 +1,10 @@
-package pages;
+package org.bb.qa.archive.pages;
 
-import helpers.BasePageObject;
 import org.openqa.selenium.WebDriver;
 
-public class ProgramsTopic extends BasePageObject {
+public class EventsYear extends BasePageObject {
 
-    public ProgramsTopic(WebDriver driver) {
+    public EventsYear(WebDriver driver) {
         super(driver);
     }
 

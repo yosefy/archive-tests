@@ -1,6 +1,5 @@
-package pages;
+package org.bb.qa.archive.pages;
 
-import helpers.BasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -13,63 +12,53 @@ import java.util.Map;
 
 public class VideoPlayer extends BasePageObject {
 
-    public VideoPlayer(WebDriver driver) {
-        super(driver);
-    }
-
     public final static String MEDIA_PLAYER_PLAY = "play";
     public final static String MEDIA_PLAYER_PAUSE = "pause";
     public final static String MEDIA_PLAYER_FORWARD = "step forward icon";
     public final static String MEDIA_PLAYER_FORWARD_DISABLED = "step forward disabled icon";
-
     public final static String MEDIA_PLAYER_BACKWARD = "step backward icon";
     public final static String MEDIA_PLAYER_BACKWARD_DISABLED = "step backward disabled icon";
-
     public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls>div.buttons-wrapper>button";
     public final static String MEDIA_PLAYER_TIMECODE = ".mediaplayer__timecode>time";
     public final static String MEDIA_PLAYER_SEEKBAR = ".seekbar__knob";
     public final static String MEDIA_PLAYER_CONTROLS_RATE = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > button";
     public final static String MEDIA_PLAYER_CONTROLS_RATE_LIST = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > div div>span";
-
     public final static String MEDIA_PLAYER_RATE_1X = "1x";
     public final static String MEDIA_PLAYER_RATE_1_5X = "1.5x";
     public final static String MEDIA_PLAYER_RATE_2X = "2x";
-
     public final static String MEDIA_PLAYER_MUTE = ".mediaplayer__volume>button";
     public final static String MEDIA_PLAYER_VOLUME = ".mediaplayer__volume";
     public final static String MEDIA_PLAYER_VOLUME_WRAPPER = ".volume-popover__wrapper";
     public final static String MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE = ".mediaplayer__audiovideo";
-
     public final static String MEDIA_PLAYER_LANGUAGES = ".mediaplayer__languages>div";
     public final static String MEDIA_DOWNLOADS_LANGUAGES = ".content__aside-unit>div>div>div>div";
-
     public final static String MEDIA_PLAYER_FULL_SCREEN = ".player-button.player-control-fullscreen";
     public final static String MEDIA_PLAYER_SHARE = ".player-button.player-control-edit-slice";
-
     public final static String MEDIA_PLAYER = ".mediaplayer__onscreen-controls";
-
-
-
     public final HashMap<String, String> allLanguagesHash = new HashMap<String, String>() {{
-        put("en","English");
-        put("he","Hebrew");
-        put("ru","Russian");
-        put("es","Spanish");
-        put("it","Italian");
-        put("de","German");
-        put("fr","French");
-        put("hu","Hungarian");
-        put("zh","Chinese");
-        put("pt","Portuguese");
-        put("tr","Turkish");
-        put("lt","Lithuanian");
-        put("ja","Japanese");
-        put("bg","Bulgarian");
-        put("ka","Georgian");
-        put("ro","Romanian");
-        put("ua","Ukrainian");
+        put("en", "English");
+        put("he", "Hebrew");
+        put("ru", "Russian");
+        put("es", "Spanish");
+        put("it", "Italian");
+        put("de", "German");
+        put("fr", "French");
+        put("hu", "Hungarian");
+        put("zh", "Chinese");
+        put("pt", "Portuguese");
+        put("tr", "Turkish");
+        put("lt", "Lithuanian");
+        put("ja", "Japanese");
+        put("bg", "Bulgarian");
+        put("ka", "Georgian");
+        put("ro", "Romanian");
+        put("ua", "Ukrainian");
     }};
 
+
+    public VideoPlayer(WebDriver driver) {
+        super(driver);
+    }
 
     public boolean actionAndReturnState(String listToButtons, String action) {
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
@@ -86,29 +75,29 @@ public class VideoPlayer extends BasePageObject {
     }
 
 
-    public void choosePlayerRate (String MEDIA_PLAYER_RATE) {
+    public void choosePlayerRate(String MEDIA_PLAYER_RATE) {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_CONTROLS_RATE)));
         clickListAndTarget(MEDIA_PLAYER_CONTROLS_RATE_LIST, MEDIA_PLAYER_RATE);
     }
 
-    public void clickOnMute(){
+    public void clickOnMute() {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
     }
 
-    public void clickAudioVideo(){
+    public void clickAudioVideo() {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE)));
     }
 
-    public void clickOnShare(){
+    public void clickOnShare() {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_SHARE)));
     }
 
 
-    public void updateVolumeControl (int y){
+    public void updateVolumeControl(int y) {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
         WebElement tryElem = driver.findElement(By.cssSelector(MEDIA_PLAYER_VOLUME_WRAPPER));
         scrollToElementIgnoringSteakHeader(tryElem, y);
-        dragAndDropElementByActionOnVertical(tryElem,y);
+        dragAndDropElementByActionOnVertical(tryElem, y);
     }
 
     public List<String> getWebElemListReturnListVideoSrc(String eventsVerticalMenu) {
@@ -123,7 +112,7 @@ public class VideoPlayer extends BasePageObject {
         return listStr;
     }
 
-    public String[] getTimeCode (){
+    public String[] getTimeCode() {
         LocalTime now = LocalTime.now();
         int currentMinute = now.getMinute();
         int nextMinute;
@@ -177,7 +166,7 @@ public class VideoPlayer extends BasePageObject {
         try {
             String result = jsExec.executeScript(script).toString();
             return result.equals("VIDEO");
-        }catch (WebDriverException e){
+        } catch (WebDriverException e) {
             return false;
         }
     }
@@ -188,7 +177,7 @@ public class VideoPlayer extends BasePageObject {
         try {
             String result = jsExec.executeScript(script).toString();
             return result.equals("AUDIO");
-        }catch (WebDriverException e){
+        } catch (WebDriverException e) {
             return false;
         }
     }
@@ -207,7 +196,7 @@ public class VideoPlayer extends BasePageObject {
     }
 
 
-    public boolean isPlayerAudioVideoToggleLoaded(){
+    public boolean isPlayerAudioVideoToggleLoaded() {
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE));
         return element != null;
     }
@@ -224,7 +213,7 @@ public class VideoPlayer extends BasePageObject {
     }
 
     // todo - need to move to other page object class
-    public List<String> getListOfLanguagesFromMediaDownloads(){
+    public List<String> getListOfLanguagesFromMediaDownloads() {
         WebElement languageMenu = driver.findElement(By.cssSelector(MEDIA_DOWNLOADS_LANGUAGES));
         if (!languageMenu.getText().contains("active"))
             click(languageMenu);
@@ -236,8 +225,8 @@ public class VideoPlayer extends BasePageObject {
     }
 
 
-    public Map<String,String> listFromPlayerToHash(List<String> languages){
-        Map<String,String> playerLanguagesMap = new HashMap<>();
+    public Map<String, String> listFromPlayerToHash(List<String> languages) {
+        Map<String, String> playerLanguagesMap = new HashMap<>();
         for (String i : languages) playerLanguagesMap.put(allLanguagesHash.get(i), i);
         return playerLanguagesMap;
     }

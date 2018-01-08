@@ -1,4 +1,4 @@
-package helpers;
+package org.bb.qa.archive.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static pages.ProgramsGenre.*;
+import static org.bb.qa.archive.pages.ProgramsGenre.*;
 
 public class BasePageObject {
 
@@ -56,9 +56,9 @@ public class BasePageObject {
 
     public void getCssListAndClickOnElementByText(String list, String text) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
-        for(WebElement element : listOptions){
-            if (element.getText().equals(text)){
-                this.waitForClickabilityOfElementLocated(element,50000);
+        for (WebElement element : listOptions) {
+            if (element.getText().equals(text)) {
+                this.waitForClickabilityOfElementLocated(element, 50000);
                 navigate(list);
                 click(listOptions.get(0));
                 break;
@@ -102,7 +102,8 @@ public class BasePageObject {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 15);
             wait.until(ExpectedConditions.elementToBeClickable(elementToBeLoaded));
-        }catch (Exception ignore){}
+        } catch (Exception ignore) {
+        }
     }
 
     public void highlightElement(WebElement element) {
@@ -111,7 +112,7 @@ public class BasePageObject {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='none'", element);
     }
 
-    public void wait (int milliseconds){
+    public void wait(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
@@ -143,8 +144,9 @@ public class BasePageObject {
     }
 
     // get two chars[] split by > and check from the end to start
+
     /**
-    *   Two strings should have the same length
+     * Two strings should have the same length
      **/
     public boolean comp2StringArrays(String[] first, String[] second) {
         if (first.length == second.length) {
@@ -170,13 +172,13 @@ public class BasePageObject {
 
     public void navigateToPanelAndSection(String MAIN_SECTION) {
         // Check browser size and decide if displayed hamburger or not
-        if (driver.manage().window().getSize().getWidth() <1505 )
+        if (driver.manage().window().getSize().getWidth() < 1505)
             click(driver.findElement(By.cssSelector(SIDE_BAR_ICON)));
 
         clickListAndTarget(VERTICAL_HAMBURGER_MENU, MAIN_SECTION);
     }
 
-    public void chooseSectionAndOpenItemByText(String section, String cssPathToOpenFirstElement, String text){
+    public void chooseSectionAndOpenItemByText(String section, String cssPathToOpenFirstElement, String text) {
         this.navigateToPanelAndSection(section);
         this.getCssListAndClickOnElementByText(cssPathToOpenFirstElement, text);
     }
@@ -227,7 +229,7 @@ public class BasePageObject {
         return true;
     }
 
-    public void CheckBrokenImage(String pathToCss){
+    public void CheckBrokenImage(String pathToCss) {
         List<WebElement> list = driver.findElements(By.cssSelector(pathToCss));
 
         JavascriptExecutor jsExec = (JavascriptExecutor) driver;
@@ -235,13 +237,13 @@ public class BasePageObject {
                 "&& typeof arguments[0].naturalWidth != 'undefined'" +
                 "&& arguments[0].naturalWidth > 0";
 
-        for(WebElement element : list){
+        for (WebElement element : list) {
             try {
                 if (jsExec.executeScript(script, element).equals(false))
-                    System.out.println(String.format("Image [%s] is broken : ",element.getAttribute("src")));
+                    System.out.println(String.format("Image [%s] is broken : ", element.getAttribute("src")));
                 else
-                    System.out.println(String.format("Image [%s] doesn't broken : ",element.getAttribute("src")));
-            }catch (Exception e){
+                    System.out.println(String.format("Image [%s] doesn't broken : ", element.getAttribute("src")));
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }
@@ -290,13 +292,13 @@ public class BasePageObject {
                 } catch (Exception ignored) {
                 }
                 nextMinute = now.getMinute();
-                System.out.println("Waiting : " + nextMinute +" minute");
+                System.out.println("Waiting : " + nextMinute + " minute");
                 System.out.println("Waiting for changes to be saved...");
             }
 
             if (nextMinute - currentMinute >= minutesForWait) {
                 System.out.println(String.format("The message - [%s] didn't displayed during [%s] !!!",
-                        message,minutesForWait.toString()));
+                        message, minutesForWait.toString()));
                 return false;
             }
         }
@@ -336,7 +338,7 @@ public class BasePageObject {
     public void sliderLeftByArrow(int numberOfTimes, String pathToCssWebElement) {
         Actions moveSlider = new Actions(driver);
         WebElement element = driver.findElement(By.cssSelector(pathToCssWebElement));
-        if (numberOfTimes>0) {
+        if (numberOfTimes > 0) {
             moveSlider.click(element).build().perform();
             for (int i = 0; i < numberOfTimes; i++) {
                 moveSlider.sendKeys(Keys.ARROW_LEFT).build().perform();
@@ -348,7 +350,7 @@ public class BasePageObject {
     public void sliderRightByArrow(int numberOfTimes, String pathToCssWebElement) {
         Actions moveSlider = new Actions(driver);
         WebElement element = driver.findElement(By.cssSelector(pathToCssWebElement));
-        if (numberOfTimes>0) {
+        if (numberOfTimes > 0) {
             moveSlider.click(element).build().perform();
             for (int i = 0; i < numberOfTimes; i++) {
                 moveSlider.sendKeys(Keys.ARROW_RIGHT).build().perform();
@@ -391,8 +393,8 @@ public class BasePageObject {
 
         driver.getTitle();
         robot.mouseMove(xcord, ycord);
-        robot.mouseMove(xcord+50, ycord);
-        robot.mouseMove(xcord, ycord+50);
+        robot.mouseMove(xcord + 50, ycord);
+        robot.mouseMove(xcord, ycord + 50);
 
 
         driver.getTitle();
@@ -466,7 +468,7 @@ public class BasePageObject {
         driver.getTitle();
     }
 
-    public int getCurrentMachineSecond(){
+    public int getCurrentMachineSecond() {
         LocalTime now = LocalTime.now();
         int currentSecond = now.getSecond();
         System.out.println("currentSecond is: " + currentSecond);
