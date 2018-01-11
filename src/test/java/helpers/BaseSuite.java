@@ -22,6 +22,7 @@ public class BaseSuite {
     @BeforeClass
     public static void setUp(){
         ChromeDriverManager.getInstance().setup();
+        System.setProperty("log4j2.debug", "1");
 //        System.setProperty("webdriver.chrome.driver", "C:\\automation\\drivers\\chromedriver\\chromedriver.exe");
 
 //        ChromeOptions options = new ChromeOptions();

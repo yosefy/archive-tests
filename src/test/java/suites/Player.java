@@ -2,7 +2,8 @@ package suites;
 
 import io.qameta.allure.Issue;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import pages.EventsMain;
 import helpers.BaseSuite;
 import pages.VideoPlayer;
@@ -15,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ import static pages.VideoPlayer.*;
 
 public class Player extends BaseSuite {
 
+    private static final Logger logger = LoggerFactory.getLogger(Player.class);
     private EventsMain eventsMain;
     private VideoPlayer videoPlayer;
 
@@ -90,7 +93,7 @@ public class Player extends BaseSuite {
         for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)){
             videoPlayer.click(item);
             Assert.assertTrue(videoPlayer.isWebElemAttributeActiveItem(item),"WebElement doesn't active");
-            System.out.println("Current URL: " + webPlayerItemsStr.get(i));
+            logger.info("Current URL: " + webPlayerItemsStr.get(i));
             Assert.assertTrue(webPlayerItemsStr.get(i).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
                     "Video sources doesn't equals");
             // Click on Forward Button
@@ -104,7 +107,7 @@ public class Player extends BaseSuite {
         }
         // This block testing Backward button and in the end of iteration verify disabled Backward button
         for (int j = webPlayerItemsStr.size()-1; j >= 0; j--) {
-            System.out.println("Current URL: " + webPlayerItemsStr.get(j));
+            logger.info("Current URL: " + webPlayerItemsStr.get(j));
             Assert.assertTrue(webPlayerItemsStr.get(j).equals(videoPlayer.HTMLMediaElement_GetVideoSource()),
                     "Video sources doesn't equals");
             // click backward btn
@@ -124,15 +127,15 @@ public class Player extends BaseSuite {
         // navigate to list items and get all lessons
         for(WebElement item : eventsMain.getCssPathReturnWebElementList(EVENTS_VERTICAL_MENU)) {
             videoPlayer.click(item);
-            System.out.println(item.getText());
+            logger.info(item.getText());
             videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
             String[] timeCode = videoPlayer.getTimeCode();
             Assert.assertTrue(!timeCode[1].equals("00:00"),"End time doesn't equal 00:00");
             // get timeCode from player side list
             String[] timeFromPlayList = item.getText().trim().split("-");
             // compare file duration
-            System.out.println("Displayed time in playlist: " + timeFromPlayList[timeFromPlayList.length - 1].trim());
-            System.out.println("Displayed time in player: " + timeCode[1].trim());
+            logger.info("Displayed time in playlist: " + timeFromPlayList[timeFromPlayList.length - 1].trim());
+            logger.info("Displayed time in player: " + timeCode[1].trim());
             //Assert.assertFalse(!timeFromPlayList[timeFromPlayList.length - 1].trim().equals(timeCode[1].trim()),
             //        "Duration doesn't equals");
         }
@@ -147,8 +150,8 @@ public class Player extends BaseSuite {
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
         Assert.assertTrue(!timeCode[1].equals("00:00"),"End time equal 00:00");
         // compare file duration
-        System.out.println("Displayed start time in player: " + timeCode[0].trim());
-        System.out.println("Displayed start time in player: " + timeCode[1].trim());
+        logger.info("Displayed start time in player: " + timeCode[0].trim());
+        logger.info("Displayed start time in player: " + timeCode[1].trim());
     }
 
     @Test()
@@ -158,13 +161,13 @@ public class Player extends BaseSuite {
         eventsMain.chooseSectionAndOpenItemByText(EVENTS, EVENTS_MAIN_TABLE_LINKS, EVENTS_Unity_Test);
         String[] timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(timeCode[0].equals("00:00"),"Start time doesn't equal 00:00");
-        System.out.println("Displayed time in player: " + timeCode[0].trim());
+        logger.info("Displayed time in player: " + timeCode[0].trim());
         videoPlayer.actionAndReturnState(MEDIA_PLAYER_CONTROLS, MEDIA_PLAYER_PLAY);
 
         eventsMain.wait(10000);
         timeCode = videoPlayer.getTimeCode();
         Assert.assertTrue(!timeCode[0].equals("00:00"),"Start time equal 00:00");
-        System.out.println("Displayed time in player: " + timeCode[0].trim());
+        logger.info("Displayed time in player: " + timeCode[0].trim());
     }
 
     @Test()
@@ -190,7 +193,7 @@ public class Player extends BaseSuite {
 
         String currentUrl = driver.getCurrentUrl();
         currentUrl += "?sstart=150.000";
-        System.out.println(currentUrl);
+        logger.info(currentUrl);
         driver.get(currentUrl);
 
         String[]timeCode = videoPlayer.getTimeCode();
@@ -221,7 +224,7 @@ public class Player extends BaseSuite {
         // get time form player
         timeCode = videoPlayer.getTimeCode();
         int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
-        System.out.println(minutes);
+        logger.info(String.format("%s", minutes));
         Assert.assertTrue(minutes >= 10,String.format("Start time expected: 10:00, get: %s", timeCode[0]));
     }
 
@@ -249,7 +252,7 @@ public class Player extends BaseSuite {
         // get time form player
         timeCode = videoPlayer.getTimeCode();
         int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
-        System.out.println(minutes);
+        logger.info(String.format("%s", minutes));
         Assert.assertTrue(minutes >= 16,String.format("Start time expected: 10:00, get: %s", timeCode[0]));
     }
 
@@ -277,7 +280,7 @@ public class Player extends BaseSuite {
         // get time form player
         timeCode = videoPlayer.getTimeCode();
         int minutes = Integer.parseInt(timeCode[0].split(":")[1]);
-        System.out.println(minutes);
+        logger.info(String.format("%s", minutes));
         Assert.assertTrue(minutes >= 21,String.format("Start time expected: 10:00, get: %s", timeCode[0]));
     }
 
@@ -349,6 +352,12 @@ public class Player extends BaseSuite {
         Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player doesn't full screen mode");
         videoPlayer.click(driver.findElement(By.cssSelector(MEDIA_PLAYER_FULL_SCREEN)));
         Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player in full screen mode");
+        logger.info("Player shortKeys: Fullscreen toggle on");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("f"));
+        videoPlayer.waitForFullScreenStatusUpdate(5, "true");
+        logger.info("Player shortKeys: Fullscreen toggle off");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("f"));
+        videoPlayer.waitForFullScreenStatusUpdate(5, "false");
     }
 
 
@@ -359,7 +368,7 @@ public class Player extends BaseSuite {
         eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
 
-        System.out.println(videoPlayer.HTMLMediaElement_IF_CURRENT_TIME());
+        logger.info(videoPlayer.HTMLMediaElement_IF_CURRENT_TIME());
         // click on share
         videoPlayer.clickOnShare();
         // verify that displayed 5 elements (share option, link option, back to play, right and left share controls)
@@ -369,14 +378,15 @@ public class Player extends BaseSuite {
     @Test()
     @Parameters({"link"})
     public void playerButtons(String link){
+
         driver.get(link);
         eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
         eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
 
-        WebElement player = driver.findElement(By.cssSelector(MEDIA_PLAYER));
-        player.sendKeys(Keys.END);
-
-        driver.getTitle();
+        for (HashMap.Entry<String, String> entry : videoPlayer.playerHotKeys.entrySet()) {
+            logger.info(String.format("Applying key %s", entry.getKey()));
+            videoPlayer.playerKeyPress(entry.getValue());
+        }
 
     }
 
