@@ -5,6 +5,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.Key;
 import java.time.LocalTime;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class VideoPlayer extends BasePageObject {
+    private static final Logger logger = LoggerFactory.getLogger(VideoPlayer.class);
 
     public VideoPlayer(WebDriver driver) {
         super(driver);
@@ -87,12 +90,12 @@ public class VideoPlayer extends BasePageObject {
             put("ArrowTop", Keys.ARROW_UP.toString()); // Volume +5
             put("ArrowRight", Keys.ARROW_RIGHT.toString()); // Skip time +5
             put("ArrowDown", Keys.ARROW_DOWN.toString()); // Volume -5
-            put("j + Shift", Keys.chord("j", Keys.SHIFT)); // Skip time -10
-            put("ArrowLeft + Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_LEFT)); // Skip time -10
-            put("l + Shift", Keys.chord("l", Keys.SHIFT)); // Skip time +10
-            put("ArrowRight + Shift", Keys.chord(Keys.ARROW_RIGHT, Keys.SHIFT)); // Skip time +10
-            put("ArrowUp + Shift", Keys.chord(Keys.ARROW_UP, Keys.SHIFT)); // Volume +10
-            put("ArrowDown + Shift", Keys.chord(Keys.ARROW_DOWN, Keys.SHIFT)); // Volume -10
+            put("j_Shift", Keys.chord(Keys.SHIFT, "j")); // Skip time -10
+            put("ArrowLeft_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_LEFT)); // Skip time -10
+            put("l_Shift", Keys.chord(Keys.SHIFT, "l")); // Skip time +10
+            put("ArrowRight_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_RIGHT)); // Skip time +10
+            put("ArrowUp_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_UP)); // Volume +10
+            put("ArrowDown_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_DOWN)); // Volume -10
     }};
 
     public boolean actionAndReturnState(String listToButtons, String action) {
@@ -151,7 +154,7 @@ public class VideoPlayer extends BasePageObject {
         LocalTime now = LocalTime.now();
         int currentMinute = now.getMinute();
         int nextMinute;
-        System.out.println("currentMinute is: " + currentMinute);
+        logger.debug("currentMinute is: " + currentMinute);
 
         String[] time = new String[2];
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
@@ -163,7 +166,7 @@ public class VideoPlayer extends BasePageObject {
             time[1] = element.get(1).getText();
             nextMinute = now.getMinute();
             if (nextMinute - currentMinute >= 2) {
-                System.out.println("The player didn't get end time !!!");
+                logger.debug("The player didn't get end time !!!");
                 break;
             }
         }

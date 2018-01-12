@@ -40,7 +40,7 @@
                     <!--<include name="sharingModeOn">-->
                     <!--</include>-->
 
-                    <include name="playerButtons">
+                    <include name="playerSkipTimeShortKeys">
                     </include>
 
 

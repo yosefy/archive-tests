@@ -390,6 +390,71 @@ public class Player extends BaseSuite {
 
     }
 
+
+    @Test()
+    @Parameters({"link"})
+    public void playerSkipTimeShortKeys(String link) {
+
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+
+        String[]timeCode = videoPlayer.getTimeCode();
+        String duration = timeCode[1];
+        String start;
+
+        logger.info("Player shortKeys: Skip +1 with \'.\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("."));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:01"), String.format("Skip +1 with \'.\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip -1 with \',\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get(","));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:00"),String.format("Skip -1 with \',\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip +5 with \'l\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("l"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:05"),String.format("Skip +5 with \'l\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip -5 with \'j\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("j"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:00"),String.format("Skip -5 with \'j\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip +5 with \'ArrowRight\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("ArrowRight"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:05"),String.format("Skip +5 with \'ArrowRight\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip -5 with \'ArrowLeft\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("ArrowLeft"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:00"),String.format("Skip -5 with \'ArrowLeft\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip +10 with \'ArrowRight + Shift\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("ArrowRight_Shift"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:10"),String.format("Skip +10 with \'ArrowRight + Shift\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip -10 with \'ArrowLeft + Shift\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("ArrowLeft_Shift"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:00"),String.format("Skip -10 with \'ArrowLeft + Shift\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip +10 with \'l + Shift\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("l_Shift"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:10"),String.format("Skip +10 with \'l + Shift\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+        logger.info("Player shortKeys: Skip -10 with \'j + Shift\'");
+        videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("j_Shift"));
+        start = videoPlayer.getTimeCode()[0];
+        Assert.assertTrue(start.equals("00:00"),String.format("Skip -10 with \'j + Shift\' failed. TimeCode: %s", start));
+        logger.info(String.format("Skipped to : %s", start));
+    }
+
     @Test()
     public void sharingModeOff(){
         // click back to play
