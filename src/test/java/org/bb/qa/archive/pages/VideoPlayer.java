@@ -3,7 +3,9 @@ package org.bb.qa.archive.pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.security.Key;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +57,28 @@ public class VideoPlayer extends PageObject {
         put("ua", "Ukrainian");
     }};
 
+    public final HashMap<String, String> playerHotKeys = new HashMap<String, String>() {{
+            put("0", Keys.NUMPAD0.toString()); // Seek to 0
+            put("f", "f"); // Full Screen
+            put("j", "j"); // Skip time -5
+            put("k", "k"); // Play/Pause
+            put("l", "l"); // Skip time +5
+            put(",", ","); // Skip time -1
+            put(".", "."); // Skip time 1
+            put("Space", Keys.SPACE.toString()); // Play/Pause
+            put("Home", Keys.HOME.toString()); // Seek to 0
+            put("End", Keys.END.toString()); // Seek to duration
+            put("ArrowLeft", Keys.ARROW_LEFT.toString()); // Skip time -5
+            put("ArrowTop", Keys.ARROW_UP.toString()); // Volume +5
+            put("ArrowRight", Keys.ARROW_RIGHT.toString()); // Skip time +5
+            put("ArrowDown", Keys.ARROW_DOWN.toString()); // Volume -5
+            put("j + Shift", Keys.chord("j", Keys.SHIFT)); // Skip time -10
+            put("ArrowLeft + Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_LEFT)); // Skip time -10
+            put("l + Shift", Keys.chord("l", Keys.SHIFT)); // Skip time +10
+            put("ArrowRight + Shift", Keys.chord(Keys.ARROW_RIGHT, Keys.SHIFT)); // Skip time +10
+            put("ArrowUp + Shift", Keys.chord(Keys.ARROW_UP, Keys.SHIFT)); // Volume +10
+            put("ArrowDown + Shift", Keys.chord(Keys.ARROW_DOWN, Keys.SHIFT)); // Volume -10
+    }};
 
     public VideoPlayer(WebDriver driver) {
         super(driver);
@@ -229,6 +253,20 @@ public class VideoPlayer extends PageObject {
         Map<String, String> playerLanguagesMap = new HashMap<>();
         for (String i : languages) playerLanguagesMap.put(allLanguagesHash.get(i), i);
         return playerLanguagesMap;
+    }
+
+
+    public void playerKeyPress(String key){
+
+        WebElement player = driver.findElement(By.cssSelector(MEDIA_PLAYER));
+        player.sendKeys(key);
+    }
+
+    public void waitForFullScreenStatusUpdate(int timeoutInSeconds, String expectedValue) {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        new WebDriverWait(driver, timeoutInSeconds).
+                until(func -> jsExec.executeScript("return document.webkitIsFullScreen").toString().
+                        equals(expectedValue));
     }
 }
 
