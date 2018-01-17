@@ -83,7 +83,7 @@ public class BasePageObject {
     }
 
     // Need to navigate because otherwise selenium can not click on element
-    protected void navigate(String cssToElement) {
+    public void navigate(String cssToElement) {
         WebElement element = driver.findElement(By.cssSelector(cssToElement));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-150)", "", element);

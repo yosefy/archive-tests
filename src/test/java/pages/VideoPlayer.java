@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.security.Key;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,7 +86,7 @@ public class VideoPlayer extends BasePageObject {
             put("Home", Keys.HOME.toString()); // Seek to 0
             put("End", Keys.END.toString()); // Seek to duration
             put("ArrowLeft", Keys.ARROW_LEFT.toString()); // Skip time -5
-            put("ArrowTop", Keys.ARROW_UP.toString()); // Volume +5
+            put("ArrowUp", Keys.ARROW_UP.toString()); // Volume +5
             put("ArrowRight", Keys.ARROW_RIGHT.toString()); // Skip time +5
             put("ArrowDown", Keys.ARROW_DOWN.toString()); // Volume -5
             put("j_Shift", Keys.chord(Keys.SHIFT, "j")); // Skip time -10
@@ -134,6 +133,7 @@ public class VideoPlayer extends BasePageObject {
     public void updateVolumeControl (int y){
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
         WebElement tryElem = driver.findElement(By.cssSelector(MEDIA_PLAYER_VOLUME_WRAPPER));
+        isElementLoaded(tryElem);
         scrollToElementIgnoringSteakHeader(tryElem, y);
         dragAndDropElementByActionOnVertical(tryElem,y);
     }
@@ -281,6 +281,17 @@ public class VideoPlayer extends BasePageObject {
         new WebDriverWait(driver, timeoutInSeconds).
                 until(func -> jsExec.executeScript("return document.webkitIsFullScreen").toString().
                         equals(expectedValue));
+    }
+
+    public int getVolumePercentage() {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return parseInt(document.getElementsByTagName('video')[0].volume * 100)";
+        try {
+            return Integer.parseInt(jsExec.executeScript(script).toString());
+
+        }catch (NumberFormatException num_err) {
+            return -1;
+        }
     }
 }
 
