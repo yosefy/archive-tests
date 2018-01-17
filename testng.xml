@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="It run all steps from Sanity" parallel="false">
+<suite name="Archive site test suite" parallel="false">
     <!--<listeners>-->
-        <!--<listener class-name="framework.ExecutionListner"/>-->
-        <!--<listener class-name="framework.TestsListener"/>-->
+    <!--<listener class-name="framework.ExecutionListner"/>-->
+    <!--<listener class-name="framework.TestsListener"/>-->
     <!--</listeners>-->
-    <!-- Setup all base parameters for tests -->
+    <!-- Setup all base parameters for testcases -->
 
-    <parameter name="link" value="http://archive.kbb1.com/" />
+    <!--<parameter name="link" value="http://archive.kbb1.com/" />-->
+    <parameter name="link" value="http://archive-dev.bbdomain.org/"/>
 
-    <suite-files>
-        <suite-file path="src/test/resources/testng/DailyLessonsTests.xml" />
-        <suite-file path="src/test/resources/testng/ProgramsTests.xml" />
-        <suite-file path="src/test/resources/testng/EventsTests.xml" />
-        <!--<suite-file path="src/test/resources/testng/Player.xml" />-->
-    </suite-files>
+    <test name="testing">
+        <packages>
+            <package name="org.bb.qa.archive.testcases"/>
+        </packages>
+    </test>
+
+
+    <!--<suite-files>-->
+        <!--&lt;!&ndash;<suite-file path="src/test/resources/testng/DailyLessonsTests.xml" />&ndash;&gt;-->
+        <!--<suite-file path="src/test/resources/testng/ProgramsTests.xml"/>-->
+        <!--&lt;!&ndash;<suite-file path="src/test/resources/testng/EventsTests.xml" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<suite-file path="src/test/resources/testng/Player.xml" />&ndash;&gt;-->
+    <!--</suite-files>-->
 </suite>

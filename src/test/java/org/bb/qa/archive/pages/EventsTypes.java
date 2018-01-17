@@ -4,10 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 public class EventsTypes extends PageObject {
 
-    public EventsTypes(WebDriver driver) {
-        super(driver);
-    }
-
     // todo - need to develop
 //    public final static String GENRE_MAIN_LEFT_PANEL = ".ui.blue.tiny.fluid.vertical.menu>a.item";
 //    private final static String ALL_PROGRAMS_ITEMS = ".column>div.ui.tiny.list>div";

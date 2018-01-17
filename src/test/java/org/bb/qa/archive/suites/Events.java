@@ -16,7 +16,7 @@ public class Events extends BaseSuite {
 
     @BeforeMethod
     public void beforeMethod() {
-        eventsMain = new EventsMain(driver);
+        eventsMain = new EventsMain();
     }
 
     @Test()

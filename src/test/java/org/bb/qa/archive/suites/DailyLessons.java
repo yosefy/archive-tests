@@ -23,9 +23,9 @@ public class DailyLessons extends BaseSuite {
 
     @BeforeMethod
     public void beforeMethod() {
-        archiveDate = new ArchiveDate(driver);
-        archiveSources = new ArchiveSources(driver);
-        archiveTopics = new ArchiveTopics(driver);
+        archiveDate = new ArchiveDate();
+        archiveSources = new ArchiveSources();
+        archiveTopics = new ArchiveTopics();
     }
 
     @Test()
@@ -185,7 +185,7 @@ public class DailyLessons extends BaseSuite {
 
 
     private void ValidationsWithSingleLable(String label) {
-        String formattedWithSlashLabel = archiveDate.convertToDateFromLabel(label);
+        String formattedWithSlashLabel = Utils.convertToDateFromLabel(label);
         // need to click on label to open the date picker
         archiveDate.openDateRangeByClickOnFilter();
         String dateFromUi = archiveDate.convertToDateFromUi(archiveDate.returnValueByAttribute(DATE_FIRST));

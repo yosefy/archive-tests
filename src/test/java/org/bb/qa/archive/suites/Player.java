@@ -33,8 +33,8 @@ public class Player extends BaseSuite {
 
     @BeforeMethod
     public void beforeMethod() {
-        eventsMain = new EventsMain(driver);
-        videoPlayer = new VideoPlayer(driver);
+        eventsMain = new EventsMain();
+        videoPlayer = new VideoPlayer();
     }
 
     @Test()

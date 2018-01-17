@@ -25,9 +25,9 @@ public class Programs extends BaseSuite {
 
     @BeforeMethod
     public void beforeMethod() {
-        programsGenre = new ProgramsGenre(driver);
-        archiveTopics = new ArchiveTopics(driver);
-        archiveSources = new ArchiveSources(driver);
+        programsGenre = new ProgramsGenre();
+        archiveTopics = new ArchiveTopics();
+        archiveSources = new ArchiveSources();
     }
 
     @Test()

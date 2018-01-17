@@ -38,10 +38,6 @@ public class ArchiveDate extends PageObject {
     private final static String REMOVE_LABEL = ".close.icon";
     private final static String APPLY_BTN = ".ui.button:nth-child(2)";
 
-    public ArchiveDate(WebDriver driver) {
-        super(driver);
-    }
-
     public String saveAndReturnDateRangeLabel(String listToDropDownRange, String range) {
         WebElement openDropDown = driver.findElement(By.cssSelector(".sixteen.wide.column>div"));
         click(openDropDown);

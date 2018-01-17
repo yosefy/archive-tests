@@ -80,10 +80,6 @@ public class VideoPlayer extends PageObject {
             put("ArrowDown + Shift", Keys.chord(Keys.ARROW_DOWN, Keys.SHIFT)); // Volume -10
     }};
 
-    public VideoPlayer(WebDriver driver) {
-        super(driver);
-    }
-
     public boolean actionAndReturnState(String listToButtons, String action) {
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
         for (WebElement elem : buttons) {

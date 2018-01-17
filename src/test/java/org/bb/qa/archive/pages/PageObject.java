@@ -1,5 +1,6 @@
 package org.bb.qa.archive.pages;
 
+import org.bb.qa.common.drivers.DriverProvider;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -14,10 +15,9 @@ import static org.bb.qa.archive.pages.ProgramsGenre.*;
 
 public class PageObject {
 
-    protected WebDriver driver;
+    protected WebDriver driver = DriverProvider.getActiveDriver();
 
-    public PageObject(WebDriver driver) {
-        this.driver = driver;
+    public PageObject() {
         PageFactory.initElements(driver, this);
     }
 
@@ -206,9 +206,7 @@ public class PageObject {
 
         Point point = element.getLocation();
         int xcord = point.getX();
-        System.out.println("Element's Position by X: " + xcord);
         int ycord = point.getY();
-        System.out.println("Element's Position by Y: " + ycord);
 
         Actions builder = new Actions(driver);
         builder.dragAndDropBy(element, xcord, ycord + 50).click().build().perform();

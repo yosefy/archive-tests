@@ -15,10 +15,6 @@ public class ArchiveSources extends PageObject {
     private final static String COLUMNS = ".filter-steps__column-wrapper";
     private final static String APPLY_BTN = ".ui.primary.right.floated.button";
 
-    public ArchiveSources(WebDriver driver) {
-        super(driver);
-    }
-
     public boolean navToSourceAndApply(String navToLable) {
         String[] tokens = navToLable.split(">");
         for (int i = 0; i < tokens.length; i++)

@@ -10,10 +10,6 @@ public class ArchiveTopics extends PageObject {
     public final static String TAG_INSIDE_PROGRAM = ".ui.list>div:nth-child(1) a";
     private final static String APPLY_BTN = ".ui.button:nth-child(1)";
 
-    public ArchiveTopics(WebDriver driver) {
-        super(driver);
-    }
-
     public boolean navToTopicsAndApply(String navToTopic) {
         boolean flag = clickListAndTarget(TOPICS_RESULTS_TABLE, navToTopic);
         click(driver.findElement(By.cssSelector(APPLY_BTN)));

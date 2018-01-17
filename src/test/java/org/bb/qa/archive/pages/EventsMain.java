@@ -15,10 +15,6 @@ public class EventsMain extends PageObject {
     public final static String EVENTS_Unity_Test = "Unity Evening - “The Story of Kabbalah LaAm”";
     public final static String EVENTS_CONVENTION_GEO_2017 = "Convention in Georgia 2017";
 
-    public EventsMain(WebDriver driver) {
-        super(driver);
-    }
-
     public int checkAllEventsItems() {
         return driver.findElements(By.cssSelector(EVENTS_MAIN_TABLE)).size();
     }

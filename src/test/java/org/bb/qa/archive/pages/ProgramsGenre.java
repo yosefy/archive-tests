@@ -18,10 +18,6 @@ public class ProgramsGenre extends PageObject {
     public final static String PAGINATION_PANEL = ".ui.blue.compact.menu";
     public final static String PROGRAMS_RESULT_EPISODE = ".ui.sortable.very.basic.table.index-list>tbody>tr>td>div>a";
 
-    public ProgramsGenre(WebDriver driver) {
-        super(driver);
-    }
-
     public Map<String, String> getAllProgramsItems(String listToCss) {
         Map<String, String> myMap = new HashMap<>();
         List<WebElement> allItems = driver.findElements(By.cssSelector(listToCss));
