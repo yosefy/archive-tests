@@ -1,6 +1,6 @@
 package org.bb.qa.archive.testcases;
 
-import org.bb.qa.archive.pageobjects.pages.LessonsPage;
+import org.bb.qa.archive.pageobjects.pages.ProgramsPage;
 import org.bb.qa.common.TestTemplate;
 import org.testng.annotations.Test;
 
@@ -8,17 +8,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 
-public class LessonsSectionTest extends TestTemplate {
+public class ProgramsSectionTest extends TestTemplate {
 
     @Test
     public void sectionHeaderIsDisplayed() {
-        LessonsPage page = new LessonsPage().open();
+        ProgramsPage page = new ProgramsPage().open();
         assertThat("header.displayed",
                 page.sectionHeader.isHeaderDisplayed(),
                 is(true));
         assertThat("header.text",
                 page.sectionHeader.getHeaderText(),
-                is(equalTo("Daily Lessons")));
+                is(equalTo("Programs")));
         assertThat("subheader.displayed",
                 page.sectionHeader.isSubHeaderDisplayed(),
                 is(true));
@@ -29,7 +29,7 @@ public class LessonsSectionTest extends TestTemplate {
 
     @Test
     public void paginationIsDisplayed() {
-        LessonsPage page = new LessonsPage().open();
+        ProgramsPage page = new ProgramsPage().open();
         assertThat("results",
                 page.paginationHeader.isResultsDisplayed(),
                 is(true));
@@ -40,12 +40,12 @@ public class LessonsSectionTest extends TestTemplate {
 
     @Test
     public void filtersInitialDisplay() {
-        LessonsPage page = new LessonsPage().open();
+        ProgramsPage page = new ProgramsPage().open();
         assertThat("filters",
-                page.filterPanel.menu.hasFilters("Topics", "Sources", "Date"),
+                page.filterPanel.menu.hasFilters("Genre/Program", "Topics", "Sources", "Date"),
                 is(true));
-        assertThat("no active item",
-                page.filterPanel.menu.noItemIsActive(),
+        assertThat("Genre/Program shown",
+                page.filterPanel.menu.isActiveItem("Topics"),
                 is(true));
     }
 }

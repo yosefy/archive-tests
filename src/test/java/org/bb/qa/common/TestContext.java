@@ -9,8 +9,9 @@ public class TestContext {
     private static Method testMethod;
 
     public static void writeMethodName(Method method) {
-        methodName =
-                method.getDeclaringClass().getSimpleName() + StringUtils.capitalize(method.getName());
+        methodName = String.format("%s.%s",
+                method.getDeclaringClass().getSimpleName(),
+                StringUtils.capitalize(method.getName()));
         testMethod = method;
     }
 

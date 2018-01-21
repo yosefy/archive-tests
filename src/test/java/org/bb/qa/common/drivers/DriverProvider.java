@@ -41,10 +41,11 @@ public class DriverProvider {
     }
 
     public static void close() {
-        for (WebDriver webDriver : drivers) {
-            if (webDriver != null) {
+        for (WebDriver driver : drivers) {
+            if (driver != null) {
                 try {
-                    webDriver.quit();
+                    driver.manage().deleteAllCookies();
+                    driver.quit();
                 } catch (UnsatisfiedLinkError | NoClassDefFoundError | NullPointerException e) {
                     logger.info("Error closing Browser", e);
                 }

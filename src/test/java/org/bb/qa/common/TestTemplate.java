@@ -23,7 +23,7 @@ public class TestTemplate {
 
 
     @BeforeMethod(alwaysRun = true)
-    public void initTestContext(Method method) {
+    public void beforeMethod(Method method) {
         TestContext.writeMethodName(method);
 //        PageObjectLogging.start(method);
 
@@ -49,6 +49,7 @@ public class TestTemplate {
         driver = DriverProvider.getActiveDriver();
         setWindowSize();
 
+        logger.info("######## Start method: {}", TestContext.getCurrentMethodName());
 //        loadFirstPage();
     }
 
@@ -98,8 +99,13 @@ public class TestTemplate {
     }
 
     @AfterMethod(alwaysRun = true)
+    public void afterMethod() {
+        logger.info("######## Stop method: {}", TestContext.getCurrentMethodName());
+        DriverProvider.close();
+    }
+
     @AfterClass(alwaysRun = true)
-    public void stop() {
+    public void afterClass() {
         DriverProvider.close();
     }
 }

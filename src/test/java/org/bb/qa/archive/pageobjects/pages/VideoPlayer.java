@@ -1,11 +1,11 @@
-package org.bb.qa.archive.pages;
+package org.bb.qa.archive.pageobjects.pages;
 
+import org.bb.qa.archive.pageobjects.PageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.Key;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package org.bb.qa.archive.pages;
+package org.bb.qa.archive.pageobjects.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.bb.qa.archive.pageobjects.PageObject;
 
 public class EventsTypes extends PageObject {
 

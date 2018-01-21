@@ -1,8 +1,8 @@
-package org.bb.qa.archive.pages;
+package org.bb.qa.archive.pageobjects.pages;
 
 import org.bb.qa.archive.helpers.Utils;
+import org.bb.qa.archive.pageobjects.PageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;

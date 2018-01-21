@@ -91,6 +91,10 @@ public class Configuration {
         return getProp("env");
     }
 
+    public static String getSiteUrl() {
+        return getProp("siteUrl");
+    }
+
     public static String getPlatform() {
         return getProp("platform");
     }
