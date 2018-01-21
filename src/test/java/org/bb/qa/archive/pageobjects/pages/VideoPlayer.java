@@ -5,6 +5,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,29 +16,41 @@ import java.util.Map;
 
 public class VideoPlayer extends PageObject {
 
+    private static final Logger logger = LoggerFactory.getLogger(VideoPlayer.class);
+
     public final static String MEDIA_PLAYER_PLAY = "play";
     public final static String MEDIA_PLAYER_PAUSE = "pause";
     public final static String MEDIA_PLAYER_FORWARD = "step forward icon";
     public final static String MEDIA_PLAYER_FORWARD_DISABLED = "step forward disabled icon";
+
     public final static String MEDIA_PLAYER_BACKWARD = "step backward icon";
     public final static String MEDIA_PLAYER_BACKWARD_DISABLED = "step backward disabled icon";
+
     public final static String MEDIA_PLAYER_CONTROLS = ".mediaplayer__controls>div.buttons-wrapper>button";
     public final static String MEDIA_PLAYER_TIMECODE = ".mediaplayer__timecode>time";
     public final static String MEDIA_PLAYER_SEEKBAR = ".seekbar__knob";
     public final static String MEDIA_PLAYER_CONTROLS_RATE = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > button";
     public final static String MEDIA_PLAYER_CONTROLS_RATE_LIST = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > div div>span";
+
     public final static String MEDIA_PLAYER_RATE_1X = "1x";
     public final static String MEDIA_PLAYER_RATE_1_5X = "1.5x";
     public final static String MEDIA_PLAYER_RATE_2X = "2x";
+
     public final static String MEDIA_PLAYER_MUTE = ".mediaplayer__volume>button";
     public final static String MEDIA_PLAYER_VOLUME = ".mediaplayer__volume";
     public final static String MEDIA_PLAYER_VOLUME_WRAPPER = ".volume-popover__wrapper";
     public final static String MEDIA_PLAYER_AUDIO_VIDEO_TOGGLE = ".mediaplayer__audiovideo";
+
     public final static String MEDIA_PLAYER_LANGUAGES = ".mediaplayer__languages>div";
     public final static String MEDIA_DOWNLOADS_LANGUAGES = ".content__aside-unit>div>div>div>div";
+
     public final static String MEDIA_PLAYER_FULL_SCREEN = ".player-button.player-control-fullscreen";
     public final static String MEDIA_PLAYER_SHARE = ".player-button.player-control-edit-slice";
+
     public final static String MEDIA_PLAYER = ".mediaplayer__onscreen-controls";
+
+
+
     public final HashMap<String, String> allLanguagesHash = new HashMap<String, String>() {{
         put("en", "English");
         put("he", "Hebrew");
@@ -69,15 +83,15 @@ public class VideoPlayer extends PageObject {
             put("Home", Keys.HOME.toString()); // Seek to 0
             put("End", Keys.END.toString()); // Seek to duration
             put("ArrowLeft", Keys.ARROW_LEFT.toString()); // Skip time -5
-            put("ArrowTop", Keys.ARROW_UP.toString()); // Volume +5
+            put("ArrowUp", Keys.ARROW_UP.toString()); // Volume +5
             put("ArrowRight", Keys.ARROW_RIGHT.toString()); // Skip time +5
             put("ArrowDown", Keys.ARROW_DOWN.toString()); // Volume -5
-            put("j + Shift", Keys.chord("j", Keys.SHIFT)); // Skip time -10
-            put("ArrowLeft + Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_LEFT)); // Skip time -10
-            put("l + Shift", Keys.chord("l", Keys.SHIFT)); // Skip time +10
-            put("ArrowRight + Shift", Keys.chord(Keys.ARROW_RIGHT, Keys.SHIFT)); // Skip time +10
-            put("ArrowUp + Shift", Keys.chord(Keys.ARROW_UP, Keys.SHIFT)); // Volume +10
-            put("ArrowDown + Shift", Keys.chord(Keys.ARROW_DOWN, Keys.SHIFT)); // Volume -10
+            put("j_Shift", Keys.chord(Keys.SHIFT, "j")); // Skip time -10
+            put("ArrowLeft_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_LEFT)); // Skip time -10
+            put("l_Shift", Keys.chord(Keys.SHIFT, "l")); // Skip time +10
+            put("ArrowRight_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_RIGHT)); // Skip time +10
+            put("ArrowUp_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_UP)); // Volume +10
+            put("ArrowDown_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_DOWN)); // Volume -10
     }};
 
     public boolean actionAndReturnState(String listToButtons, String action) {
@@ -116,6 +130,7 @@ public class VideoPlayer extends PageObject {
     public void updateVolumeControl(int y) {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
         WebElement tryElem = driver.findElement(By.cssSelector(MEDIA_PLAYER_VOLUME_WRAPPER));
+        isElementLoaded(tryElem);
         scrollToElementIgnoringSteakHeader(tryElem, y);
         dragAndDropElementByActionOnVertical(tryElem, y);
     }
@@ -136,7 +151,7 @@ public class VideoPlayer extends PageObject {
         LocalTime now = LocalTime.now();
         int currentMinute = now.getMinute();
         int nextMinute;
-        System.out.println("currentMinute is: " + currentMinute);
+        logger.debug("currentMinute is: " + currentMinute);
 
         String[] time = new String[2];
         List<WebElement> element = driver.findElements(By.cssSelector(MEDIA_PLAYER_TIMECODE));
@@ -148,7 +163,7 @@ public class VideoPlayer extends PageObject {
             time[1] = element.get(1).getText();
             nextMinute = now.getMinute();
             if (nextMinute - currentMinute >= 2) {
-                System.out.println("The player didn't get end time !!!");
+                logger.debug("The player didn't get end time !!!");
                 break;
             }
         }
@@ -263,6 +278,17 @@ public class VideoPlayer extends PageObject {
         new WebDriverWait(driver, timeoutInSeconds).
                 until(func -> jsExec.executeScript("return document.webkitIsFullScreen").toString().
                         equals(expectedValue));
+    }
+
+    public int getVolumePercentage() {
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        String script = "return parseInt(document.getElementsByTagName('video')[0].volume * 100)";
+        try {
+            return Integer.parseInt(jsExec.executeScript(script).toString());
+
+        }catch (NumberFormatException num_err) {
+            return -1;
+        }
     }
 }
 

@@ -12,6 +12,8 @@
                     <!--</include>-->
                     <!--<include name="playerPlayBtnAndPauseBtn">-->
                     <!--</include>-->
+                    <include name="playerPlayPauseShortKeys">
+                    </include>
                     <!--<include name="playerForwardBtnAndBackwardBtn">-->
                     <!--</include>-->
                     <!--<include name="playerTimeCodeToPlaylistCompare">-->
@@ -40,8 +42,8 @@
                     <!--<include name="sharingModeOn">-->
                     <!--</include>-->
 
-                    <include name="playerButtons">
-                    </include>
+                    <!--<include name="playerSkipTimeShortKeys">-->
+                    <!--</include>-->
 
 
                 </methods>
