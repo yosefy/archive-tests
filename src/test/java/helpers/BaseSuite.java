@@ -7,10 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +23,8 @@ public class BaseSuite {
     protected static WebDriver driver;
 
     @BeforeClass
-    public static void setUp(){
+    public static void setUp() throws MalformedURLException {
+
         ChromeDriverManager.getInstance().setup();
         System.setProperty("log4j2.debug", "1");
 //        System.setProperty("webdriver.chrome.driver", "C:\\automation\\drivers\\chromedriver\\chromedriver.exe");
@@ -51,6 +55,7 @@ public class BaseSuite {
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+
     }
 
     @AfterClass

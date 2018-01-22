@@ -23,8 +23,13 @@ public class ArchiveDate extends BasePageObject {
     public final static String PANEL_DATE = "Date";
     public final static String PANEL_SOURCES = "Sources";
     public final static String PANEL_TOPICS = "Topics";
-    public final static String PROGRAMS = "Programs";
+
     public final static String DAILY_LESSONS = "Daily Lessons";
+    public final static String PROGRAMS = "Programs";
+    public final static String LECTURES_LESSONS = "Lectures & Lessons";
+    public final static String KABBALAH_SOURCES = "Kabbalah Sources";
+    public final static String PUBLICATIONS = "Publications";
+
     public final static String DAILY_LESSONS_SECOND_ITEM = ".ui.container.padded>table>tbody>tr>td:nth-child(1)>a";
 
     public final static String DATE_DROPDOWN_LIST_SELECTED = ".ui.fluid.item.dropdown>div:nth-child(1)";
