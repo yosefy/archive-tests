@@ -1,6 +1,7 @@
 .idea
 *.iml
 
+src/test/*.xml
 target/
 test-output
 pom.xml.tag
