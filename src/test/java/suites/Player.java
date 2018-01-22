@@ -399,27 +399,13 @@ public class Player extends BaseSuite {
         Assert.assertFalse(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player doesn't full screen mode");
         videoPlayer.click(driver.findElement(By.cssSelector(MEDIA_PLAYER_FULL_SCREEN)));
         Assert.assertTrue(videoPlayer.HTMLMediaElement_IF_FullScreen(),"Player in full screen mode");
+        videoPlayer.focusOnVideoPlayer();
         logger.info("Player shortKeys: Fullscreen toggle on");
         videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("f"));
         videoPlayer.waitForFullScreenStatusUpdate(5, "true");
         logger.info("Player shortKeys: Fullscreen toggle off");
         videoPlayer.playerKeyPress(videoPlayer.playerHotKeys.get("f"));
         videoPlayer.waitForFullScreenStatusUpdate(5, "false");
-    }
-
-
-    @Test()
-    @Parameters({"link"})
-    public void sharingModeOn(String link){
-        driver.get(link);
-        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
-        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
-
-        logger.info(videoPlayer.HTMLMediaElement_IF_CURRENT_TIME());
-        // click on share
-        videoPlayer.clickOnShare();
-        // verify that displayed 5 elements (share option, link option, back to play, right and left share controls)
-
     }
 
     @Test()
@@ -513,10 +499,40 @@ public class Player extends BaseSuite {
     }
 
     @Test()
-    public void sharingModeOff(){
-        // click back to play
-        // verify that doesn't displayed ...
-        // open bug - when back from sharing mode started to play todo
+    @Parameters({"link"})
+    public void sharingModeOn(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+        videoPlayer.focusOnVideoPlayer();
+        // click on share
+        videoPlayer.clickOnShare();
+        // verify that displayed 5 elements (share option, link option, back to play, right and left share controls)
+        for (HashMap.Entry <String,String>entry : videoPlayer.sharing_controls.entrySet()){
+            logger.info(String.format("Checking %s", entry.getKey()));
+            Assert.assertTrue(videoPlayer.existsElement(entry.getValue()),
+                    String.format("Element %s not exists!", entry.getKey()));
+        }
+
+    }
+
+    @Test()
+    @Parameters({"link"})
+    public void sharingModeOff(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+        videoPlayer.focusOnVideoPlayer();
+        videoPlayer.clickOnShare();
+        videoPlayer.clickOnBackToPlay();
+        videoPlayer.waitForElementToBeRemoved(1, videoPlayer.sharing_controls.get("sharing_button"));
+        // verify that there are no sharing elements displayed
+        for (HashMap.Entry <String,String>entry : videoPlayer.sharing_controls.entrySet()){
+            logger.info(String.format("Checking %s is removed", entry.getKey()));
+            Assert.assertTrue(!videoPlayer.existsElement(entry.getValue()),
+                    String.format("Element %s is exists!", entry.getKey()));
+        }
+
     }
 
     @Test()

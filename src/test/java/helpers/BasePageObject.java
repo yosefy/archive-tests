@@ -56,6 +56,10 @@ public class BasePageObject {
         new WebDriverWait(driver, timeoutInSeconds).until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public void waitForElementToBeRemoved(int timeoutInSeconds, String cssSelectorString) {
+        new WebDriverWait(driver, timeoutInSeconds).
+                until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(cssSelectorString)));
+    }
 
     public void getCssListAndClickOnElementByText(String list, String text) {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
@@ -475,6 +479,16 @@ public class BasePageObject {
         System.out.println("currentSecond is: " + currentSecond);
         return currentSecond;
     }
+
+    public boolean existsElement(String cssSelector) {
+        try {
+            driver.findElement(By.cssSelector(cssSelector));
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        return true;
+    }
+
 }
 
 

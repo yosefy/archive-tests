@@ -3,6 +3,7 @@ package pages;
 import helpers.BasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class VideoPlayer extends BasePageObject {
     public final static String MEDIA_PLAYER_SEEKBAR = ".seekbar__knob";
     public final static String MEDIA_PLAYER_CONTROLS_RATE = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > button";
     public final static String MEDIA_PLAYER_CONTROLS_RATE_LIST = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > div div>span";
+    public final static String MEDIA_PLAYER_BACK_TO_PLAY = ".ui.blue.large.button.button-close-slice-edit>.chevron.left.icon";
 
     public final static String MEDIA_PLAYER_RATE_1X = "1x";
     public final static String MEDIA_PLAYER_RATE_1_5X = "1.5x";
@@ -97,6 +99,16 @@ public class VideoPlayer extends BasePageObject {
             put("ArrowDown_Shift", Keys.chord(Keys.SHIFT, Keys.ARROW_DOWN)); // Volume -10
     }};
 
+    public final HashMap<String, String> sharing_controls = new HashMap<String, String>(){
+        {
+            put("left_seekbar", ".seekbar__slicehandle--left");
+            put("right_seekbar", ".seekbar__slicehandle--right");
+            put("copy_link", ".chain.icon");
+            put("sharing_button", ".button>.share.alternate.icon");
+            put("back_to_play", ".ui.blue.large.button.button-close-slice-edit>.chevron.left.icon");
+        }
+    };
+
     public boolean actionAndReturnState(String listToButtons, String action) {
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
         for (WebElement elem : buttons) {
@@ -129,6 +141,9 @@ public class VideoPlayer extends BasePageObject {
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_SHARE)));
     }
 
+    public void clickOnBackToPlay(){
+        click(driver.findElement(By.cssSelector(MEDIA_PLAYER_BACK_TO_PLAY)));
+    }
 
     public void updateVolumeControl (int y){
         click(driver.findElement(By.cssSelector(MEDIA_PLAYER_MUTE)));
@@ -292,6 +307,12 @@ public class VideoPlayer extends BasePageObject {
         }catch (NumberFormatException num_err) {
             return -1;
         }
+    }
+
+    public void focusOnVideoPlayer() {
+        navigate(MEDIA_PLAYER);
+        new Actions(driver).moveToElement(driver.findElement(By.cssSelector(MEDIA_PLAYER))).perform();
+
     }
 }
 
