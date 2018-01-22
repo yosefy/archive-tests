@@ -1,8 +1,6 @@
 package suites;
 
-import pages.ArchiveDate;
-import pages.ArchiveSources;
-import pages.ArchiveTopics;
+import pages.*;
 import com.automation.remarks.video.annotations.Video;
 import helpers.BaseSuite;
 import org.testng.Assert;
@@ -10,9 +8,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static pages.ArchiveDate.*;
+import static pages.EventsMain.EVENTS;
 
 
 public class DailyLessons extends BaseSuite {
@@ -20,12 +21,39 @@ public class DailyLessons extends BaseSuite {
     private ArchiveDate archiveDate;
     private ArchiveSources archiveSources;
     private ArchiveTopics archiveTopics;
+    private HeaderFilter headerFilter;
 
     @BeforeMethod
     public void beforeMethod() {
         archiveDate = new ArchiveDate(driver);
         archiveSources = new ArchiveSources(driver);
         archiveTopics = new ArchiveTopics(driver);
+        headerFilter = new HeaderFilter(driver);
+    }
+
+    @Test()
+    @Video()
+    @Parameters({"link"})
+    public void checkAllSectionsAndFilters(String link) {
+        driver.get(link);
+
+        archiveDate.navigateToPanelAndSection(DAILY_LESSONS);
+        Assert.assertTrue(headerFilter.checkFilterBy(new ArrayList<>(Arrays.asList("Topics", "Sources", "Date"))));
+
+        archiveDate.navigateToPanelAndSection(PROGRAMS);
+        Assert.assertTrue(headerFilter.checkFilterBy(new ArrayList<>(Arrays.asList("Genre/Program", "Topics", "Sources", "Date"))));
+
+        archiveDate.navigateToPanelAndSection(LECTURES_LESSONS);
+        Assert.assertTrue(headerFilter.checkFilterBy(new ArrayList<>(Arrays.asList("Topics", "Sources", "Date"))));
+
+        archiveDate.navigateToPanelAndSection(KABBALAH_SOURCES);
+
+        archiveDate.navigateToPanelAndSection(EVENTS);
+        Assert.assertTrue(headerFilter.checkFilterByEvent(
+                new ArrayList<>(Arrays.asList("Conventions", "Holidays", "Picnics", "Unity Days", "Friends Gatherings", "Meals"))));
+
+        archiveDate.navigateToPanelAndSection(PUBLICATIONS);
+        Assert.assertTrue(headerFilter.checkFilterBy(new ArrayList<>(Arrays.asList("Publishers", "Date"))));
     }
 
     @Test()
