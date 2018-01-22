@@ -16,14 +16,16 @@ public class LessonsPage extends PageObject {
 
     public LessonsPage open() {
         getUrl(urlBuilder.getUrlForPath("lessons"));
+        this.waitForPresent();
+        return this;
+    }
 
+    @Override
+    public void waitForPresent() {
         // Wait for root app element (react has rendered)
         this.wait.forElementPresent(By.id("app"));
 
         // Wait for root unit-list element (data fetching is done)
         this.wait.forElementPresent(By.className("unit-list"));
-
-        return this;
     }
-
 }

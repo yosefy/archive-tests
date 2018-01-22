@@ -1,7 +1,9 @@
 package org.bb.qa.archive.pageobjects;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bb.qa.archive.helpers.UrlBuilder;
 import org.bb.qa.common.drivers.DriverProvider;
+import org.bb.qa.common.element.CommonExpectedConditions;
 import org.bb.qa.common.element.JsActions;
 import org.bb.qa.common.element.Wait;
 import org.openqa.selenium.*;
@@ -13,8 +15,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-//import static org.bb.qa.archive.pageobjects.pages.ProgramsGenre.*;
 
 public class PageObject {
 
@@ -36,6 +36,14 @@ public class PageObject {
         driver.get(url);
     }
 
+    /**
+     * Wait for page object to be present on the page.
+     * <p>
+     * Implement this where necessary
+     */
+    public void waitForPresent() {
+        throw new NotImplementedException("");
+    }
 
     protected boolean isElementDisplayed(WebElement element) {
         try {
@@ -44,6 +52,11 @@ public class PageObject {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    protected boolean isElementNotVisible(WebElement element) {
+        Boolean res = CommonExpectedConditions.invisibilityOfElement(element).apply(driver);
+        return res == null ? false : res;
     }
 
     /**

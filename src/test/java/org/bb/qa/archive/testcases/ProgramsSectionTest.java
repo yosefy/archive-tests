@@ -45,7 +45,7 @@ public class ProgramsSectionTest extends TestTemplate {
                 page.filterPanel.menu.hasFilters("Genre/Program", "Topics", "Sources", "Date"),
                 is(true));
         assertThat("Genre/Program shown",
-                page.filterPanel.menu.isActiveItem("Topics"),
+                page.filterPanel.menu.isActiveItem("Genre/Program"),
                 is(true));
     }
 }

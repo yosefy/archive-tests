@@ -81,7 +81,7 @@ public class Wait {
         }
     }
 
-    public <T> WebElement forCondition(Function<T, ExpectedCondition<WebElement>> f, T x) {
+    public <T, V> V forCondition(Function<T, ExpectedCondition<V>> f, T x) {
         presetConditionImplicitWait(x);
         try {
             return wait.until(f.apply(x));
@@ -90,7 +90,7 @@ public class Wait {
         }
     }
 
-    public <T> WebElement forCondition(Function<T, ExpectedCondition<WebElement>> f, T x, Duration duration) {
+    public <T, V> V forCondition(Function<T, ExpectedCondition<V>> f, T x, Duration duration) {
         presetConditionImplicitWait(x);
         try {
             return new WebDriverWait(driver, (int) duration.getSeconds()).until(f.apply(x));
@@ -112,12 +112,20 @@ public class Wait {
         }
     }
 
-    private void changeImplicitWait(int value, TimeUnit timeUnit) {
+    public static void changeImplicitWait(WebDriver driver, int value, TimeUnit timeUnit) {
         driver.manage().timeouts().implicitlyWait(value, timeUnit);
     }
 
+    public static void restoreDefaultImplicitWait(WebDriver driver) {
+        Wait.changeImplicitWait(driver, DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+    }
+
+    private void changeImplicitWait(int value, TimeUnit timeUnit) {
+        Wait.changeImplicitWait(driver, value, timeUnit);
+    }
+
     private void restoreDefaultImplicitWait() {
-        changeImplicitWait(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        Wait.restoreDefaultImplicitWait(driver);
     }
 
 }
