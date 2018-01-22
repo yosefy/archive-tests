@@ -1,5 +1,6 @@
 package suites;
 
+import com.automation.remarks.video.annotations.Video;
 import helpers.BasePageObject;
 import io.qameta.allure.Issue;
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -60,7 +61,7 @@ public class Player extends BaseSuite {
     }
 
     @Test()
-//    @Video()
+    @Video()
     @Parameters({"link"})
     public void playerPlayBtnAndPauseBtn(String link){
         driver.get(link);
@@ -114,7 +115,7 @@ public class Player extends BaseSuite {
     }
 
     @Test()
-//    @Video()
+    @Video()
     @Parameters({"link"})
     public void playerForwardBtnAndBackwardBtn(String link) {
         driver.get(link);

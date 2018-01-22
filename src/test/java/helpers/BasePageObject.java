@@ -36,7 +36,6 @@ public class BasePageObject {
         List<WebElement> listOptions = driver.findElements(By.cssSelector(list));
         for (WebElement options : listOptions) {
             if (options.getText().trim().equals(target.trim())) {
-                highlightElement(options);
                 click(options);
                 return true;
             }
