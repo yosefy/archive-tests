@@ -18,6 +18,8 @@ public class FilterMenu extends PageObject {
     @FindBy(css = ".index-filters .item.active")
     private WebElement activeItem;
 
+
+
     public boolean noItemIsActive() {
         return items.stream()
                 .noneMatch(x -> ElementUtils.hasCssClass(x, "active"));
@@ -29,6 +31,28 @@ public class FilterMenu extends PageObject {
                 .collect(Collectors.toSet());
         return Arrays.stream(names).allMatch(s::contains);
     }
+
+    public boolean navToFilterAndOpenSubFilter(String... names) {
+        for (WebElement webElement : items) {
+           if (webElement.getText().trim().equals(names[0])) {
+                click(webElement);
+                return true;
+           }
+        }
+        return false;
+    }
+
+//    public boolean noMenuItemIsActive() {
+////        for (WebElement webElement : menuItems) {
+////           if (ElementUtils.hasCssClass(webElement, "active")) {
+////               return true;
+////           }
+////        }
+////        return false;
+//
+//        return menuItems.stream()
+//                .anyMatch(x -> ElementUtils.hasCssClass(x, "active"));
+//    }
 
     public boolean isActiveItem(String name) {
         return activeItem.getText().equals(name);

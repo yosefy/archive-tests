@@ -13,8 +13,9 @@ import static org.hamcrest.Matchers.not;
 public class PlayerTest extends TestTemplate {
 
     @Test
-    public void playerIsInitiallyReadyToPlay() {
+    public void IsInitiallyReadyToPlay() {
         Player player = new LessonUnitPage().open().player;
+
         player.waitForPresent();
         assertThat("src", player.getVideoSrc(), not(isEmptyOrNullString()));
         assertThat("paused", player.isVideoPaused());
@@ -22,4 +23,18 @@ public class PlayerTest extends TestTemplate {
         assertThat("onScreen.play", player.onScreenControls.isPlayReady());
         player.waitForVideoReady();
     }
+
+//    Press play and check that video is playing
+
+    // after play click pause and check video is paused
+
+    // +- volume
+    // full screen
+    // timecode
+
+    // controls are hidden automatically after 2 seconds
+
+    // controlls are shown on hover
+
+    //
 }

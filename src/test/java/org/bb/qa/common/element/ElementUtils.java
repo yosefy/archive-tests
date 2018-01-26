@@ -11,7 +11,6 @@ public class ElementUtils {
                 return true;
             }
         }
-
         return false;
     }
 

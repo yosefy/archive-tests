@@ -1,6 +1,7 @@
 package org.bb.qa.archive.testcases;
 
-import org.bb.qa.archive.pageobjects.pages.ProgramsPage;
+import org.bb.qa.archive.pageobjects.pages.PublicationsPage;
+import org.bb.qa.archive.pageobjects.pages.SourcesPage;
 import org.bb.qa.common.TestTemplate;
 import org.testng.annotations.Test;
 
@@ -8,15 +9,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 
-public class ProgramsSectionTest extends TestTemplate {
+public class PublicationsSectionTest extends TestTemplate {
 
     @Test
     public void InitialRender() {
-        ProgramsPage page = new ProgramsPage().open();
+        PublicationsPage page = new PublicationsPage().open();
 
         // section header
         assertThat("header.displayed", page.sectionHeader.isHeaderDisplayed());
-        assertThat("header.text", page.sectionHeader.getHeaderText(), is(equalTo("Programs")));
+        assertThat("header.text", page.sectionHeader.getHeaderText(), is(equalTo("Publications")));
         assertThat("subHeader.displayed", page.sectionHeader.isSubHeaderDisplayed());
         assertThat("subHeader.text", page.sectionHeader.getSubHeaderText(), not(isEmptyOrNullString()));
 
@@ -25,8 +26,7 @@ public class ProgramsSectionTest extends TestTemplate {
         assertThat("pagination.menu", page.pagination.isRootDisplayed());
 
         // filters
-        assertThat("filters.menu", page.filterPanel.menu.hasFilters("Genre/Program", "Topics", "Sources", "Date"));
-        assertThat("Genre/Program shown", page.filterPanel.menu.isActiveItem("Genre/Program"));
+        assertThat("filters.menu", page.filterPanel.menu.hasFilters("Publishers", "Date"));
+        assertThat("no-active-item", page.filterPanel.menu.noItemIsActive());
     }
-
 }
