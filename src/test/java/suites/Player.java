@@ -547,4 +547,23 @@ public class Player extends BaseSuite {
         // compare copied link with source link
     }
 
+
+    @Test()
+    @Parameters({"link"})
+    public void sharingModeSocialMedia(String link){
+        driver.get(link);
+        eventsMain.chooseSectionAndOpenItemByText(DAILY_LESSONS, DAILY_LESSONS_SECOND_ITEM, DAILY_LESSONS_SECOND_ITEM);
+        eventsMain.getCssListAndClickOnFirstElement(DAILY_LESSONS_SECOND_ITEM);
+        videoPlayer.focusOnVideoPlayer();
+        // click on share
+        videoPlayer.clickOnShare();
+        videoPlayer.click(driver.findElement(By.cssSelector(videoPlayer.sharing_controls.get("sharing_button"))));
+        // verify that displayed 5 elements (share option, link option, back to play, right and left share controls)
+        for (HashMap.Entry <String,String>entry : videoPlayer.social_media.entrySet()){
+            logger.info(String.format("Checking social media button %s", entry.getKey()));
+            Assert.assertTrue(videoPlayer.existsElement(entry.getValue()),
+                    String.format("Element %s not exists!", entry.getKey()));
+        }
+
+    }
 }

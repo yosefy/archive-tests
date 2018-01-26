@@ -109,6 +109,16 @@ public class VideoPlayer extends BasePageObject {
         }
     };
 
+    public final HashMap<String, String> social_media = new HashMap<String, String>(){
+        {
+            put("facebook", ".SocialMediaShareButton--facebook");
+            put("googleplus", ".SocialMediaShareButton--googlePlus");
+            put("twitter", ".SocialMediaShareButton--twitter");
+            put("whatsapp", ".SocialMediaShareButton--whatsapp");
+            put("email", ".SocialMediaShareButton--email");
+        }
+    };
+
     public boolean actionAndReturnState(String listToButtons, String action) {
         List<WebElement> buttons = driver.findElements(By.cssSelector(listToButtons));
         for (WebElement elem : buttons) {

@@ -8,39 +8,41 @@
         <classes>
             <class name="suites.Player">
                 <methods>
-                    <include name="playerVideoSrcAndForwardBtn">
-                    </include>
-                    <include name="playerPlayBtnAndPauseBtn">
-                    </include>
-                    <include name="playerPlayPauseShortKeys">
-                    </include>
-                    <include name="playerForwardBtnAndBackwardBtn">
-                    </include>
-                    <include name="playerTimeCodeToPlaylistCompare">
-                    </include>
-                    <include name="playerTimeCode">
-                    </include>
-                    <include name="timeCodeUpdateByPlay">
-                    </include>
-                    <include name="timeCodeUpdateByScroll">
-                    </include>
-                    <include name="timeCodeUpdateByLink">
-                    </include>
-                    <include name="speedSelector_1X">
-                    </include>
-                    <include name="speedSelector_1_5X">
-                    </include>
-                    <include name="speedSelector_2X">
-                    </include>
-                    <include name="volumeBar">
-                    </include>
-                    <include name="languageSelector">
-                    </include>
-                    <include name="fullScreenToggle">
-                    </include>
-                    <include name="sharingModeOn">
-                    </include>
-                    <include name="playerSkipTimeShortKeys">
+                    <!--<include name="playerVideoSrcAndForwardBtn">-->
+                    <!--</include>-->
+                    <!--<include name="playerPlayBtnAndPauseBtn">-->
+                    <!--</include>-->
+                    <!--<include name="playerPlayPauseShortKeys">-->
+                    <!--</include>-->
+                    <!--<include name="playerForwardBtnAndBackwardBtn">-->
+                    <!--</include>-->
+                    <!--<include name="playerTimeCodeToPlaylistCompare">-->
+                    <!--</include>-->
+                    <!--<include name="playerTimeCode">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByPlay">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByScroll">-->
+                    <!--</include>-->
+                    <!--<include name="timeCodeUpdateByLink">-->
+                    <!--</include>-->
+                    <!--<include name="speedSelector_1X">-->
+                    <!--</include>-->
+                    <!--<include name="speedSelector_1_5X">-->
+                    <!--</include>-->
+                    <!--<include name="speedSelector_2X">-->
+                    <!--</include>-->
+                    <!--<include name="volumeBar">-->
+                    <!--</include>-->
+                    <!--<include name="languageSelector">-->
+                    <!--</include>-->
+                    <!--<include name="fullScreenToggle">-->
+                    <!--</include>-->
+                    <!--<include name="sharingModeOn">-->
+                    <!--</include>-->
+                    <!--<include name="playerSkipTimeShortKeys">-->
+                    <!--</include>-->
+                    <include name="sharingModeSocialMedia">
                     </include>
 
 
