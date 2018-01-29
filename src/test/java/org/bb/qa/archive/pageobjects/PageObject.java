@@ -126,7 +126,6 @@ public class PageObject {
     public void click(WebElement elementToClick) {
         Actions action = new Actions(driver);
         action.moveToElement(elementToClick).perform();
-//        this.isElementLoaded(elementToClick);
         this.highlightElement(elementToClick);
         elementToClick.click();
     }
