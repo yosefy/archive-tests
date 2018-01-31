@@ -1,6 +1,7 @@
 package org.bb.qa.archive.testcases;
 
 import org.bb.qa.archive.pageobjects.pages.LessonUnitPage;
+import org.bb.qa.archive.pageobjects.widgets.videobox.Controls;
 import org.bb.qa.archive.pageobjects.widgets.videobox.Player;
 import org.bb.qa.common.TestTemplate;
 import org.testng.annotations.Test;
@@ -55,6 +56,7 @@ public class PlayerTest extends TestTemplate {
         Player player = new LessonUnitPage().open().player;
         player.waitForPresent();
 
+        player.waitForVideoReady();
         // time code is initially zero
         Duration[] timeCode = player.getTimeCode();
         assertThat("startTime.initial", timeCode[0].isZero());
@@ -66,18 +68,30 @@ public class PlayerTest extends TestTemplate {
         player.pause();
         timeCode = player.getTimeCode(); // get time from UI
         assertThat("startTime after pause", timeCode[0].equals(ofSeconds(2)));
+    }
 
-        System.out.println(player.getTimeCodeJS());
+    // controls are hidden automatically after 2 seconds
+    // controls are shown on hover
+    @Test
+    public void isControlHidden() {
+        Player player = new LessonUnitPage().open().player;
+        player.waitForVideoReady();
 
+        // play and wait 5 seconds
+        player.playFor(ofSeconds(3));
+        assertThat("player.Controls.isHidden", Controls.isHidden());
+
+        player.moveToControl(ofSeconds(1));
+        assertThat("player.Controls.isDisplayed", !Controls.isHidden());
     }
 
     // +- volume
     // full screen
 
 
-    // controls are hidden automatically after 2 seconds
 
-    // controlls are shown on hover
 
-    //
+
+
+
 }

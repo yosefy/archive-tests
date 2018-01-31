@@ -2,11 +2,11 @@ package org.bb.qa.archive.pageobjects.widgets.videobox;
 
 import org.bb.qa.archive.pageobjects.PageObject;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.function.Function;
 
 public class Player extends PageObject {
@@ -35,6 +35,15 @@ public class Player extends PageObject {
     @FindBy(className = "mediaplayer__timecode")
     private WebElement timeCode;
 
+    @FindBy(className = "mediaplayer__controls--is-fade")
+    private WebElement mediaplayerControlsIsFade;
+
+    @FindBy(className = "layout__header")
+    private WebElement header;
+
+    @FindBy(className = "mediaplayer__onscreen-controls")
+    private WebElement onscreenControls;
+
 
     public Player() {
         super();
@@ -55,16 +64,23 @@ public class Player extends PageObject {
         this.playByControlIcon(waitSec);
     }
 
+    public void moveToControl(Duration waitSec){
+        moveMouseToElement(onscreenControls);
+        wait.forX(waitSec);
+    }
+
     public void pause() {
         this.playByControlIcon(Duration.ZERO);
     }
 
     protected void playByControlIcon(Duration waitSec) {
         click(onControlPlay);
+        click(header);
         if (!waitSec.isZero() && !waitSec.isNegative()) {
             wait.forX(waitSec);
         }
     }
+
 
     public void pauseByScreenClick() {
         click(player);
@@ -91,11 +107,18 @@ public class Player extends PageObject {
     }
 
     public String getTimeCodeJS() {
-        String val = jsActions.execute("return arguments[0].currentTime/60", player).toString();
+        String val = timeByJS(video);
+        System.out.println(val);
+
         if (val != null)
             return val;
         else
             return null;
+    }
+
+    protected String timeByJS(WebElement e) {
+        Object val = jsActions.execute("return arguments[0].currentTime/60", e).toString();
+        return (String) val;
     }
 
     protected boolean isPaused(WebElement e) {
@@ -131,23 +154,23 @@ public class Player extends PageObject {
 
     public Duration[] getTimeCode() {
         Duration[] dur = new Duration[2];
-        String[] mainParts = timeCode.getText().replaceAll("\\s","").split("/");
+        String[] mainParts = timeCode.getText().replaceAll("\\s", "").split("/");
 
         for (int i = 0; i < mainParts.length; i++) {
             // remove all space and split by :
-            String[] parts = mainParts[i].trim().split ( ":" );
+            String[] parts = mainParts[i].trim().split(":");
             Duration d = Duration.ZERO;
-            if ( parts.length == 3 ) {
-                int hours = Integer.parseInt   ( parts[ 0 ] );
-                int minutes = Integer.parseInt ( parts[ 1 ] );
-                int seconds = Integer.parseInt ( parts[ 2 ] );
-                d = d.plusHours ( hours ).plusMinutes ( minutes ).plusSeconds ( seconds );
-            } else if ( parts.length == 2 ) {
-                int minutes = Integer.parseInt ( parts[ 0 ] );
-                int seconds = Integer.parseInt ( parts[ 1 ] );
-                d = d.plusMinutes ( minutes ).plusSeconds ( seconds );
+            if (parts.length == 3) {
+                int hours = Integer.parseInt(parts[0]);
+                int minutes = Integer.parseInt(parts[1]);
+                int seconds = Integer.parseInt(parts[2]);
+                d = d.plusHours(hours).plusMinutes(minutes).plusSeconds(seconds);
+            } else if (parts.length == 2) {
+                int minutes = Integer.parseInt(parts[0]);
+                int seconds = Integer.parseInt(parts[1]);
+                d = d.plusMinutes(minutes).plusSeconds(seconds);
             } else {
-                System.out.println ( "ERROR - Unexpected input." );
+                System.out.println("ERROR - Unexpected input.");
             }
             dur[i] = d;
             System.out.println(dur[i]);
@@ -155,5 +178,9 @@ public class Player extends PageObject {
         return dur;
     }
 
-
 }
+
+
+
+
+

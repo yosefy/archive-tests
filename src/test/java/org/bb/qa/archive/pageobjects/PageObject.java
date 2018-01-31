@@ -118,6 +118,10 @@ public class PageObject {
         }
     }
 
+    public void moveMouseToElement(WebElement element){
+        builder.moveToElement(element).perform();
+    }
+
     public boolean isWebElemAttributeActiveItem(WebElement element) {
         this.highlightElement(element);
         return element.getAttribute("class").equals("active item");

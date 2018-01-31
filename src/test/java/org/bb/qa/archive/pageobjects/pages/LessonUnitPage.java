@@ -26,7 +26,7 @@ public class LessonUnitPage extends PageObject {
     }
 
     public LessonUnitPage open() {
-        getUrl(urlBuilder.getUrlForPath("lessons/cu/9BBbQn7u"));
+        getUrl(urlBuilder.getUrlForPath("lessons/cu/9BBbQn7u")); // FiDUi9Hd
         this.waitForPresent();
         return this;
     }
