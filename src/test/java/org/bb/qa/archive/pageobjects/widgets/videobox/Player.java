@@ -65,9 +65,10 @@ public class Player extends PageObject {
     }
 
     public void moveToControl(Duration waitSec){
-        moveMouseToElement(onscreenControls);
+        builder.moveToElement(onscreenControls).perform();
         wait.forX(waitSec);
     }
+
 
     public void pause() {
         this.playByControlIcon(Duration.ZERO);
@@ -117,6 +118,10 @@ public class Player extends PageObject {
             return val;
         else
             return null;
+    }
+
+    public void seekToTime(long seconds) {
+        jsActions.execute(String.format("arguments[0].currentTime=%s", Long.toString(seconds)), video);
     }
 
     protected String timeByJS(WebElement e) {

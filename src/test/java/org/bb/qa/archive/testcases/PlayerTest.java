@@ -77,7 +77,7 @@ public class PlayerTest extends TestTemplate {
         Player player = new LessonUnitPage().open().player;
         player.waitForVideoReady();
 
-        // play and wait 5 seconds
+        // play and wait 3 seconds
         player.playFor(ofSeconds(3));
         player.clickOutOfPlayerAndWait();
 
@@ -86,6 +86,25 @@ public class PlayerTest extends TestTemplate {
         player.moveToControl(ofSeconds(1));
         assertThat("player.Controls.isDisplayed", !Controls.isHidden());
     }
+
+
+    @Test
+    public void isTimeCodeUpdatedBySeek() {
+        Player player = new LessonUnitPage().open().player;
+        player.waitForVideoReady();
+
+        player.seekToTime(300);
+
+        // play and wait 3 seconds
+        player.playFor(ofSeconds(3));
+        player.clickOutOfPlayerAndWait();
+
+        assertThat("player.Controls.isHidden", Controls.isHidden());
+
+        player.moveToControl(ofSeconds(1));
+        assertThat("player.Controls.isDisplayed", !Controls.isHidden());
+    }
+
 
     // +- volume
     // full screen
