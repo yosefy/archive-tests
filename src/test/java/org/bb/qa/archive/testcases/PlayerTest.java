@@ -44,7 +44,7 @@ public class PlayerTest extends TestTemplate {
     public void playPauseByControls() {
         Player player = new LessonUnitPage().open().player;
         player.waitForPresent();
-
+        player.waitForVideoReady();
         player.playFor(ZERO);
         assertThat("player.isVideoPlaying", player.isVideoPlaying());
         player.pause();
@@ -79,6 +79,8 @@ public class PlayerTest extends TestTemplate {
 
         // play and wait 5 seconds
         player.playFor(ofSeconds(3));
+        player.clickOutOfPlayerAndWait();
+
         assertThat("player.Controls.isHidden", Controls.isHidden());
 
         player.moveToControl(ofSeconds(1));

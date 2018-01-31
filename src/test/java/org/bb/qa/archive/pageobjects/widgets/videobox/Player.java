@@ -73,14 +73,17 @@ public class Player extends PageObject {
         this.playByControlIcon(Duration.ZERO);
     }
 
-    protected void playByControlIcon(Duration waitSec) {
+    private void playByControlIcon(Duration waitSec) {
         click(onControlPlay);
-        click(header);
         if (!waitSec.isZero() && !waitSec.isNegative()) {
             wait.forX(waitSec);
         }
     }
 
+    public void clickOutOfPlayerAndWait(){
+        click(header);
+        wait.forX(Duration.ofSeconds(2));
+    }
 
     public void pauseByScreenClick() {
         click(player);
