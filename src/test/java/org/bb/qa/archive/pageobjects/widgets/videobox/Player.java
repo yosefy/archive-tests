@@ -110,8 +110,8 @@ public class Player extends PageObject {
     }
 
 
-    public void seekToTime(long seconds) {
-        jsActions.execute(String.format("arguments[0].currentTime=%s", Long.toString(seconds)), video);
+    public void seekToTime(Duration seconds) {
+        jsActions.execute(String.format("arguments[0].currentTime=%s", Long.toString(seconds.getSeconds())), video);
     }
 
 

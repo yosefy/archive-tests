@@ -93,12 +93,12 @@ public class PlayerTest extends TestTemplate {
         Player player = new LessonUnitPage().open().player;
         player.waitForVideoReady();
 
-        player.seekToTime(300);
+        player.seekToTime(ofSeconds(300));
 
-        System.out.println(player.getTimeCodeJS());
+        Duration timeCode = player.getTimeCodeJS();
+        assertThat("player.Controls.timecode", timeCode.equals(Duration.ofSeconds(300)));
 
 
-        assertThat("player.Controls.isHidden", Controls.isHidden());
     }
 
 
