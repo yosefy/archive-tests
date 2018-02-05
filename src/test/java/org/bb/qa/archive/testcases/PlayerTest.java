@@ -95,14 +95,9 @@ public class PlayerTest extends TestTemplate {
 
         player.seekToTime(300);
 
-        // play and wait 3 seconds
-        player.playFor(ofSeconds(3));
-        player.clickOutOfPlayerAndWait();
+        String test = player.getTimeCodeJS();
 
         assertThat("player.Controls.isHidden", Controls.isHidden());
-
-        player.moveToControl(ofSeconds(1));
-        assertThat("player.Controls.isDisplayed", !Controls.isHidden());
     }
 
 

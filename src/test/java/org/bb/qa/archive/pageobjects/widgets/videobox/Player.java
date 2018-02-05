@@ -2,7 +2,6 @@ package org.bb.qa.archive.pageobjects.widgets.videobox;
 
 import org.bb.qa.archive.pageobjects.PageObject;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
@@ -110,23 +109,31 @@ public class Player extends PageObject {
         return getSrc(video);
     }
 
-    public String getTimeCodeJS() {
-        String val = timeByJS(video);
-        System.out.println(val);
-
-        if (val != null)
-            return val;
-        else
-            return null;
-    }
 
     public void seekToTime(long seconds) {
         jsActions.execute(String.format("arguments[0].currentTime=%s", Long.toString(seconds)), video);
     }
 
-    protected String timeByJS(WebElement e) {
-        Object val = jsActions.execute("return arguments[0].currentTime/60", e).toString();
-        return (String) val;
+    public String getTimeCodeJS() {
+        Instant val = getInstant(video);
+        if (val != null){
+            int seconds = val.getSeconds();
+            int minutes = val.getMinutes();
+            int hours = val.getHours();
+        }
+        System.out.println(val);
+        return val.toString();
+    }
+
+    protected Instant getInstant(WebElement e) {
+        try {
+            String currentTimeStr = String.valueOf(jsActions.execute("return arguments[0].currentTime", e));
+            int seconds = (int) Float.parseFloat(currentTimeStr);
+            return new Instant(seconds);
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+            return null;
+        }
     }
 
     protected boolean isPaused(WebElement e) {
@@ -184,6 +191,39 @@ public class Player extends PageObject {
             System.out.println(dur[i]);
         }
         return dur;
+    }
+
+    static class Instant {
+        final int hours;
+        final int minutes;
+        final int seconds;
+
+//        public static void main(String[] args) {
+//            System.out.println(new Instant(2 * 60 * 60 + 90));
+//        }
+
+        public Instant(int totalSeconds) {
+            this.seconds = totalSeconds % 60;
+            this.hours = totalSeconds / 3_600;
+            this.minutes = (totalSeconds / 60) - (hours * 60);
+        }
+
+        public int getHours() {
+            return hours;
+        }
+
+        public int getMinutes() {
+            return minutes;
+        }
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%2d:%02d:%02d", hours, minutes, seconds);
+        }
     }
 
 }
