@@ -95,7 +95,8 @@ public class PlayerTest extends TestTemplate {
 
         player.seekToTime(300);
 
-        String test = player.getTimeCodeJS();
+        System.out.println(player.getTimeCodeJS());
+
 
         assertThat("player.Controls.isHidden", Controls.isHidden());
     }

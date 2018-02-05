@@ -114,27 +114,7 @@ public class Player extends PageObject {
         jsActions.execute(String.format("arguments[0].currentTime=%s", Long.toString(seconds)), video);
     }
 
-    public String getTimeCodeJS() {
-        Instant val = getInstant(video);
-        if (val != null){
-            int seconds = val.getSeconds();
-            int minutes = val.getMinutes();
-            int hours = val.getHours();
-        }
-        System.out.println(val);
-        return val.toString();
-    }
 
-    protected Instant getInstant(WebElement e) {
-        try {
-            String currentTimeStr = String.valueOf(jsActions.execute("return arguments[0].currentTime", e));
-            int seconds = (int) Float.parseFloat(currentTimeStr);
-            return new Instant(seconds);
-        } catch (NumberFormatException nfe) {
-            nfe.printStackTrace();
-            return null;
-        }
-    }
 
     protected boolean isPaused(WebElement e) {
         Object val = jsActions.execute("return arguments[0].paused", e);
@@ -193,6 +173,32 @@ public class Player extends PageObject {
         return dur;
     }
 
+
+    public Duration getTimeCodeJS() {
+        Instant val = getInstant(video);
+        if(val == null)
+            return null;
+
+
+            int seconds = val.getSeconds();
+            int minutes = val.getMinutes();
+            int hours = val.getHours();
+
+        System.out.println(val);
+        return val.getDuration();
+    }
+
+    protected Instant getInstant(WebElement e) {
+        try {
+            String currentTimeStr = String.valueOf(jsActions.execute("return arguments[0].currentTime", e));
+            int seconds = (int) Float.parseFloat(currentTimeStr);
+            return new Instant(seconds);
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+            return null;
+        }
+    }
+
     static class Instant {
         final int hours;
         final int minutes;
@@ -218,6 +224,12 @@ public class Player extends PageObject {
 
         public int getSeconds() {
             return seconds;
+        }
+
+            public Duration getDuration() {
+            Duration d = Duration.ZERO;
+            d = d.plusHours(hours).plusMinutes(minutes).plusSeconds(seconds);
+            return d;
         }
 
         @Override
