@@ -102,6 +102,67 @@ public class PlayerTest extends TestTemplate {
     }
 
 
+    @Test
+    public void timeCodeUpdateByLink() {
+
+    }
+
+    @Test
+    public void speedSelector_1X() {
+
+    }
+
+    @Test
+    public void speedSelector_1_5X() {
+
+    }
+
+    @Test
+    public void speedSelector_2X() {
+
+    }
+
+    @Test
+    public void volumeBar() {
+
+    }
+
+    @Test
+    public void audioVideoToggle() {
+
+    }
+
+    @Test
+    public void languageSelector() {
+
+    }
+
+    @Test
+    public void fullScreenToggle() {
+
+    }
+
+    @Test
+    public void sharingModeOn() {
+
+    }
+
+    @Test
+    public void playerButtons(){
+
+    }
+
+    @Test
+    public void sharingModeOff() {
+
+    }
+
+    @Test
+    public void sharingModeActions() {
+
+    }
+
+
     // +- volume
     // full screen
 
