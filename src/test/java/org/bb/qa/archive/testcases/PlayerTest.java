@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 import static java.time.Duration.ZERO;
+import static java.time.Duration.ofMinutes;
 import static java.time.Duration.ofSeconds;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
@@ -104,6 +105,13 @@ public class PlayerTest extends TestTemplate {
 
     @Test
     public void timeCodeUpdateByLink() {
+        Player player = new LessonUnitPage().open().player;
+        player.waitForVideoReady();
+
+        player.getVideoURLWithArgs("sstart=4m&send=10m");
+        player.waitForVideoReady();
+        Duration[] timeCode = player.getTimeCode();
+        assertThat("startTime.initial", timeCode[0].equals(ofMinutes(4)));
 
     }
 

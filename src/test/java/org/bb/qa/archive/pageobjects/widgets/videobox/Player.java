@@ -109,6 +109,12 @@ public class Player extends PageObject {
         return getSrc(video);
     }
 
+    public void getVideoURLWithArgs(String args){
+        String currentVideoURL = driver.getCurrentUrl();
+        String finalUrl = String.format("%s?%s", currentVideoURL,args);
+        System.out.println(finalUrl);
+        this.driver.get(finalUrl);
+    }
 
     public void seekToTime(Duration seconds) {
         jsActions.execute(String.format("arguments[0].currentTime=%s", Long.toString(seconds.getSeconds())), video);
