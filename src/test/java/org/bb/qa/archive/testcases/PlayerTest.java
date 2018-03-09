@@ -116,19 +116,24 @@ public class PlayerTest extends TestTemplate {
     }
 
     @Test
-    public void speedSelector_1X() {
+    public void speedSelector() {
+        Player player = new LessonUnitPage().open().player;
+        player.waitForVideoReady();
 
+        player.clickOnPlayerSpeedRate();
+        player.selectFromPlayerSpeedRateList("2x");
+        assertThat("video.playbackRate", player.getPlaybackRate().equals("2"));
+        player.clickOnPlayerSpeedRate();
+        player.selectFromPlayerSpeedRateList("1.5x");
+        assertThat("video.playbackRate", player.getPlaybackRate().equals("1.5"));
+        player.clickOnPlayerSpeedRate();
+        player.selectFromPlayerSpeedRateList("1.25");
+        assertThat("video.playbackRate", player.getPlaybackRate().equals("1.25"));
+        player.clickOnPlayerSpeedRate();
+        player.selectFromPlayerSpeedRateList("1x");
+        assertThat("video.playbackRate", player.getPlaybackRate().equals("1"));
     }
 
-    @Test
-    public void speedSelector_1_5X() {
-
-    }
-
-    @Test
-    public void speedSelector_2X() {
-
-    }
 
     @Test
     public void volumeBar() {

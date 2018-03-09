@@ -2,10 +2,16 @@ package org.bb.qa.archive.pageobjects.widgets.videobox;
 
 import org.bb.qa.archive.pageobjects.PageObject;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.Duration;
+import java.util.List;
 import java.util.function.Function;
 
 public class Player extends PageObject {
@@ -43,6 +49,11 @@ public class Player extends PageObject {
     @FindBy(className = "mediaplayer__onscreen-controls")
     private WebElement onscreenControls;
 
+    @FindBy(className = "mediaplayer__playback-rate")
+    private WebElement playbackSpeedRate;
+
+    @FindBy(css = ".mediaplayer__controls > div.mediaplayer__playback-rate > div > div > div")
+    private List<WebElement> playbackSpeedRateList;
 
     public Player() {
         super();
@@ -93,6 +104,19 @@ public class Player extends PageObject {
         click(onControlPause);
     }
 
+    public void clickOnPlayerSpeedRate(){
+        click(playbackSpeedRate);
+    }
+
+    public void selectFromPlayerSpeedRateList(String speedRate){
+        for(WebElement entry: playbackSpeedRateList){
+           if(entry.getText().contains(speedRate)) {
+               click(entry);
+               break;
+           }
+        }
+    }
+
     public boolean isVideoPlaying() {
         return !isVideoPaused();
     }
@@ -109,11 +133,15 @@ public class Player extends PageObject {
         return getSrc(video);
     }
 
-    public void getVideoURLWithArgs(String args){
+    public String getPlaybackRate() {
+        return playbackRate(video);
+    }
+
+    public void getVideoURLWithArgs(String args) {
         String currentVideoURL = driver.getCurrentUrl();
-        String finalUrl = String.format("%s?%s", currentVideoURL,args);
+        String finalUrl = String.format("%s&%s", currentVideoURL, args);
         System.out.println(finalUrl);
-        this.driver.get(finalUrl);
+        driver.get(finalUrl);
     }
 
     public void seekToTime(Duration seconds) {
@@ -121,14 +149,18 @@ public class Player extends PageObject {
     }
 
 
+    protected String playbackRate(WebElement e) {
+        Object val = jsActions.execute("return arguments[0].playbackRate", e);
+        return val.toString();
+    }
 
-    protected boolean isPaused(WebElement e) {
+    private boolean isPaused(WebElement e) {
         Object val = jsActions.execute("return arguments[0].paused", e);
         return val != null && (Boolean) val;
     }
 
 
-    protected void waitForReadyState(WebElement e, int readyState) {
+    private void waitForReadyState(WebElement e, int readyState) {
         Function<WebElement, ExpectedCondition<Boolean>> cond =
                 (WebElement element) -> new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
@@ -149,7 +181,7 @@ public class Player extends PageObject {
         wait.forCondition(cond, e);
     }
 
-    protected String getSrc(WebElement e) {
+    private String getSrc(WebElement e) {
         return e.getAttribute("src");
     }
 
