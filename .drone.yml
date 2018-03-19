@@ -3,4 +3,4 @@ pipeline:
     image: selenium/standalone-chrome
     commands:
       - sudo apt-get update && sudo apt-get install maven -y
-      - mvn clean test
+      - sudo mvn clean test
