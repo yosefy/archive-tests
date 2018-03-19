@@ -2,5 +2,5 @@ pipeline:
   build:
     image: selenium/standalone-chrome
     commands:
-      - sudo apt-get install maven -y
+      - sudo apt-get update && apt-get install maven -y
       - mvn clean test
