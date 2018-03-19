@@ -1,6 +1,7 @@
 pipeline:
   build:
-    image: selenium/standalone-chrome
+    image: ubuntu:16.04
     commands:
-      - sudo apt-get update && sudo apt-get install maven -y
-      - sudo mvn clean test
+      - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+      - apt-get update && apt-get install wget maven default-jdk google-chrome-stable -y
+      - mvn clean test
