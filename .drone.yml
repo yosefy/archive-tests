@@ -1,5 +1,6 @@
 pipeline:
   build:
-    image: uitests/docker-maven-chrome
+    image: selenium/standalone-chrome
     commands:
+      - apt install maven -y
       - mvn clean test
