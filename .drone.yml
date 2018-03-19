@@ -2,4 +2,4 @@ pipeline:
   build:
     image: uitests/docker-maven-chrome
     commands:
-      - cd /drone/src && mvn clean test
+      - mvn clean test
