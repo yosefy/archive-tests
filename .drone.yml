@@ -3,4 +3,4 @@ pipeline:
     image: uitests/docker-maven-chrome
     commands:
       - pwd
-      - mvn clean test
+      - ls -lah
