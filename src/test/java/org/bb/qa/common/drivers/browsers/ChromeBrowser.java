@@ -19,6 +19,7 @@ public class ChromeBrowser extends BrowserAbstract {
     @Override
     public void setOptions() {
         options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
         options.addArguments("--test-type");
         options.addArguments("--disable-extensions"); //to disable browser extension popup
         options.addArguments("--disable-infobars");     //to disable infobars
