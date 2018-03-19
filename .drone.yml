@@ -2,5 +2,6 @@ pipeline:
   build:
     image: uitests/docker-maven-chrome
     commands:
+      - git checkout edo
       - pwd
       - ls -lah
