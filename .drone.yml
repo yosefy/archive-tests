@@ -1,5 +1,5 @@
 pipeline:
   build:
-    image: selenium/hub
+    image: uitests/docker-maven-chrome
     commands:
       - cd /drone/src && mvn clean test
