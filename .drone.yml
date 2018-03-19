@@ -1,0 +1,5 @@
+pipeline:
+  build:
+    image: uitests/docker-maven-chrome
+    commands:
+      - mvn clean test
